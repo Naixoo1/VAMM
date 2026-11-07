@@ -1,3 +1,4 @@
+import { installTradingViewStub } from "./tradingview-stub.ts";
 import { chromium } from "@playwright/test";
 import { writeFile } from "node:fs/promises";
 function scanContrast() {
@@ -31,14 +32,15 @@ const browser = await chromium.launch();
 const reports = [];
 for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,844]]) {
   const page = await browser.newPage({ viewport: { width, height } });
+  await installTradingViewStub(page);
   const inspect = async route => reports.push({viewport,route,failures:await page.evaluate(scanContrast)});
-  for (const route of ["dashboard","compare","research","simulation","news"]) {
+  for (const route of ["dashboard","market","compare","research","simulation","news"]) {
     await page.goto("http://127.0.0.1:3000/" + route);
     await page.getByRole("heading",{level:1}).waitFor();
-    await page.getByRole("main").getByRole("status").waitFor({state:"hidden"});
+    await page.getByRole("main").getByRole("status").filter({hasText:/Restoring|Loading the educational|Loading instrument|Opening/}).waitFor({state:"hidden"});
     if(route==="dashboard") await page.getByText("Simulated cash",{exact:true}).waitFor();
     if(route==="research") await page.getByRole("checkbox",{name:"Simulated bond basket"}).waitFor();
-    if(route==="news") await page.getByText("Synthetic scenario: bond basket records a modest gain",{exact:true}).waitFor();
+    if(route==="news") await page.getByRole("heading",{name:"Apple reports fourth quarter results",exact:true}).waitFor();
     await inspect(route);
     if(route==="research") {
       await page.getByLabel("Your question").fill("Explain why synthetic results are not a forecast.");
@@ -50,7 +52,7 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
       await page.getByRole("button",{name:"Start your simulation"}).click();
       await page.getByRole("button",{name:"Advance one year"}).click();
       await page.getByRole("button",{name:"Confirm funding decision"}).waitFor();
-      await page.getByRole("main").getByRole("status").waitFor({state:"hidden"});
+      await page.getByRole("main").getByRole("status").filter({hasText:/Restoring|Loading the educational|Loading instrument|Opening/}).waitFor({state:"hidden"});
       await inspect("simulation-pending");
       await page.getByRole("button",{name:"New session",exact:true}).click();
       await inspect("reset-dialog");

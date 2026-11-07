@@ -1,0 +1,44 @@
+[
+  {
+    "name": "desktop",
+    "viewport": "1440x900",
+    "state": "ready",
+    "moduleStatus": 200,
+    "dimensions": {
+      "x": 316,
+      "y": 381.359375,
+      "width": 1052,
+      "height": 612
+    },
+    "events": [
+      "tv-widget-ready"
+    ],
+    "defined": true,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "failedRequests": [
+      "www.tradingview.com/support/support-portal-problems/"
+    ]
+  },
+  {
+    "name": "mobile",
+    "viewport": "390x844",
+    "state": "ready",
+    "moduleStatus": 200,
+    "dimensions": {
+      "x": 31,
+      "y": 488.078125,
+      "width": 328,
+      "height": 573.90625
+    },
+    "events": [
+      "tv-widget-ready"
+    ],
+    "defined": true,
+    "documentWidth": 390,
+    "pageErrors": [],
+    "failedRequests": [
+      "www.tradingview.com/support/support-portal-problems/"
+    ]
+  }
+]

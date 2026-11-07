@@ -2,7 +2,7 @@
 
 ## Mission and authority
 
-Build the seven-hour research and student simulation MVP in `docs/MVP.md`.
+Build the accepted research/student simulation baseline in `docs/MVP.md` and explicitly authorized presentation extensions recorded in `orchestration/TASKS.md`.
 User explicitly authorized implementation on 2026-11-07 in C:/code/VAMM. Preserve contract v2 and the frozen MVP; use the existing BOOT/UI/DATA/SIM briefs.
 Reconcile new teammate designs under `orchestration/INTAKE.md`; handle failures under
 `orchestration/ISSUES.md`. Receiving files or switching Codex modes does not itself
@@ -91,3 +91,7 @@ provenance/failure states.
 Return task/outcome, changed files, interfaces, executed checks/results, limitations,
 and integration steps. Include role-specific evidence. Worker completion alone does
 not establish integration or verification.
+
+## Authorized presentation extension — 2026-11-07
+
+Latest user request authorizes independent /market and dashboard TradingView charts, plus real-source curated News. See orchestration/reviews/TRADINGVIEW-2026-11-07.md for bounded ownership and reconciliation. Contract v2, frozen fixtures, simulation/storage/AI code and existing financial APIs stay unchanged. No plugins or paid data services may be added without asking the user. Original IDENTITY/SOUL/USER files remain untouched.

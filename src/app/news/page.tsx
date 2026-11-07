@@ -1,6 +1,43 @@
 "use client";
-import {Info,Newspaper} from "lucide-react";
-import {useNewsData} from "@/hooks/use-api-data";
-import {Badge,ErrorNotice,LoadingPanel,PageHeading,Panel,SourceLine,styles} from "@/components/features/workspace";
-export default function NewsPage(){const{data,error,loading,reload}=useNewsData();return <><PageHeading eyebrow="Read between the headlines" title="News & Sentiment Lab" description="Practice noticing how a story is framed, without turning a headline into a trading decision."><Badge>Synthetic stories</Badge></PageHeading><div className={styles.stack}><div className={styles.callout}><Info size={19} style={{flexShrink:0,marginTop:2}} aria-hidden="true"/><p><strong>A practice space for critical thinking</strong>These stories are authored teaching examples. Sentiment labels and reasons are prewritten. This is a synthetic learning feed.</p></div>{error&&<ErrorNotice message={error} onRetry={reload}/>}
- {loading&&!data?<LoadingPanel message="Opening the sentiment lab…"/>:data&&<Panel title="The learning feed" description="Synthetic scenarios · published 6 Nov 2026" body={false}><div style={{marginTop:15}}>{data.items.map(item=><article className={styles.newsItem} key={item.id}><span className={styles.newsIcon}><Newspaper size={19} strokeWidth={1.4} aria-hidden="true"/></span><div><div className={styles.newsMeta}><span>SYNTHETIC SCENARIO</span><span>{new Date(item.publishedAt).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"})}</span></div><h2>{item.headline}</h2><p>{item.sentimentReason??"No sentiment reason available."}</p><p className={styles.source}>Authored by VAMM · Prewritten sentiment · No external publisher</p></div><div><Badge tone={item.sentiment==="negative"?"coral":item.sentiment==="mixed"?"amber":""}>{item.sentiment?item.sentiment.charAt(0).toUpperCase()+item.sentiment.slice(1):"Unavailable"}</Badge></div></article>)}</div>{data.items.length===0&&<p className={styles.empty}>No teaching stories are available.</p>}<div style={{padding:"0 24px 18px"}}><SourceLine version={data.datasetVersion}/></div></Panel>}<div className={styles.equal2}><Panel title="Sentiment is a description"><p className={[styles.small,styles.muted].join(" ")} style={{lineHeight:1.9}}>Positive, negative, neutral, and mixed describe the wording or events in a story. They do not tell you what to buy or sell.</p></Panel><Panel title="Stay curious about the source"><p className={[styles.small,styles.muted].join(" ")} style={{lineHeight:1.9}}>Ask what is known, what is missing, and whose perspective a headline reflects. Synthetic examples have no real publisher or source URL.</p></Panel></div></div></>}
+
+import { useState } from "react";
+import { Info } from "lucide-react";
+import { Badge, PageHeading, Panel, styles } from "@/components/features/workspace";
+import { SourceNewsList, SyntheticPractice } from "@/components/features/source-news";
+import sourceStyles from "@/components/features/source-news.module.css";
+
+export default function NewsPage() {
+  const [practiceOpen, setPracticeOpen] = useState(false);
+  return <>
+    <PageHeading eyebrow="Read between the headlines" title="News & Sentiment Lab" description="Read original announcements, check dates and perspectives, and practice thinking critically about financial stories.">
+      <Badge>Curated · not live</Badge>
+    </PageHeading>
+    <div className={styles.stack}>
+      <div className={styles.callout}>
+        <Info size={19} style={{ flexShrink: 0, marginTop: 2 }} aria-hidden="true" />
+        <p><strong>Real sources, selected for learning</strong>A manually selected reading list, not a live news feed. Open each publisher’s page for the full context. Reading links do not change the simulation’s teaching data.</p>
+      </div>
+      <div className={styles.grid2}>
+        <Panel title="From the original publishers" description="Recent announcements and clearly dated background reading" body={false}>
+          <SourceNewsList />
+        </Panel>
+        <div className={styles.stack} style={{ alignContent: "start" }}>
+          <Panel title="Three questions to bring to a story">
+            <ol className={sourceStyles.questions}>
+              <li><strong>Who is speaking?</strong> A company, a central bank, and an investment provider have different reasons for publishing.</li>
+              <li><strong>When was it published?</strong> Separate the article’s date from the date you read it. Older context can explain a concept without describing today’s market.</li>
+              <li><strong>What is fact, and what is expectation?</strong> Look for the evidence, limitations, and uncertainty behind a claim.</li>
+            </ol>
+          </Panel>
+          <Panel title="A headline is a starting point">
+            <p className={[styles.small, styles.muted].join(" ")} style={{ lineHeight: 1.9, margin: 0 }}>The reading questions are written by VAMM for learning. Real articles have no VAMM sentiment score or buy/sell label. A company’s own announcement is one perspective on its business.</p>
+          </Panel>
+        </div>
+      </div>
+      <details className={sourceStyles.practice} onToggle={event => setPracticeOpen(event.currentTarget.open)}>
+        <summary className={sourceStyles.summary}>Synthetic practice<span className={sourceStyles.summaryHint}>Three teaching stories with prewritten sentiment</span></summary>
+        {practiceOpen && <SyntheticPractice />}
+      </details>
+    </div>
+  </>;
+}

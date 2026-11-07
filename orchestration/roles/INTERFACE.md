@@ -5,7 +5,7 @@ Read AGENTS, MVP, contract v2, FIXTURES, and your brief. Use the common handoff 
 ## Ownership
 
 - `src/app/dashboard/**`, `src/app/research/**`, `src/app/compare/**`
-- `src/app/simulation/**`, `src/app/news/**`
+- `src/app/simulation/**`, `src/app/news/**`, `src/app/market/**`
 - `src/components/ui/**`, `src/components/features/**`, `src/hooks/**`, `tests/ui/**`
 
 CEO owns shell/dependencies/configuration/contracts. Data/platform owns storage/identity/
@@ -19,7 +19,7 @@ allocation; never reproduce its formula. Reload current state after replay/confl
 never silently resubmit a stale action. Reset confirms then calls createSession with a
 new request ID, preserving history and switching only on success.
 Show pending bill separately from undeducted balances; null unmet cost is undecided.
-Use MarketResponse.chartSeries for Recharts; label synthetic index/dates/provenance.
+Frozen MarketResponse data remains synthetic. The approved dashboard/Market TradingView Web Component is an independent external chart; never feed it into the engine or label it synthetic/IDR. Preserve simulation Recharts and data contracts. See orchestration/reviews/TRADINGVIEW-2026-11-07.md.
 Show local-device access limits and storage/model failures; no silent replacement.
 Support keyboard/focus, text alongside colors, mobile and loading/empty/error states.
 Prevent pending duplicates/premature success. Handoff includes checked journeys and gaps.

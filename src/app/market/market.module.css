@@ -1,0 +1,8 @@
+.market{background:#10151f;color:#edf2f8;border:1px solid #293341;border-radius:14px;padding:26px;min-width:0;width:100%}
+.header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:25px}
+.eyebrow{color:#a7bfbd;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;font-weight:600;margin:0 0 12px}
+.title{font-size:32px;line-height:1.2;letter-spacing:-.9px;font-weight:550;color:#f2f5f8;margin:0 0 12px}
+.description{font-size:13px;color:#b3c0ce;line-height:1.9;max-width:680px;margin:0}
+.note{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.8;color:#b8c8ce;margin:20px 0 0}
+.note svg{flex-shrink:0;margin-top:3px;color:#a4cfc3}
+@media(max-width:600px){.market{padding:16px 12px;border-radius:10px}.header{margin-bottom:20px}.title{font-size:29px}.description{font-size:12px}.note{font-size:11px}}

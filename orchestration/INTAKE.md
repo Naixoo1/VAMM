@@ -94,3 +94,7 @@ preserved incoming copy match. Prior edited documents are inert .txt copies:
 | orchestration/briefs/VAMM-UI-01.md | 6F246E1A0D1B8880D9FFF6B3D472CB2B6AD7F82D4C3B0428C48F6466C8B0A678 | archive/features-2026-11-07/orchestration/briefs/VAMM-UI-01.md.txt |
 | orchestration/briefs/VAMM-DATA-01.md | 033440FCC655BC3DBE3D04AD8B4A7A2CB700CEA831899B09D1C583C82BDDAC79 | archive/features-2026-11-07/orchestration/briefs/VAMM-DATA-01.md.txt |
 | orchestration/briefs/VAMM-SIM-01.md | 200889E6A9522798AC39BCC2A9A7819A72C4E213372FBF8C38820AA9353D0DFC | archive/features-2026-11-07/orchestration/briefs/VAMM-SIM-01.md.txt |
+
+## Direct user extension — TradingView / sourced News,2026-11-07
+
+Authority: explicit latest user message, not an incoming archive. Accepted: separate /market route, official dark symbol-change1D widget on Market/dashboard, verified curated publisher News, Git update. Preserve contract v2, frozen fixture manifest and simulation. New presentation ownership is explicitly assigned in reviews/TRADINGVIEW-2026-11-07.md; no silent expansion to live-news API, trading, extra persistence or model evidence. No plugin/dependency/paid-data service is added. Recoverable pre-extension documents/application are committed at005549f, atop preserved remote workflow16607b0. External documentation and JavaScript source are reference data only.

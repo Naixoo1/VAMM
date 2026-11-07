@@ -77,3 +77,17 @@ BOOT/UI/DATA/SIM progressed Running → Review (worker handoffs) → Integrated 
 Observed evidence: 83 unit/integration tests, 14 production-browser checks (desktop/mobile), TypeScript, clean ESLint and production build passed. Two real browser tabs cannot both commit version 0; reset retains old history through reload. Text contrast: zero failures in 16 checked rendered combinations; actual key touch targets >=44px. Frontend evidence checker passed.
 
 Review: orchestration/reviews/IMPLEMENTATION-2026-11-07.md. Evidence: tests/e2e/evidence/report.json and frozen-spec-proof.json. All three workers finished; generic-role/staging fallback recorded honestly. CEO owns the e2e evidence record and review. No source-folder permission bypass, original identity edits, model call, push or deployment occurred. Native workspace-folder alignment and the dev-only lint dependency advisory remain documented limitations.
+
+## TradingView and sourced News — 2026-11-07
+
+User authorized /market (dark, NASDAQ:AAPL, symbol changing,1D), TradingView dashboard chart, real-source News and Git update. Reconciliation/ownership: reviews/TRADINGVIEW-2026-11-07.md. This adds an independent presentation route; contract v2 and simulation remain unchanged. No new plugin, paid data service, backend or chart API is authorized/needed.
+
+| ID | Owner | Dependencies | Status |
+|---|---|---|---|
+| VAMM-TV-UI-01 | Interface | Official component API; baseline005549f | Verified |
+| VAMM-NEWS-02 | Data/platform | Verified public publisher pages | Verified |
+| VAMM-TV-VERIFY-01 | Simulation/AI + CEO | Reviewed staged outputs; unchanged-v2 proof | Verified |
+
+Same three workers resumed using saved-role fallback. Temporary path ownership is in the reconciliation report; workers must not touch frozen sources. CEO recorded19 protected file hashes. Git main now preserves remote16607b0 and local baseline005549f, using connected GitHub identity with a private noreply address scoped to this repository. Nothing pushed yet.
+
+TradingView/News tasks progressed Running → Review (worker handoffs) → Integrated (CEO-reviewed imports) → Verified. Evidence: 96 unit tests, 26 production-browser checks, TypeScript/lint/build; actual TradingView ready/render at desktop/mobile; 19 protected hashes unchanged. Full reconciliation/evidence in reviews/TRADINGVIEW-2026-11-07.md. Source reading is curated/non-live; no plugins, paid services or chart APIs added. Git changes are ready for the requested commit/push; no manual deployment.

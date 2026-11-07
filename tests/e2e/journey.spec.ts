@@ -1,4 +1,7 @@
+import { installTradingViewStub } from "./tradingview-stub";
 import { test, expect, type Page } from "@playwright/test";
+
+test.beforeEach(async ({ page }) => { await installTradingViewStub(page); });
 
 async function savedState(page: Page) {
   return page.evaluate(async () => {
@@ -104,8 +107,8 @@ test("loading, visible network failure, retry and empty news states", async ({ p
     await route.fulfill({ status: 503, json: { ok: false, error: { code: "DATA_UNAVAILABLE", message: "Test data is temporarily unavailable.", retryable: true, requestId: null } } });
   });
   await page.goto("/dashboard");
-  await expect(page.getByRole("status")).toContainText("Loading the educational baskets");
-  expect(await page.getByRole("status").locator("svg").evaluate(element => getComputedStyle(element).animationName)).toBe("none");
+  await expect(page.getByRole("region", { name: "Meet the educational baskets" }).getByRole("status")).toContainText("Loading the educational baskets");
+  expect(await page.getByRole("region", { name: "Meet the educational baskets" }).getByRole("status").locator("svg").evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   release();
   await expect(page.getByRole("main").getByRole("alert")).toContainText("Test data is temporarily unavailable.");
   expect(failedResponses).toBe(1);
@@ -114,6 +117,7 @@ test("loading, visible network failure, retry and empty news states", async ({ p
   await expect(page.getByText("Simulated cash", { exact: true })).toBeVisible();
   await page.route("**/api/news", route => route.fulfill({ json: { ok: true, data: { contractVersion: 2, datasetVersion: "vamm-demo-2026-11-06.v1", items: [], evidence: [] } } }));
   await page.goto("/news");
+  await page.locator("summary").filter({ hasText: "Synthetic practice" }).click();
   await expect(page.getByText("No teaching stories are available.", { exact: true })).toBeVisible();
 });
 

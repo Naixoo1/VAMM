@@ -73,5 +73,6 @@
     "The preserved-session navigation index is in QueryClient memory; prior records remain in IndexedDB across refresh, while the frozen gateway has no operation to enumerate all old session IDs.",
     "Model/provider service access was not configured or exercised; provider failures use labeled fixtures.",
     "Research rate/concurrency limits are per instance, not a distributed billing quota."
-  ]
+  ],
+  "historicalBaseline": "Original MVP evidence at Git005549f. Current presentation is superseded by tradingview-report.json."
 }

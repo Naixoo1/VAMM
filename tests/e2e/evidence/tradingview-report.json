@@ -1,0 +1,80 @@
+{
+  "contract": "User-authorized TradingView presentation extension: dark responsive /market plus dashboard chart, official ES module, NASDAQ:AAPL default, allow-symbol-change, interval1D. Real publisher reading is curated and dated; v2 APIs and synthetic simulation stay unchanged.",
+  "targetViewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "Named Market/chart regions, provider loading/error live messages, 44px external links/retry controls, reduced-motion styling, and separate source/synthetic labels. Rendered text scan found zero host-page failures in18 checked combinations; closed TradingView internals are outside that scanner."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "All six routes and widget fallback/remount states passed desktop/mobile no-overflow assertions. The actual provider emitted ready at1440x900 and390x844; measured chart hosts1052x612 and328x573.91 respectively. Screenshots inspected."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "pass",
+      "evidence": "Script registration without tv-widget-ready stayed loading; the20-second deadline produced an actionable fallback. Synthetic basket loading remained independent."
+    },
+    "empty": {
+      "status": "pass",
+      "evidence": "Unchanged fresh-session/empty synthetic-practice states passed existing browser checks; curated publisher reading remained available."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "Blocked ES module and tv-widget-error produced fixed safe messages, external link and reload/retry. Untrusted provider error details were not displayed."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "External chart still rendered independently when educational fixture data failed; real reading stayed visible if secondary synthetic practice failed. Source context/delay limits remained labeled."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "96 unit tests,26 Chromium checks, types/lint/build passed. Live widget emitted ready in both viewports; singleton SPA remount and source interaction preserved actual saved simulation/API snapshots."
+    },
+    "permission": {
+      "status": "pass",
+      "evidence": "Browser-storage unavailability still displayed a safe error and prevented silent session creation; blocked external script displayed provider fallback without adding accounts or services."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "1440x900",
+      "artifact": "tradingview-live-market-desktop.png",
+      "observation": "Actual official provider rendered AAPL daily dark chart; genuine tv-widget-ready observed, module200, document width1440."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "tradingview-live-market-mobile.png",
+      "observation": "Actual official provider chart filled328px host; mobile document width390, no page error."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "news-desktop.png",
+      "observation": "Real Apple/Fed publisher announcements with dates and Vanguard background reading; synthetic practice separate."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "news-mobile.png",
+      "observation": "Curated source cards and readable original-publisher links wrap on mobile."
+    }
+  ],
+  "checks": {
+    "unitIntegrationTests": 96,
+    "productionBrowserTests": 26,
+    "typecheck": "pass",
+    "lint": "pass",
+    "build": "pass",
+    "protectedFilesUnchanged": 19,
+    "newDependencies": 0,
+    "newPlugins": 0,
+    "paidDataServices": 0
+  },
+  "limits": [
+    "News is manually curated, not an automatic live feed.",
+    "Quotes may be delayed; currency follows the selected external instrument.",
+    "Live service checks verify observed readiness/rendering, not every provider interaction or future uptime.",
+    "An ancillary TradingView help endpoint failed in the live smoke; chart readiness/render and page operation succeeded."
+  ]
+}

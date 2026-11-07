@@ -1,0 +1,56 @@
+"use client";
+import {useEffect,useId,useRef,useState} from "react";
+import {ArrowUpRight,ChartNoAxesCombined,LoaderCircle,RefreshCw} from "lucide-react";
+import styles from "./tradingview-chart.module.css";
+export const TRADINGVIEW_MODULE_URL="https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js";
+export const TRADINGVIEW_LOAD_TIMEOUT_MS=20_000;
+const ELEMENT_NAME="tv-advanced-chart";
+const CHART_URL="https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAPL";
+let registration:Promise<void>|undefined;
+/** One browser registration serves dashboard/market instances and route remounts. */
+function ensureTradingViewModule():Promise<void>{
+ if(customElements.get(ELEMENT_NAME))return Promise.resolve();
+ if(registration)return registration;
+ registration=new Promise<void>((resolve,reject)=>{
+  let script=Array.from(document.scripts).find(item=>item.src===TRADINGVIEW_MODULE_URL);
+  const isNew=!script;
+  if(!script){script=document.createElement("script");script.type="module";script.src=TRADINGVIEW_MODULE_URL;script.dataset.vammTradingviewModule=""}
+  const moduleScript=script;
+  const onError=()=>{moduleScript.dataset.vammTradingviewState="failed";reject(new Error("TradingView module unavailable"))};
+  moduleScript.addEventListener("error",onError,{once:true});
+  void customElements.whenDefined(ELEMENT_NAME).then(()=>{moduleScript.dataset.vammTradingviewState="registered";moduleScript.removeEventListener("error",onError);resolve()});
+  if(moduleScript.dataset.vammTradingviewState==="failed")onError();else if(isNew)document.head.append(moduleScript);
+ });
+ return registration;
+}
+type ChartState="loading"|"ready"|"error";
+export function TradingViewChart({variant="market"}:{variant?:"market"|"dashboard"}){
+ const host=useRef<HTMLDivElement>(null);const headingId=useId();
+ const[attempt,setAttempt]=useState(0);const[state,setState]=useState<ChartState>("loading");const[moduleAvailable,setModuleAvailable]=useState(false);
+ useEffect(()=>{
+  const container=host.current;if(!container)return;let active=true;
+  const widget=document.createElement(ELEMENT_NAME);
+  widget.setAttribute("symbol","NASDAQ:AAPL");widget.setAttribute("interval","1D");widget.setAttribute("theme","dark");widget.setAttribute("allow-symbol-change","");widget.setAttribute("aria-label","TradingView Advanced Chart");
+  const timer=window.setTimeout(()=>{if(active)setState("error")},TRADINGVIEW_LOAD_TIMEOUT_MS);
+  const onReady=(event:Event)=>{if(event.target!==widget||!active)return;window.clearTimeout(timer);setState("ready")};
+  const onError=(event:Event)=>{if(event.target!==widget||!active)return;window.clearTimeout(timer);setState("error")};
+  // Provider event details are untrusted. The UI always shows fixed fallback text.
+  widget.addEventListener("tv-widget-ready",onReady);widget.addEventListener("tv-widget-error",onError);
+  container.append(widget);
+  void ensureTradingViewModule().then(()=>{if(active)setModuleAvailable(true)},()=>{if(active){window.clearTimeout(timer);setState("error")}});
+  return()=>{active=false;window.clearTimeout(timer);widget.removeEventListener("tv-widget-ready",onReady);widget.removeEventListener("tv-widget-error",onError);widget.remove()};
+ },[attempt]);
+ function retry(){
+  if(!customElements.get(ELEMENT_NAME)){
+   // Failed ES modules can remain cached in this document's module map.
+   // Explicit reload starts a fresh registration attempt without changing app data.
+   window.location.reload();return;
+  }
+  setState("loading");setAttempt(value=>value+1);
+ }
+ return <section className={[styles.card,variant==="dashboard"?styles.dashboard:""].join(" ")} aria-labelledby={headingId} data-tradingview-state={state}>
+  <header className={styles.header}><div><h2 id={headingId} className={styles.title}>TradingView market chart</h2><p className={styles.description}>Starts with NASDAQ:AAPL · Daily interval · Change symbols inside the chart</p></div><span className={styles.external}>External market data</span></header>
+  <div className={styles.frame}><div ref={host} className={styles.host} data-testid="tradingview-host"/>{state!=="ready"&&<div className={styles.placeholder} aria-hidden="true">{state==="loading"?<><LoaderCircle size={25} className={styles.spinner}/><p>Loading TradingView chart…</p></>:<><ChartNoAxesCombined size={28} strokeWidth={1.4}/><strong>TradingView couldn’t load this chart here.</strong><p className={styles.hint}>The provider may be blocked or temporarily unavailable. Retry below, or open the chart on TradingView.</p></>}</div>}</div>
+  <footer className={styles.footer}><div className={styles.provenance}><p className={[styles.status,state==="error"?styles.error:""].join(" ")} role={state==="error"?"alert":"status"}>{state==="loading"?"Loading TradingView chart…":state==="ready"?"Chart loaded by TradingView.":"TradingView couldn’t load this chart here."}</p><p>Chart by <a href="https://www.tradingview.com/" target="_blank" rel="noreferrer">TradingView</a> · Quotes may be delayed. The selected instrument determines the chart currency.</p><p>This external chart is separate from VAMM’s synthetic baskets and simulation calculations.</p></div><div className={styles.actions}>{state==="error"&&<button type="button" className={styles.button} onClick={retry}><RefreshCw size={14} aria-hidden="true"/>{moduleAvailable?"Retry chart":"Reload page"}</button>}<a href={CHART_URL} target="_blank" rel="noreferrer" className={styles.link}>Open on TradingView <ArrowUpRight size={14} aria-hidden="true"/></a></div></footer>
+ </section>
+}
