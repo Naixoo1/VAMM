@@ -7,6 +7,11 @@ const assets = {
   '/app.js': ['app.js', 'text/javascript'],
   '/model.js': ['model.js', 'text/javascript'],
   '/style.css': ['style.css', 'text/css'],
+  '/images/academy.svg': ['images/academy.svg', 'image/svg+xml'],
+  '/images/market.svg': ['images/market.svg', 'image/svg+xml'],
+  '/images/mentor.svg': ['images/mentor.svg', 'image/svg+xml'],
+  '/images/missions.svg': ['images/missions.svg', 'image/svg+xml'],
+  '/images/news.svg': ['images/news.svg', 'image/svg+xml'],
 };
 
 const port = Number(process.argv[2] ?? 8000);
