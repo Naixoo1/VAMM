@@ -1,7 +1,6 @@
 # VAMM Hackathon MVP
 
-Frozen contract v2 and `docs/FIXTURES.md` govern implementation. Documentation only
-until explicitly authorized; no app resources or credentials are provisioned here.
+Frozen contract v2 and `docs/FIXTURES.md` govern implementation. Implementation and bounded live presentation/motion extensions were explicitly authorized. Simulation and contract v2 remain frozen.
 
 ## Goal and defaults
 
@@ -22,9 +21,9 @@ fund shock → review nominal/real outcome → continue or reset.
 
 | Screen | Required behavior |
 |---|---|
-| Dashboard / Home | Three instruments; Recharts synthetic dated index line; optional independent TradingView panel |
-| Research / AI Investment Mentor | 1–2 instruments/question; server-selected fixture evidence; limitations/labeled fallback |
-| Compare | Bonds/equity default; cumulative synthetic return and unavailable annual fee; matching periods |
+| Dashboard / Home | Live TradingView market context/chart; separate educational baskets with frozen provenance |
+| Research / AI Investment Mentor | Live company context from TradingView; separate synthetic basket mentor retains1–2 instruments/question, fixture evidence and labeled fallback |
+| Compare | Live instrument comparison; separate bonds/equity teaching comparison retains frozen periods/metrics and unavailable annual fee |
 | Simulation | Engine contribution preview; nominal/real charts; separate gain/contribution/bill; explicit funding, history/reset |
 | News / News & Sentiment Lab | Live TradingView feed; separately expandable three synthetic stories with prewritten sentiment/reason, never trading advice |
 
@@ -98,4 +97,4 @@ Preserve local persistence and simulation semantics.
 
 The separate /market route and Dashboard chart use TradingView (NASDAQ:AAPL, symbol changing, 1D). News is automatically updated by TradingView instead of manually maintained links. Provider timestamps/availability apply; VAMM adds no live sentiment score. Synthetic sentiment practice and all v2 endpoints remain unchanged. No backend or financial API is created for the widgets.
 
-Future handmade UI can replace presentation only; retain hooks, gateway, validation, contracts, fixtures and storage semantics. Current animation work is a separate MagicPath prototype/combination study based on the user's video, not a production redesign. Details: orchestration/reviews/LIVE-NEWS-MOTION-2026-11-07.md. Ask before adding plugins or paid data services.
+Future handmade UI can replace presentation only; retain hooks, gateway, validation, contracts, fixtures and storage semantics. The latest user authorizes applying all24 documented motion treatments based on the video studies. This is a shared presentation layer, preserving financial controllers and current design conventions. Current details: orchestration/reviews/LIVE-FEATURES-MOTION-2026-11-07.md; earlier concept evidence remains historical. Ask before adding plugins or paid data services.

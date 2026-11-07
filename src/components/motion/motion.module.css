@@ -1,0 +1,32 @@
+.scope{display:contents}
+.mark{display:inline-flex;align-items:center;gap:7px;max-width:100%;vertical-align:middle;min-width:0;color:inherit}
+.decorative{display:inline-flex;flex:0 0 auto;pointer-events:none;color:var(--motion-color,#4e7762)}
+.artwork{display:block;width:58px;height:29px;max-width:100%;fill:currentColor;overflow:hidden}
+.compact .artwork{width:38px;height:20px}
+.label{font:inherit;min-width:0}
+.mark[data-motion-palette=silver] .decorative,.boundary[data-motion-palette=silver] .boundaryAccent{--motion-color:#75877b}
+.mark[data-motion-palette=green] .decorative,.boundary[data-motion-palette=green] .boundaryAccent{--motion-color:#457356}
+.mark[data-motion-palette=ivory] .decorative,.boundary[data-motion-palette=ivory] .boundaryAccent{--motion-color:#87764f}
+.helix,.orbit,.signal,.artwork,.sweep{transform-origin:32px 16px;transform-box:view-box}
+.mark[data-motion-eligible=true][data-motion-behavior=loop] .helix,.boundary[data-motion-eligible=true][data-motion-behavior=loop] .helix{animation:motion-weave var(--motion-duration,18s) ease-in-out infinite}
+.mark[data-motion-eligible=true][data-motion-behavior=loop] .orbit,.boundary[data-motion-eligible=true][data-motion-behavior=loop] .orbit{animation:motion-orbit var(--motion-duration,16s) linear infinite}
+.mark[data-motion-eligible=true][data-motion-behavior=loop] .signal,.boundary[data-motion-eligible=true][data-motion-behavior=loop] .signal{animation:motion-signal var(--motion-duration,3.6s) ease-in-out infinite}
+.mark[data-motion-eligible=true][data-motion-behavior=loop] .sweep,.boundary[data-motion-eligible=true][data-motion-behavior=loop] .sweep{animation:motion-sweep var(--motion-duration,2.8s) ease-in-out infinite}
+.mark[data-motion-eligible=true][data-motion-behavior=arrival] .artwork,.boundary[data-motion-eligible=true][data-motion-behavior=arrival] .boundaryAccent .artwork{animation:motion-arrive var(--motion-duration,.18s) ease-out both}
+.boundary{position:relative;min-width:0}
+.boundaryAccent{position:absolute;inset:-7px 4px auto auto;display:block;width:30px;height:15px;opacity:.38;color:var(--motion-color,#4e7762);pointer-events:none;z-index:1}
+.boundaryAccent .artwork{width:30px;height:15px}
+.boundaryLabel{display:block;font-size:11px;line-height:1.7;color:inherit}
+.boundary[data-motion-preset=focus-ring] :where(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #4b8361;outline-offset:3px}
+.controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:inherit;min-width:0}
+.controls button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;border:1px solid #b7c6b7;border-radius:6px;background:#f7faf4;color:#354f3a;font:500 11px/1.5 Arial,Helvetica,sans-serif;cursor:pointer}
+.controls button:hover{background:#eaf2e4}.controls button[aria-pressed=true],.controls button[aria-checked=true]{background:#e1edd9;color:#2e5138;border-color:#78946e}.controls button:disabled{cursor:default;opacity:.65}.controls button:focus-visible{outline:2px solid #4b8361;outline-offset:3px}.preferenceNote{font-size:11px;line-height:1.7;color:inherit;flex:1 1 180px}
+.mark[data-motion-paused=true] .artwork,.mark[data-motion-paused=true] .artwork *,.boundary[data-motion-paused=true] .boundaryAccent .artwork,.boundary[data-motion-paused=true] .boundaryAccent .artwork *{animation-play-state:paused}
+.mark[data-motion-static=true] .artwork,.mark[data-motion-static=true] .artwork *,.boundary[data-motion-static=true] .boundaryAccent .artwork,.boundary[data-motion-static=true] .boundaryAccent .artwork *{animation:none!important;transition:none!important}
+@keyframes motion-weave{0%,100%{transform:rotateX(-12deg) translateY(-.4px);opacity:.7}50%{transform:rotateX(12deg) translateY(.4px);opacity:1}}
+@keyframes motion-orbit{to{transform:rotate(360deg)}}
+@keyframes motion-signal{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(-.7px);opacity:.95}}
+@keyframes motion-sweep{0%,100%{transform:translateX(0);opacity:.3}50%{transform:translateX(35px);opacity:.7}}
+@keyframes motion-arrive{from{transform:scale(.96);opacity:.65}to{transform:scale(1);opacity:1}}
+@media(max-width:600px){.artwork{width:48px;height:24px}.compact .artwork{width:32px;height:18px}.controls{gap:6px}.controls button{padding:8px 9px}.preferenceNote{flex-basis:100%;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.mark .artwork,.mark .artwork *,.boundary .boundaryAccent .artwork,.boundary .boundaryAccent .artwork *{animation:none!important;transition:none!important}}

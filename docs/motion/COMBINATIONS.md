@@ -1,6 +1,6 @@
 # VAMM motion combination matrix
 
-Exploration only. Both MagicPath studies are isolated from production UI and contain no application data, hooks, gateway, storage, contract or API imports. The existing app design is unchanged.
+The user now authorizes applying these24 treatments to production. The two full MagicPath studies remain separate proposals; a small shared motion layer implements their visual language in real app states while preserving data/logic.
 
 ## Observed reference
 
@@ -33,7 +33,7 @@ The server-preserved named exports remain exact. Each has one adjacent scoped CS
 
 ## Broad combination matrix
 
-Candidate directions below are not installed features. Two interactive studies demonstrate the core family; not every permutation has been rendered.
+These24 rows are the accepted production-treatment inventory. Actual implemented paths and runtime coverage are recorded in orchestration/reviews/LIVE-FEATURES-MOTION-2026-11-07.md; a registry entry alone is not proof of reachability.
 
 | # | Combination | Surface | Proposed treatment | Exit / safeguard |
 |---|---|---|---|---|
@@ -70,11 +70,11 @@ Signal-line examples have no price axes, market values, directional returns or i
 2. **The evidence orbit:** Charcoal, compact, light density and restrained motion. Suitable for a research-response wait with one concise status, without promising undisclosed research tools.
 3. **The settled signal:** Warm ivory, a neutral line resolving to a static check only after a real commit. Show the real result immediately; optional opacity settling should stay around 150–180 ms.
 
-News can reuse the same skeleton/particle language. Stable article identity, source links, readable text and explicit provider hide/pause behavior remain more important than decoration. For the current TradingView feed, VAMM controls the outer host/loading/error/hide boundary only. Per-card entry or reordering is a future concept; do not inspect closed shadow DOM, scrape articles, or add an ingestion API/store to realize it.
+News can reuse the same skeleton/particle language. Stable article identity, source links, readable text and explicit provider hide/pause behavior remain more important than decoration. For the current TradingView feed, VAMM controls the outer host/loading/error/hide boundary only. Row19 is adapted to outer-host arrival; no per-card reordering or closed-shadow inspection, scraping, ingestion API or new store is authorized.
 
 ## Future presentation boundary
 
-A future reusable motion component can consume a label and idle/loading/ready/error state. This is a proposed UI prop boundary, not a contract-v2 amendment.
+The shared production motion API consumes label and idle/loading/ready/error state, with decoration-only replay keys. This presentation boundary does not amend contract v2.
 
 - Existing query pending/error state drives decoration. Decoration never starts a fetch.
 - Existing simulation busy/result/error state drives acknowledgment. Replaying a visual must not reinitialize hooks, change request IDs, or call create/ADVANCE/SETTLE/reset.
@@ -101,4 +101,10 @@ Worker drafts were reviewed and preserved here with sources in design/motion; th
 
 ## Verification boundary
 
-Source review, executed local checks and observed CEO checks are reported separately in the handoff. A generated source file or successful remote upload is not a passing rendered test. CEO completed responsive390px/1440px, pause/replay/static, runtime reduced-motion, keyboard and remote builds; see evidence/report.json and the current task review. No production animation is installed.
+Source review, executed local checks and observed CEO checks are reported separately in the handoff. A generated source file or successful remote upload is not a passing rendered test. CEO completed responsive390px/1440px, pause/replay/static, runtime reduced-motion, keyboard and remote builds; see evidence/report.json and the current task review. Production treatments are now applied; the full study pages remain outside app imports. See APPLIED.md for actual usage.
+
+
+Latest scope: production use is now authorized. Preserve the original study/worker evidence above as historical; current implementation and acceptance status are recorded in the LIVE-FEATURES-MOTION review. Rows12/13/24 acknowledge real committed results, with immediate visible financial values and no animation-triggered action.
+
+
+Production mapping and observed reachability are in [APPLIED.md](APPLIED.md). The full study pages remain proposals; their shared visual vocabulary is now applied in small state-driven treatments rather than embedding a full-screen study or the66MB video.

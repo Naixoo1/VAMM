@@ -1,0 +1,14 @@
+{
+  "simulation": {
+    "callsBefore": 56,
+    "callsAfter": 56,
+    "callsIdentical": true,
+    "handlersBefore": 13,
+    "handlersAfter": 13,
+    "handlersIdentical": true,
+    "controllerIdentical": true
+  },
+  "research": {
+    "controllerIdentical": true
+  }
+}

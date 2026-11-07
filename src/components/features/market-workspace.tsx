@@ -1,6 +1,7 @@
 "use client";
 import {useState} from "react";
 import {Tabs} from "radix-ui";
+import {MotionBoundary} from "@/components/motion";
 import {useMarketData} from "@/hooks/use-api-data";
 import {IndexChart} from "./index-chart";
 import {TradingViewChart} from "./tradingview-chart";
@@ -26,7 +27,7 @@ export function MarketWorkspace(){
     {loading&&!data&&<LoadingPanel message="Loading the original learning chart…"/>}
     {data&&(data.instruments.length>0&&data.chartSeries.length>0?<>
      <ul className={styles.instruments} aria-label="Available educational instruments">{data.instruments.map(instrument=><li key={instrument.id}>{instrument.name}</li>)}</ul>
-     <IndexChart series={data.chartSeries}/>
+     <MotionBoundary preset="content-arrival" state="ready"><IndexChart series={data.chartSeries}/></MotionBoundary>
      <SourceLine version={data.chartSeries[0].datasetVersion}/>
      <p className={styles.description}>Authored teaching assumptions, not forecasts or external market observations. These baskets stay separate from TradingView’s market data.</p>
     </>:<p className={styles.description} role="status">No educational chart data is available.</p>)}

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { ExternalLink, LoaderCircle, Newspaper, RefreshCw } from "lucide-react";
+import { ExternalLink, Newspaper, RefreshCw } from "lucide-react";
+import { MotionBoundary, MotionMark } from "@/components/motion";
 import { ensureLiveNewsModule, LIVE_NEWS_ELEMENT, LIVE_NEWS_EXTERNAL_URL, LIVE_NEWS_LOAD_TIMEOUT_MS } from "@/lib/data/live-news";
 import styles from "./live-news.module.css";
 
@@ -113,13 +114,20 @@ export function LiveNewsFeed() {
       </div>
     </header>
     <div id={frameId} className={styles.frame} hidden={hidden}>
-      <div ref={host} className={styles.host} data-testid="live-news-host" inert={state !== "ready"} aria-hidden={state !== "ready"} />
+      <MotionBoundary preset="news-arrival" state={state === "ready" ? "ready" : "idle"} className={styles.arrival}>
+        <div ref={host} className={styles.host} data-testid="live-news-host" inert={state !== "ready"} aria-hidden={state !== "ready"} />
+      </MotionBoundary>
       {state !== "ready" && state !== "paused" && <div className={styles.placeholder} aria-hidden="true">
-        {state === "loading" ? <LoaderCircle size={25} className={styles.spinner} /> : <Newspaper size={28} strokeWidth={1.4} />}
+        {state === "loading" ? <>
+          <MotionMark preset="news-thumbnail" state="loading" />
+          <div className={styles.animatedSkeleton}><MotionMark preset="news-skeleton" state="loading" /></div>
+          <div className={styles.staticSkeleton}><MotionMark preset="news-static" state="loading" /></div>
+        </> : <Newspaper size={28} strokeWidth={1.4} />}
         <strong>{state === "loading" ? "Opening the provider’s news feed…" : statusText[state]}</strong>
         <p>{state === "loading" ? "Connecting to TradingView’s external service." : "The provider may be blocked, offline, or temporarily unavailable. Retry below or open its news page."}</p>
       </div>}
     </div>
+    {hidden && <div className={styles.pausedMark}><MotionMark preset="feed-paused" state="idle" /></div>}
     <footer className={styles.footer}>
       <div className={styles.provenance}>
         <p className={[styles.status, failed ? styles.error : ""].join(" ")} role={failed ? "alert" : "status"}>{statusText[state]}</p>

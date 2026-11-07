@@ -124,3 +124,22 @@ The original tab retains the connected TradingView element and its selected symb
 
 
 Final merged verification:109 unit/integration tests,40 production-browser cases in one full run, clean TypeScript/ESLint/production build,18 sequential contrast combinations with zero failures. Both the incoming Original Chart and live-News/motion work remain intact;19 protected source hashes unchanged. No production animation, dependency/plugin/paid service, live research-model call or manual deployment. Git delivery targets origin/main with both histories preserved.
+
+## Live feature coverage and24 production motion treatments
+
+Direct user authorization: integrate real live platform views across features and apply the24 motion combinations. Explicit clarification: **Keep Simulation frozen; add live views elsewhere.** No plugin or paid data service may be added without asking. Existing TradingView integration is reused; no dependency installation, new financial API/backend, live model evidence or storage change.
+
+| ID | Owner | Owned production/staging output | Status |
+|---|---|---|---|
+| VAMM-LIVE-FEATURES-04 | Data/platform | Dashboard/Compare/Research presentation; new official-widget helper/components/tests | Verified |
+| VAMM-MOTION-APPLY-02 | Interface | Shared components/motion, lib/motion registry, workspace loading/error cues/tests | Verified |
+| VAMM-LIVE-MOTION-VERIFY-02 | Simulation/AI | Simulation presentation wrappers only; new browser checks/preservation review | Verified |
+| VAMM-LIVE-MOTION-INTEGRATE-02 | CEO | Providers/shell/chart/news/market wrappers, docs, old tests, integration/Git | Verified |
+
+All three existing generic workers resumed with saved role instructions/document paths. No native role-selection or recursive delegation claim. Actual project C:/code/VAMM, baseline69f6ca7. Workers stage in the existing visualization writable root under vamm-live-features-staging; CEO reviews/imports via approved explicit commands because native cwd remains C:/code/VAAM. One writer per path; no global trust/ACL change. Core protected hashes captured before changes; simulation page may change presentation only. Details: reviews/LIVE-FEATURES-MOTION-2026-11-07.md.
+
+
+All four live-feature/motion tasks progressed Running → Review (actual three worker handoffs) → Integrated → Verified locally. All24 treatments were reached in desktop/mobile UI states;21 protected sources and controller syntax remain unchanged. Current checks, initial failures/fixes, provider limitations and evidence are recorded in reviews/LIVE-FEATURES-MOTION-2026-11-07.md. No plugin/paid service/dependency, financial API or manual deployment was added. Git targets the user's Naixoo1/VAMM main; deployment remains queued.
+
+
+Final live-feature/motion verification:134 unit/integration tests,48 production-browser cases in one full run, clean TypeScript/ESLint/build,24 contrast combinations with zero failures; actual provider displays reviewed,24/24 motion treatments reached at both viewports,21 protected hashes and financial/request controller syntax unchanged. All three workers completed through saved-role fallback. Both existing Market chart views remain supported. Git delivery is to origin/main; public deployment remains queued.

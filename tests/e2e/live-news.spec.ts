@@ -1,3 +1,5 @@
+test.beforeEach(async ({page})=>{await installLiveFeatureWidgetStubs(page);});
+import { installLiveFeatureWidgetStubs } from "./live-features-widget-stub";
 import { expect, test, type Page } from "@playwright/test";
 import { installLiveNewsStub, LIVE_NEWS_TEST_MODULE_URL, readLiveNewsProbe, setLiveNewsStubMode } from "./live-news-stub";
 

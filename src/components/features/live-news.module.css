@@ -5,6 +5,11 @@
 .provider{font-size:11px;color:#46613e;background:#eef3e6;padding:4px 8px;border-radius:5px}
 .frame{position:relative;min-width:0;height:650px;background:#fff}
 .host{width:100%;height:100%;min-width:0;display:block}
+.arrival{width:100%;height:100%;min-width:0}
+.staticSkeleton{display:none}
+.pausedMark{display:flex;justify-content:center;padding:18px}
+:global([data-motion-static="true"]) .animatedSkeleton{display:none}
+:global([data-motion-static="true"]) .staticSkeleton{display:block}
 .host>tv-news-feed{display:block;width:100%;height:100%;min-width:0}
 .placeholder{position:absolute;inset:0;background:#f9fbf6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#52635b;padding:28px;gap:12px}
 .placeholder strong{font-size:15px;color:#304c3a}

@@ -5,7 +5,8 @@ import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
 
 import ResearchPage from "@/app/research/page";
 vi.mock("@/hooks/use-api-data",async()=>{const {getMarketData}=await import("@/lib/data/fixtures");return{useMarketData:()=>({data:getMarketData(),error:null,loading:false,reload:vi.fn()})}});
-function renderMentor(){const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});return render(<QueryClientProvider client={client}><ResearchPage/></QueryClientProvider>)}
+vi.mock("@/components/features/live-market-widget",()=>({LiveMarketWidget:()=>null}));
+function renderMentor(){const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});const mounted=render(<QueryClientProvider client={client}><ResearchPage/></QueryClientProvider>); const disclosure=screen.getByText("Synthetic basket mentor").closest("details") as HTMLDetailsElement; disclosure.open=true; fireEvent(disclosure,new Event("toggle")); return mounted}
 afterEach(()=>{cleanup();vi.unstubAllGlobals()});
 beforeEach(()=>{vi.stubGlobal("fetch",vi.fn().mockResolvedValue({json:async()=>({ok:true,data:{summary:"Synthetic teaching explanation.",facts:[],limitations:["Teaching assumptions, not forecasts."],evidence:[],origin:"prewritten"}})}))});
 describe("Mentor request boundaries",()=>{
@@ -35,4 +36,3 @@ describe("Mentor request boundaries",()=>{
   expect(await screen.findByRole("alert")).toBeTruthy();expect(screen.getByText("Research connection failed")).toBeTruthy();expect(fetch).toHaveBeenCalledTimes(1);
  });
 });
-

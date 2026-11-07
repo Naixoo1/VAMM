@@ -1,3 +1,4 @@
+import { installLiveFeatureWidgetStubs } from "./live-features-widget-stub";
 import { installLiveNewsStub } from "./live-news-stub";
 import { installTradingViewStub } from "./tradingview-stub";
 import { test, expect } from "@playwright/test";
@@ -24,6 +25,7 @@ test("frozen market/news and labeled research fallback", async ({ request }) => 
 });
 
 test("six routes render without page errors or horizontal overflow", async ({ page }, testInfo) => {
+  await installLiveFeatureWidgetStubs(page);
   await installTradingViewStub(page);
   await installLiveNewsStub(page);
   const errors: string[] = [];
@@ -38,9 +40,9 @@ test("six routes render without page errors or horizontal overflow", async ({ pa
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByRole("main")).toBeVisible();
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
-    if (route === "dashboard") await expect(page.getByText("Simulated cash", { exact: true })).toBeVisible();
-    if (route === "research") await expect(page.getByRole("checkbox", { name: "Simulated bond basket" })).toBeVisible();
-    if (route === "compare") await expect(page.getByRole("cell").filter({ hasText: /^Unavailable/ })).toHaveCount(2);
+    if (route === "dashboard") await expect(page.getByRole("region", { name: "Live market summary", exact: true })).toHaveAttribute("data-live-market-state", "ready");
+    if (route === "research") await expect(page.getByLabel("Company context", { exact: true })).toBeVisible();
+    if (route === "compare") await expect(page.getByLabel("First company", { exact: true })).toBeVisible();
     if (route === "simulation") await expect(page.getByRole("button", { name: "Start your simulation" })).toBeVisible();
     if (route === "news") await expect(page.getByRole("heading", { name: "Live market news", exact: true })).toBeVisible();
     await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); window.scrollTo(0,0); });

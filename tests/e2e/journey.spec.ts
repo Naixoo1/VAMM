@@ -1,8 +1,9 @@
+import { installLiveFeatureWidgetStubs } from "./live-features-widget-stub";
 import { installLiveNewsStub } from "./live-news-stub";
 import { installTradingViewStub } from "./tradingview-stub";
 import { test, expect, type Page } from "@playwright/test";
 
-test.beforeEach(async ({ page }) => { await installTradingViewStub(page); await installLiveNewsStub(page); });
+test.beforeEach(async ({ page }) => { await installLiveFeatureWidgetStubs(page); await installTradingViewStub(page); await installLiveNewsStub(page); });
 
 async function savedState(page: Page) {
   return page.evaluate(async () => {
@@ -87,8 +88,10 @@ test("keyboard focus, partial comparison data and research prompt/fallback", asy
   expect(await skip.evaluate(element => getComputedStyle(element).outlineStyle)).not.toBe("none");
   await page.keyboard.press("Enter");
   await expect(page.getByRole("main")).toBeFocused();
+  await page.locator("summary").filter({hasText:"Synthetic basket comparison"}).click();
   await expect(page.getByRole("cell").filter({ hasText: /^Unavailable/ })).toHaveCount(2);
   await page.goto("/research");
+  await page.locator("summary").filter({hasText:"Synthetic basket mentor"}).click();
   const prompt = "Explain why these synthetic results are not a forecast.";
   await page.getByRole("button", { name: prompt }).click();
   await expect(page.getByLabel("Your question")).toHaveValue(prompt);
@@ -108,6 +111,7 @@ test("loading, visible network failure, retry and empty news states", async ({ p
     await route.fulfill({ status: 503, json: { ok: false, error: { code: "DATA_UNAVAILABLE", message: "Test data is temporarily unavailable.", retryable: true, requestId: null } } });
   });
   await page.goto("/dashboard");
+  await page.locator("summary").filter({hasText:"Synthetic learning baskets"}).click();
   await expect(page.getByRole("region", { name: "Meet the educational baskets" }).getByRole("status")).toContainText("Loading the educational baskets");
   expect(await page.getByRole("region", { name: "Meet the educational baskets" }).getByRole("status").locator("svg").evaluate(element => getComputedStyle(element).animationName)).toBe("none");
   release();

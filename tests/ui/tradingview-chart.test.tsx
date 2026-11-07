@@ -53,6 +53,21 @@ describe("TradingView Web Component boundary",()=>{
   expect(screen.getByRole("alert").textContent).toBe("TradingView couldn’t load this chart here.");
   const region=screen.getByRole("region",{name:"TradingView market chart"});expect(within(region).getByRole("link",{name:"Open on TradingView"})).toBeTruthy();expect(within(region).getByRole("button",{name:"Retry chart"})).toBeTruthy();
  });
+ it("does not time out an offscreen chart and restarts its deadline only when visible",async()=>{
+  vi.useFakeTimers();let notify!:IntersectionObserverCallback;
+  vi.stubGlobal("IntersectionObserver",class{constructor(callback:IntersectionObserverCallback){notify=callback}observe(){}disconnect(){}});
+  render(<TradingViewChart variant="dashboard"/>);
+  await act(async()=>{await Promise.resolve();vi.advanceTimersByTime(TRADINGVIEW_LOAD_TIMEOUT_MS+1)});
+  expect(screen.queryByRole("alert")).toBeNull();
+  act(()=>notify([{isIntersecting:true} as IntersectionObserverEntry],{} as IntersectionObserver));
+  act(()=>vi.advanceTimersByTime(1000));
+  act(()=>notify([{isIntersecting:false} as IntersectionObserverEntry],{} as IntersectionObserver));
+  act(()=>vi.advanceTimersByTime(TRADINGVIEW_LOAD_TIMEOUT_MS+1));
+  expect(screen.queryByRole("alert")).toBeNull();
+  act(()=>notify([{isIntersecting:true} as IntersectionObserverEntry],{} as IntersectionObserver));
+  act(()=>vi.advanceTimersByTime(TRADINGVIEW_LOAD_TIMEOUT_MS+1));
+  expect(screen.getByRole("alert").textContent).toBe("TradingView couldn’t load this chart here.");
+ });
  it("renders a stable server placeholder without registering browser elements",()=>{
   const before=document.scripts.length;const html=renderToString(<TradingViewChart/>);
   expect(html).toContain("Loading TradingView chart");expect(html).not.toContain("<tv-advanced-chart");expect(html).not.toContain("<script");expect(document.scripts.length).toBe(before);

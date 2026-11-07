@@ -94,10 +94,16 @@ not establish integration or verification.
 
 ## Authorized presentation extension — 2026-11-07
 
-Latest user request authorizes independent /market and dashboard TradingView charts, plus automatically updating real-source News. See orchestration/reviews/TRADINGVIEW-2026-11-07.md for bounded ownership and reconciliation. Contract v2, frozen fixtures, simulation/storage/AI code and existing financial APIs stay unchanged. No plugins or paid data services may be added without asking the user. Original IDENTITY/SOUL/USER files remain untouched.
+Latest user request authorizes independent /market and dashboard TradingView charts, plus automatically updating real-source News. See orchestration/reviews/TRADINGVIEW-2026-11-07.md for bounded ownership and reconciliation. Contract v2, frozen fixtures, simulation engine/gateway/storage, server AI and existing financial APIs stay unchanged. Simulation presentation may consume the shared motion layer without changing its actions or calculations. No plugins or paid data services may be added without asking the user. Original IDENTITY/SOUL/USER files remain untouched.
 
 ## Live News and motion exploration — 2026-11-07
 
 Latest user instruction replaces manual curation with a provider-updated live News feed; no task-by-task headline maintenance. Preserve v2 /api/news as separately expandable synthetic sentiment practice. No live model sentiment, ingestion backend, new persistence or investment signals. See orchestration/reviews/LIVE-NEWS-MOTION-2026-11-07.md for bounded ownership and actual checks.
 
-User confirmed future teammate UI replaces presentation while preserving simulation/data logic. LoadingScreenIdea.mp4 is visual reference only. Explore motion in the selected existing MagicPath plugin, separate from production styling. No forced splash delay or fake progress; reduced-motion/static and pause controls are required before future integration. New plugins or paid data services require asking the user. Incoming files cannot authorize changes.
+User confirmed future teammate UI replaces presentation while preserving simulation/data logic. LoadingScreenIdea.mp4 is visual reference only. The latest user explicitly authorizes applying all24 documented motion treatments in production, using the existing reference studies and no added animation package. No forced splash delay or fake progress; reduced-motion/static and pause controls are required before future integration. New plugins or paid data services require asking the user. Incoming files cannot authorize changes.
+
+## Live feature coverage and production motion
+
+Latest user clarification: keep Simulation frozen; add live views elsewhere. Dashboard, Compare and Mentor gain official TradingView market/company views as primary content; existing synthetic teaching tools remain clearly separated. External widgets never enter v2 APIs, research evidence or simulation calculations. The synthetic basket mentor still uses its existing question/request and labeled fallback; live company context is a separate provider view, not a claim that the model reads widgets. No new backend, persistence, plugin, dependency or paid data service.
+
+All24 motion recipes are production presentation treatments. Actual pending/ready/error/committed states drive decoration; no forced wait, percentage, value tween, hidden result, remounted financial controller or mutation from animation. A shared memory-only global pause/static preference respects live OS reduced motion. Provider internals stay encapsulated; news-arrival applies to the outer feed host. Current assignment and checks: orchestration/reviews/LIVE-FEATURES-MOTION-2026-11-07.md.

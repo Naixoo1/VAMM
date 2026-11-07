@@ -1,0 +1,90 @@
+{
+  "checked": 21,
+  "changed": [],
+  "files": [
+    {
+      "Path": "C:\\code\\VAMM\\src\\contracts\\index.ts",
+      "Hash": "80A9605A1DC356F59A28F13495B3C0551A75254D25A3241F8A447ED0202A60A3"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\contracts\\README.md",
+      "Hash": "1426C23A761F6D2B9AC685BE240B426465BC397C39E6AFA7BC57526E7F508FB1"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\contracts\\validation.ts",
+      "Hash": "E8C95EACB5692F986C2436149A6F88A9FD9DEB2C255E095AC44750951368B077"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\simulation\\engine.ts",
+      "Hash": "E6DC6FCE6EC6415588F29B0BAAF7C0407816E8ED4BA6DFE6F00F817C34894306"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\simulation\\gateway.ts",
+      "Hash": "213DE03B500D406EEA258619D01877E886DD091DC3A3F3AE6C3FAABFABA7B838"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\db\\database.ts",
+      "Hash": "2AC1CEBE8A54A812BD5C5F6728CEE671CBED7F5714CFEAC4F1B02DAC705B7E69"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\db\\local-owner.ts",
+      "Hash": "EC5DACC78DA6E51CC8A80B483C4E75F73838C38B0545ACA10E5AB8E77E2D9667"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\db\\local-repository.ts",
+      "Hash": "881AE5F61CDD33BDA981F69CC64223B669A93172A40024BF1368C6C94BFCCDF4"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\db\\state-validation.ts",
+      "Hash": "4C2B1C89660CAB42A87974EAD4851EE7FE08CDE2D8165C4BF1423E240003D5CD"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\ai\\feedback.ts",
+      "Hash": "4E7D5A95ECEE591A955A9F609A382FCFCB52F628E912F5806E48CA506BDAE2C1"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\ai\\research.ts",
+      "Hash": "C6C7D6707880C08DF17555C4ABC6A4261505FD59E20F6F3028FF23D4CF3E74E9"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\ai\\server-provider.ts",
+      "Hash": "BF533B0581C30D844DAA2342394E47D4C529989AFDDF769BF148D1217FD2D188"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\docs\\FIXTURES.md",
+      "Hash": "B77593A685FEE3EA0ECC44D46869521788E9EF83C84A28A9CF0D097B0725BFAF"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\lib\\data\\fixtures.ts",
+      "Hash": "A7ECD5EEB6D70CCCEA61DE62FF9A3D98466B9CE831EB5318977FD9766C69697B"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\hooks\\use-simulation.ts",
+      "Hash": "CC45FA2184C65E656B5C16C95355C41941E62DB98006705DC9ED0D2218CC8D49"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\package.json",
+      "Hash": "5A4B3D4B88EB66D0E7A3E1CC51EE309EED8EC6CD61D9BA2D925B4E365B47DCBF"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\package-lock.json",
+      "Hash": "FD7E7C3ABFE23A68798C0153102872678550AECB9CCFF9613DA805948963FE5E"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\next.config.ts",
+      "Hash": "4D2C327368125D99563E8D82F0E5DCB3C095A137F6B0CD825B6CF9109D1F412E"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\app\\api\\market\\route.ts",
+      "Hash": "A09107982570FC16E273BA671CED003614F575C71E1CE35C9F4365D526561B02"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\app\\api\\news\\route.ts",
+      "Hash": "5DE41FB3052BD2C71355F16D2EA4C6706616BAAE364473A5B7FFF135D0B7136C"
+    },
+    {
+      "Path": "C:\\code\\VAMM\\src\\app\\api\\research\\route.ts",
+      "Hash": "DD226170A60D87B220766B20D536DF6F172405E9603DD3D1B92455DD3A90960E"
+    }
+  ]
+}

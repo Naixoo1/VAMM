@@ -1,3 +1,5 @@
+test.beforeEach(async ({page})=>{await installLiveFeatureWidgetStubs(page);});
+import { installLiveFeatureWidgetStubs } from "./live-features-widget-stub";
 import { installLiveNewsStub } from "./live-news-stub";
 import { expect, test, type Page } from "@playwright/test";
 
@@ -104,6 +106,7 @@ test("stubbed official widget defaults, client navigation, singleton loader and 
   await expect(widget(page)).toHaveAttribute("allow-symbol-change", "");
   await expect(page.locator(`script[src="${MODULE_URL}"]`)).toHaveCount(1);
   await expect(page.locator(`script[src="${MODULE_URL}"]`)).toHaveAttribute("type", "module");
+  await page.locator("summary").filter({hasText:"Synthetic learning baskets"}).click();
   await expect(page.getByRole("heading", { name: "Meet the educational baskets", exact: true })).toBeVisible();
   await expect(page.getByText("Simulated cash", { exact: true })).toBeVisible();
   await expect(page.getByText(/Synthetic teaching data · IDR · 6 Nov 2026/)).toBeVisible();

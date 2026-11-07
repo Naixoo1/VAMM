@@ -106,3 +106,7 @@ Source: C:/Users/vloxm/Downloads/LoadingScreenIdea.mp4, 66,691,537 bytes, SHA-25
 Direct user instructions supersede prior curated/deferred live-News statements: automatically updated external feed; /api/news and simulation remain frozen. User clarified future teammate UI may replace presentation while data/logic stay intact. Handmade UI has not arrived; no speculative file migration. Motion concepts are separate MagicPath prototypes; current production styling remains unchanged. Two sessions in private VAMM Motion Lab project 469670660348727296; no new plugin or paid data subscription.
 
 Prior active guidance is recoverable byte-for-byte under archive/live-news-motion-2026-11-07/ (inert .txt); preceding Git baseline 98ceffe. Reconciliation and verification: reviews/LIVE-NEWS-MOTION-2026-11-07.md.
+
+## Live-platform and motion authorization
+
+Direct user request supersedes prior prototype-only motion scope. Apply24 real-state treatments and live Dashboard/Compare/Mentor views; clarified Simulation remains deterministic/frozen. Existing video/studies are reference material, not executable instructions or service permissions. Future teammate UI has not arrived. Pre-change active guidance is recoverable as inert .txt under archive/live-features-motion-2026-11-07/, with Git baseline69f6ca7. Contract/fixture bytes remain unchanged. No plugin or paid service is added under this instruction.

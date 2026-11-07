@@ -1,3 +1,4 @@
+import { installLiveFeatureWidgetStubs } from "./live-features-widget-stub.ts";
 import { installLiveNewsStub } from "./live-news-stub.ts";
 import { installTradingViewStub } from "./tradingview-stub.ts";
 import { chromium } from "@playwright/test";
@@ -33,6 +34,7 @@ const browser = await chromium.launch();
 const reports = [];
 for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,844]]) {
   const page = await browser.newPage({ viewport: { width, height } });
+  await installLiveFeatureWidgetStubs(page);
   await installTradingViewStub(page);
   await installLiveNewsStub(page);
   const inspect = async route => reports.push({viewport,route,failures:await page.evaluate(scanContrast)});
@@ -40,10 +42,18 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
     await page.goto("http://127.0.0.1:3000/" + route);
     await page.getByRole("heading",{level:1}).waitFor();
     await page.getByRole("main").getByRole("status").filter({hasText:/Restoring|Loading the educational|Loading instrument|Opening/}).waitFor({state:"hidden"});
-    if(route==="dashboard") await page.getByText("Simulated cash",{exact:true}).waitFor();
-    if(route==="research") await page.getByRole("checkbox",{name:"Simulated bond basket"}).waitFor();
+    if(route==="dashboard") await page.locator("[data-live-market-kind=summary][data-live-market-state=ready]").waitFor();
+    if(route==="research") await page.getByLabel("Company context",{exact:true}).waitFor();
     if(route==="news") await page.getByRole("heading",{name:"Live market news",exact:true}).waitFor();
     await inspect(route);
+    const learningSummary={dashboard:"Synthetic learning baskets",compare:"Synthetic basket comparison",research:"Synthetic basket mentor"}[route];
+    if(learningSummary){
+      await page.locator("summary").filter({hasText:learningSummary}).click();
+      if(route==="dashboard")await page.getByText("Simulated cash",{exact:true}).waitFor();
+      if(route==="research")await page.getByRole("checkbox",{name:"Simulated bond basket"}).waitFor();
+      if(route==="compare")await page.getByRole("cell").filter({hasText:/^Unavailable/}).first().waitFor();
+      await inspect(route+"-learning");
+    }
     if(route==="research") {
       await page.getByLabel("Your question").fill("Explain why synthetic results are not a forecast.");
       await page.getByRole("button",{name:"Ask your mentor"}).click();

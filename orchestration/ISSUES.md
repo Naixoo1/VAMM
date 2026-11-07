@@ -75,3 +75,15 @@ DEP-01 remains a development-only lint-chain advisory: production-only npm audit
 | MOTION-01 | Prototype static switch initially omitted forced OS state; two select names included nested option text. | Corrected effective static state/disable and explicit labels. Remote builds completed; four local responsive interaction checks passed. |
 
 No live-provider outage was observed in final smoke checks. Provider refresh timing and full accessibility of its closed internals remain external, not inferred from deterministic stubs.
+
+## Live-feature/motion integration — 2026-11-07
+
+| ID | Observed issue and bounded resolution | Verification |
+|---|---|---|
+| LIVE-01 | Mobile chart/provider loading could time out before scrolling into view. Start deadlines on visibility; pause chart deadline when hidden. Immediate module errors remain actionable. | Focused offscreen/ready/deadline tests and final real desktop/mobile smoke passed. No settings/data/finance change. |
+| QA-04 | Legacy test iframe was inserted after a full-height mount, overlaying disclosures. Insert it inside the actual widget mount. | Existing comparison/mentor journeys passed afterward; application was not changed for this fixture bug. |
+| QA-05 | New mobile silent-provider timeout test advanced time while the host was offscreen. Scroll/verify host visibility before advancing the unchanged deadline. | Failed case passed; real timeout/readiness safeguards retained. |
+| LIVE-02 | Initial iframe screenshots were taken before internal provider assets/data completed. | Longer visible checks confirmed actual comparison/fundamentals rendering. onLoad remains labeled only panel-open evidence. |
+| PROVIDER-01 | Auxiliary business-info CORS failure observed in one isolated desktop run despite rendered core fields. | No bypass/proxy or invented data. Final full smoke had no failed requests; optional provider fields/availability remain external. |
+
+No unresolved application blocker was found. Native workspace-root alignment remains ENV-01; dependencies/configuration and financial source semantics remain unchanged.

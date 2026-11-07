@@ -1,0 +1,218 @@
+[
+  {
+    "route": "dashboard",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "summary",
+        "state": "ready"
+      },
+      {
+        "kind": "chart",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-market-summary.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "compare",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "comparison",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "research",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "profile",
+        "state": "ready"
+      },
+      {
+        "kind": "technical",
+        "state": "ready"
+      },
+      {
+        "kind": "fundamentals",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-financials.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-company-profile.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-technical-analysis.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "news",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "news",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-news-feed.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "dashboard",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "summary",
+        "state": "ready"
+      },
+      {
+        "kind": "chart",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-market-summary.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "compare",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "comparison",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "research",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "profile",
+        "state": "ready"
+      },
+      {
+        "kind": "technical",
+        "state": "ready"
+      },
+      {
+        "kind": "fundamentals",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-financials.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-company-profile.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-technical-analysis.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "news",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "news",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-news-feed.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  }
+]
