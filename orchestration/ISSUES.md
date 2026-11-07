@@ -4,6 +4,8 @@
 
 MENTOR-PROVIDER-02: Production894782a confirmed OpenAI HTTP401 (MODEL_AUTH_FAILED). The original key was rejected upstream; safe error categories now identify credentials, access, model, quota and rate-limit failures without exposing raw provider responses. Vercel metadata confirms the user's replacement key was saved; final access must be tested on the new deployment. No secret value was read.
 
+Resolved on production9b3dbd2 at09:09UTC: real text chat, screenshot analysis and AI quiz generation all returned200 using the replacement key. Saved chat reopened and quiz scoring preserved reviewed XP. The provider rejection was a credential issue; no financial contract, simulation or fixture change was necessary.
+
 QUIZ-QA-01: The new optional configuration GET and a label locator conflicted with two browser harness assumptions. Fixtures now allow only the read-only configuration request while preserving generation-call guards, and the quiz selector uses its accessible combobox role. All100 browser cases pass after these harness fixes; all534 unit/integration cases and lint/build pass. AI generation uses the existing server-side service and does not alter reviewed quiz progress or financial state.
 
 ## Mentor chat integration — 2026-11-07

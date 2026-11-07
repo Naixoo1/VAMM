@@ -2,6 +2,8 @@
 
 ## Current provider repair and generated quizzes — 2026-11-07
 
+Final status: all four AI-QUIZ tasks are Verified, including production9b3dbd2 (Vercel READY). All18 hosted route/viewport checks, real text and screenshot replies, conversation reload/history, and real quiz generation/scoring passed at09:09UTC. The original rejected-key failure is resolved. All36 protected hashes remain unchanged. No new plugin, dependency or paid service was added.
+
 AI-QUIZ-DATA-01 (Data/platform server), AI-QUIZ-UI-01 (Interface) and AI-QUIZ-REVIEW-01 (Simulation/AI shared classifier/review) progressed Running → Review → Integrated → Verified locally. AI-QUIZ-DEPLOY-01 (CEO) is Running. See reviews/AI-QUIZ-2026-11-07.md. All534 unit/integration and100 browser cases, lint and production/TypeScript build pass. Existing service only; protected files and reviewed quiz/XP storage remain unchanged. Production894782a confirmed an OpenAI401 credential rejection; Vercel metadata now confirms user key replacement. Actual provider verification follows the Git deployment.
 
 ## Current Mentor chat authorization — 2026-11-07
