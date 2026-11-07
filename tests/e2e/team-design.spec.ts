@@ -148,19 +148,18 @@ test("shell changes, routes and static motion preserve exact committed financial
 
   await exerciseShellControl(page);
   expect(await records(page)).toEqual(committed);
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Resume animations", exact: true })).toHaveAttribute("aria-pressed", "true");
-  const staticMotion = page.getByRole("switch", { name: "Static motion", exact: true });
-  await staticMotion.click();
-  await expect(staticMotion).toHaveAttribute("aria-checked", "true");
+  await expect(page.getByRole("button", { name: /^(Pause|Resume) animations$/ })).toHaveCount(0);
+  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toHaveCount(0);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "true");
   for (const destination of routes) {
     await navigate(page, destination);
     expect(await records(page)).toEqual(committed);
-    await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toHaveAttribute("aria-checked", "true");
+    await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "true");
   }
   await navigate(page, routes.find(destination => destination.path === "/simulation")!);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toBeDisabled();
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-os-reduced", "true");
   expect(await records(page)).toEqual(committed);
   await page.reload();
   await expect(page.getByText("Age 16 · Turn 1 of 3", { exact: true })).toBeVisible();

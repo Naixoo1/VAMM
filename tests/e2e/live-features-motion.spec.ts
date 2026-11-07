@@ -202,20 +202,20 @@ test("all24 production treatments are reached through real states while live dis
   expect(errors).toEqual([]);
 });
 
-test("pause/static and runtime reduced motion preserve input focus, immediate committed money and invalid-preview safety", async ({ page }) => {
+test("runtime reduced motion preserves input focus, immediate committed money and invalid-preview safety without removed controls", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await installLiveFeatureWidgetStubs(page);
   await start(page);
   const before = await snapshot(page);
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-paused", "true");
-  await expect(page.locator('[data-motion-running="true"]')).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /^(Pause|Resume) animations$/ })).toHaveCount(0);
+  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toHaveCount(0);
   const cash = page.locator("#allocation-cash");
   await cash.focus();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(cash).toBeFocused();
-  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toBeChecked();
-  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toBeDisabled();
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-os-reduced", "true");
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "true");
+  await expect(page.locator('[data-motion-running="true"]')).toHaveCount(0);
   expect(await page.locator("[data-motion-artwork]").evaluateAll(elements =>
     elements.flatMap(element => element.getAnimations({ subtree: true })).filter(animation => animation.playState === "running").length)).toBe(0);
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -234,9 +234,10 @@ test("pause/static and runtime reduced motion preserve input focus, immediate co
     return true;
   })).toBe(true);
   const committed = await snapshot(page);
-  await page.getByRole("button", { name: "Resume animations", exact: true }).click();
-  await page.getByRole("switch", { name: "Static motion", exact: true }).click();
-  await page.getByRole("switch", { name: "Static motion", exact: true }).click();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "true");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "false");
   expect(await snapshot(page)).toEqual(committed);
   await page.getByLabel("Cash · Rp", { exact: true }).fill("150000");
   await page.getByRole("button", { name: "Confirm funding decision", exact: true }).click();

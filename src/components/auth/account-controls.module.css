@@ -1,0 +1,21 @@
+.compact{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;max-width:100%;min-width:0;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+.compactStatus{margin:0;color:#c5d6e8;font-size:12px;line-height:1.5}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:0}
+.button,.compactLink,.accountLink{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;max-width:100%;padding:10px 13px;border:1px solid #b8c8db;border-radius:10px;background:#fff;color:#1743a5;font-family:inherit;font-size:13px;font-weight:600;line-height:1.5;text-decoration:none;cursor:pointer;overflow-wrap:anywhere}
+.button svg,.compactLink svg,.accountLink svg{flex:none}
+.button:hover{background:#edf5ff;border-color:#225bd5}.button[aria-disabled=true]{cursor:default;color:#5d6c7f;background:#edf2f7;border-color:#dbe4ee}
+.primary{color:#fff;background:#225bd5;border-color:#225bd5}.primary:hover{background:#1743a5;border-color:#1743a5}.primary[aria-disabled=true]{background:#edf2f7;color:#5d6c7f;border-color:#dbe4ee}
+.button:focus-visible,.compactLink:focus-visible,.accountLink:focus-visible{outline:3px solid #225bd5;outline-offset:3px}
+.compact .button,.compactLink,.accountLink{font-size:12px;border-color:#42617f;background:#1b2d41;color:#eaf2ff}
+.compact .primary{background:#8df0d2;color:#102d31;border-color:#8df0d2}.compact .primary:hover{background:#b9f7e5;border-color:#b9f7e5}
+.compact .button[aria-disabled=true]{color:#b4c6d9;background:#1b2d41;border-color:#42617f}.compact .button:hover,.compactLink:hover,.accountLink:hover{background:#294159;color:#fff}.compact .primary:hover{color:#102d31;background:#b9f7e5}
+.compact .button:focus-visible,.compactLink:focus-visible,.accountLink:focus-visible{outline-color:#8df0d2}.compact .primary:focus-visible{outline-color:#eaf2ff}
+.compactLink{justify-content:flex-start;text-align:left}.compactLink small{display:block;color:#b4c6d9;font-size:11px;font-weight:400}.accountLink span{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.panel{min-width:0;padding:24px;border:1px solid #dbe4ee;border-radius:18px;background:#fff;color:#14263c;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif;box-shadow:0 2px 6px #14263c05}
+.heading{display:flex;align-items:center;gap:12px;margin-bottom:18px}.icon{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid #d2e1f6;border-radius:12px;color:#225bd5;background:#edf5ff}.eyebrow{margin:0 0 4px;color:#5d6c7f;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}.heading h2{margin:0;font-size:21px;line-height:1.4;font-weight:650;letter-spacing:-.4px}
+.copy,.identity p{margin:0 0 15px;color:#52657b;font-size:13px;line-height:1.8;overflow-wrap:anywhere}.identity strong{display:block;margin-bottom:5px;font-size:17px;font-weight:650;overflow-wrap:anywhere}.identity p{margin-bottom:7px}.identity .copy{margin:12px 0 16px}
+.notice,.error{margin:0 0 16px;padding:12px 14px;border:1px solid #d6e1f0;border-radius:10px;background:#edf5ff;color:#34577e;font-size:13px;line-height:1.8;overflow-wrap:anywhere}.error{background:#fff1ed;border-color:#efd4ca;color:#873a28}
+.disclosure{display:flex;align-items:flex-start;gap:9px;margin-top:20px;padding-top:17px;border-top:1px solid #dbe4ee;color:#52657b}.disclosure svg{flex:none;margin-top:3px}.disclosure p{margin:0;font-size:12px;line-height:1.9;overflow-wrap:anywhere}
+.panel>.actions{margin:16px 0}.panel>.copy[role=status]{margin-top:14px}
+@media(max-width:760px){.compact{gap:6px}.compact .actions{gap:6px}.compact .button{padding:9px;font-size:11px;gap:5px}.compact .button svg{width:13px;height:13px}.accountLink{padding:8px}.accountLink span{display:none}.compactLink{padding:8px 9px}.panel{padding:20px}.heading h2{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.button,.compactLink,.accountLink{animation:none!important;transition:none!important}}

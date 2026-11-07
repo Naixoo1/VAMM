@@ -68,6 +68,10 @@ test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   const requests: string[] = []; calls.set(page, requests);
   await page.route(url => url.pathname.startsWith("/api/"), async route => {
+    // Explicit unrelated guest account fixture; decorative motion still cannot invoke financial/model APIs.
+    if (new URL(route.request().url()).pathname === "/api/account" && route.request().method() === "GET") {
+      await route.fulfill({ json: { configured: false, user: null } }); return;
+    }
     requests.push(new URL(route.request().url()).pathname); await route.abort("blockedbyclient");
   });
   await page.route(/^https:\/\/(?:api\.openai\.com|generativelanguage\.googleapis\.com)\//, async route => {
@@ -76,7 +80,7 @@ test.beforeEach(async ({ page }) => {
 });
 test.afterEach(async ({ page }) => { expect(calls.get(page), "Decorative motion must not request APIs or model providers.").toEqual([]); });
 
-test("studio timelines actually run, pause in place, become static and respect live OS/offscreen/visibility state", async ({ page }) => {
+test("studio timelines run and automatically pause or become static with live OS/offscreen/visibility state", async ({ page }) => {
   test.setTimeout(60000);
   const errors: string[] = []; page.on("pageerror", error => errors.push(error.message));
   await page.goto("/dashboard");
@@ -90,30 +94,15 @@ test("studio timelines actually run, pause in place, become static and respect l
   const running = await ringSample(page);
   expect(running.after).toBeGreaterThan(running.before);
 
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await revealArtwork(page);
-  await motionState(page, "paused");
-  const paused = await ringSample(page);
-  expect(paused.after).toBe(paused.before);
-  await opaqueContent(page.getByRole("main").getByRole("heading", { level: 1 }));
-  await page.getByRole("button", { name: "Resume animations", exact: true }).click();
-  await revealArtwork(page);
-  await motionState(page, "running");
-
-  const staticSwitch = page.getByRole("switch", { name: "Static motion", exact: true });
-  await staticSwitch.click();
-  await expect(artwork(page)).toHaveAttribute("data-studio-static", "true");
-  await expect.poll(() => animations(artwork(page))).toEqual([]);
-  await opaqueContent(page.getByRole("main").getByRole("heading", { level: 1 }));
-  await staticSwitch.click();
-  await revealArtwork(page);
-  await motionState(page, "running");
+  await expect(page.getByRole("button", { name: /^(Pause|Resume) animations$/ })).toHaveCount(0);
+  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(staticSwitch).toBeChecked(); await expect(staticSwitch).toBeDisabled();
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-os-reduced", "true");
   await expect(artwork(page)).toHaveAttribute("data-studio-static", "true");
   await expect.poll(() => animations(artwork(page))).toEqual([]);
+  await opaqueContent(page.getByRole("main").getByRole("heading", { level: 1 }));
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await expect(staticSwitch).not.toBeChecked();
+  await expect(artwork(page)).toHaveAttribute("data-studio-static", "false");
   await revealArtwork(page); await motionState(page, "running");
 
   await page.getByRole("main").locator("footer").last().scrollIntoViewIfNeeded();
@@ -146,7 +135,7 @@ test("studio timelines actually run, pause in place, become static and respect l
   expect(errors).toEqual([]);
 });
 
-test("studio motion and midnight surfaces preserve exact financial records, visible money/dialogs and memory-only preferences", async ({ page }) => {
+test("automatic studio motion preserves exact financial records, visible money/dialogs and localStorage", async ({ page }) => {
   test.setTimeout(60000);
   await page.goto("/simulation");
   await page.getByRole("button", { name: "Start your simulation", exact: true }).click();
@@ -161,11 +150,12 @@ test("studio motion and midnight surfaces preserve exact financial records, visi
   await nav(page, "Home").click();
   await revealArtwork(page); await motionState(page, "running");
   await opaqueContent(page.getByRole("img", { name: "VAMM AI Teknologi logo", exact: true }));
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await revealArtwork(page); await motionState(page, "paused");
+  await page.getByRole("main").locator("footer").last().scrollIntoViewIfNeeded();
+  await expect(artwork(page)).not.toBeInViewport(); await motionState(page, "paused");
   expect(await financialRecords(page)).toEqual(saved);
-  await page.getByRole("button", { name: "Resume animations", exact: true }).click();
-  await page.getByRole("switch", { name: "Static motion", exact: true }).click();
+  await revealArtwork(page); await motionState(page, "running");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(artwork(page)).toHaveAttribute("data-studio-static", "true");
   await expect.poll(() => animations(artwork(page))).toEqual([]);
   expect(await page.evaluate(() => Object.entries(localStorage).sort(([a], [b]) => a.localeCompare(b)))).toEqual(storage);
   await nav(page, "Simulation").click();

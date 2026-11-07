@@ -88,6 +88,10 @@ test.beforeEach(async ({ page }) => {
   await installLiveFeatureWidgetStubs(page);
   const calls: string[] = []; unexpectedCalls.set(page, calls);
   await page.route(url => url.pathname.startsWith("/api/"), async route => {
+    // Optional account projection is an explicit unrelated guest fixture, not a learning/model API.
+    if (new URL(route.request().url()).pathname === "/api/account" && route.request().method() === "GET") {
+      await route.fulfill({ json: { configured: false, user: null } }); return;
+    }
     calls.push(new URL(route.request().url()).pathname); await route.abort("blockedbyclient");
   });
   await page.route(/^https:\/\/(?:api\.openai\.com|generativelanguage\.googleapis\.com)\//, async route => {
@@ -260,8 +264,9 @@ test("authored learning is keyboard accessible, respects reduced motion and keep
   await expect(page.getByRole("link", { name: "Skip to main content", exact: true })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("main")).toBeFocused();
-  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toBeChecked();
-  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toBeDisabled();
+  await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toHaveCount(0);
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-os-reduced", "true");
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "true");
   await noOverflow(page);
   await nav(page, "Missions & Challenges").click();
   await expect(page.getByRole("heading", { name: "Quiz Center", exact: true })).toBeVisible();

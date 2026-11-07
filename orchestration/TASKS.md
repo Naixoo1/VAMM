@@ -222,4 +222,19 @@ LEARNING-UI-01, LEARNING-DATA-01, LEARNING-VERIFY-01 and LEARNING-INTEGRATE-01, 
 
 Observed final results:299 unit/integration cases in31 suites,82 desktop/mobile browser cases, TypeScript/lint/production build,28 responsive checks,54 contrast states with zero findings, six real-provider smoke checks and36 unchanged protected hashes. New browser checks measure actual studio timelines, manual pause/static/live OS/visibility behavior and exact financial record preservation. No plugin, dependency, paid service, real model call, source backend or environment template added. Reviewed quizzes/source links are the selected demo mode; unbuilt paid generation/search/full chat/trading/screenshot advice remain explicitly disclosed.
 
-Git delivery targets origin/main at Naixoo1/VAMM. Public deployment and actual demo-video acceptance remain **Queued**; Vercel requires the user's subsequent acceptance. A locally verified build does not satisfy or authorize public deployment.
+Git delivery targets origin/main at Naixoo1/VAMM. The user subsequently authorized production deployment with “Upload to vercel”. Commit fc8b9e4 is deployed READY at https://vamm-nu.vercel.app through the connected Git project. Hosted checks reached all nine routes on desktop/mobile, passed all15 learning checks, and reconciled all three Simulation turns/reset/history. The Simulation runner retained a final harness failure on canceled lazy-image requests, while independent logo checks passed. A targeted in-view follow-up visually confirmed Home candlesticks and the AAPL Financials table after loading. TradingView technical analysis failed externally and showed its fallback; do not claim every provider is healthy. No model credentials were deployed.
+
+## Google login and shell cleanup — 2026-11-07
+
+Direct user authorization adds optional Google OAuth accounts, requests Git-triggered Vercel redeployment, removes the visible Pause/Static motion toolbar and the unused rail V. Active scope/ownership/security acceptance: [GOOGLE-AUTH-2026-11-07](reviews/GOOGLE-AUTH-2026-11-07.md). Frozen financial contracts/storage remain unchanged; the auth dependency is the narrow package manifest/lockfile exception needed for this new feature. Device history remains independent from Google identity.
+
+| Task | Owner / scope | State |
+| --- | --- | --- |
+| AUTH-DATA-01 | Data/platform: Google provider, stateless server session, bounded routes and server tests | Verified locally |
+| AUTH-UI-01 | Interface: account state/actions/profile and shell cleanup | Verified locally |
+| AUTH-QA-01 | Simulation/AI: independent security/browser/protected-state regression | Verified locally |
+| AUTH-DEPLOY-01 | CEO: dependency integration, configuration guide, Git and automatic Vercel deployment verification | Running |
+
+All three saved-role workers resumed with the current review and disjoint ownership; no recursive delegation. No Google OAuth client credentials currently exist in the Vercel project. Live Google exchange remains pending external configuration; a mocked account test does not establish actual Google access.
+
+All three implementation tasks progressed Running → Review → Integrated → Verified locally after actual handoffs. Final observed checks:379unit/34suites,88browser regressions plus6focused final account cases,9account contrast/responsive states, clean types/lint/build, and34unchanged protected hashes excluding only the required dependency manifest/lockfile addition. The user explicitly deferred live Google activation and requested setup instructions. Production URL/session secret are configured server-side; Google client values remain absent. Git-push deployment verification follows the final commit.

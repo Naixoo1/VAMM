@@ -4,11 +4,11 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {ChartNoAxesCombined,ChevronRight,GitCompareArrows,House,LockKeyhole,PanelLeftClose,PanelLeftOpen,ShieldCheck,UserRound,X} from "lucide-react";
 import {useEffect,useRef,useState,useSyncExternalStore,type ReactNode} from "react";
-import {MotionBoundary,MotionControls} from "@/components/motion";
+import {MotionBoundary} from "@/components/motion";
+import {AccountControls} from "@/components/auth/account-controls";
 import {styles} from "./workspace";
 import {BrandLogo} from "./branding";
 import shell from "./app-shell.module.css";
-import motionStyles from "./app-shell-motion.module.css";
 
 const mobileQuery="(max-width: 760px)";
 function subscribeMobile(listener:()=>void){if(typeof window==="undefined"||typeof window.matchMedia!=="function")return()=>{};const media=window.matchMedia(mobileQuery);media.addEventListener("change",listener);return()=>media.removeEventListener("change",listener)}
@@ -25,7 +25,7 @@ const links=[
  {href:"/profile",name:"Learning Profile",icon:UserRound,image:null},
 ];
 const contexts:Record<string,{kicker:string;description:string;links:{href:string;label:string}[]}>={
- "/profile":{kicker:"Your learning record",description:"Review lessons, quiz results and milestone badges saved in this browser. No account or financial ranking.",links:[{href:"/profile",label:"Learning activity"},{href:"/academy",label:"Continue learning"},{href:"/missions",label:"Quiz challenges"}]},
+ "/profile":{kicker:"Your learning record",description:"Review progress saved in this browser. Optional Google sign-in stays separate from your device history; no cloud sync or financial ranking.",links:[{href:"/profile",label:"Learning activity & account"},{href:"/academy",label:"Continue learning"},{href:"/missions",label:"Quiz challenges"}]},
  "/dashboard":{kicker:"Start with curiosity",description:"Explore live market context, compare instruments, and practice with the separate educational simulation.",links:[{href:"/market",label:"Explore the charts"},{href:"/simulation",label:"Practice from zero"},{href:"/research",label:"Ask a basket question"}]},
  "/market":{kicker:"Observe & understand",description:"Explore TradingView’s live chart. Symbols, currency and delivery timing are determined by the provider.",links:[{href:"/market",label:"Real market chart"},{href:"/compare",label:"Compare instruments"}]},
  "/research":{kicker:"Follow your questions",description:"Explore company context. The basket mentor answers separately from frozen teaching evidence.",links:[{href:"/research",label:"Company & basket research"},{href:"/compare",label:"Explore the differences"}]},
@@ -69,7 +69,6 @@ export function AppShell({children}:{children:ReactNode}){
   <aside ref={aside} className={shell.sidebar} role={modalOpen?"dialog":undefined} aria-label={modalOpen?"Workspace menu":undefined} aria-modal={modalOpen?true:undefined}>
    <div className={shell.rail}>
     <MotionBoundary preset="focus-ring" state="idle"><nav className={shell.nav} aria-label="Main navigation">{links.map(link=><Link key={link.href} href={link.href} aria-label={link.name} title={link.name} aria-current={active.href===link.href?"page":undefined} className={[shell.railLink,link.href==="/dashboard"?shell.homeLink:""].join(" ")} onClick={followLink}>{link.image?<Image src={"/team-design/"+link.image+".svg"} width={34} height={34} alt="" unoptimized/>:link.icon?<link.icon size={24} strokeWidth={1.7} aria-hidden="true"/>:null}<span className={shell.railLabel} aria-hidden="true">{({"/dashboard":"Home","/market":"Market","/research":"Mentor","/compare":"Compare","/simulation":"Practice","/news":"News","/academy":"Learn","/missions":"Quizzes","/profile":"Profile"} as Record<string,string>)[link.href]}</span></Link>)}</nav></MotionBoundary>
-    <span className={shell.railFoot} aria-hidden="true">V</span>
    </div>
    <section id="workspace-context" className={shell.contextPanel} aria-labelledby="workspace-context-title" inert={!panelOpen} aria-hidden={!panelOpen}>
     <Link href="/dashboard" className={shell.brand} aria-label="VAMM home" onClick={followLink}><BrandLogo decorative/></Link>
@@ -80,8 +79,7 @@ export function AppShell({children}:{children:ReactNode}){
   </aside>
   {modalOpen&&<button type="button" className={shell.backdrop} aria-label="Dismiss workspace menu" tabIndex={-1} onClick={()=>setMobileOpen(false)}/>}
   <div className={shell.workspace} inert={modalOpen}>
-   <header className={shell.toolbar}><div className={shell.toolbarStart}><button ref={opener} type="button" className={shell.menuButton} aria-label={menuLabel} title={menuLabel} aria-controls="workspace-context" aria-expanded={panelOpen} onClick={toggleMenu}>{panelOpen?<PanelLeftClose size={20} aria-hidden="true"/>:<PanelLeftOpen size={20} aria-hidden="true"/>}</button><span className={shell.toolbarBrand}>VAMM</span><span className={shell.toolbarDivider} aria-hidden="true">/</span><span className={shell.location}>{active.name}</span></div><span className={shell.workspacePill}><span className={shell.dot} aria-hidden="true"/>{external?"Live market context":pathname.startsWith("/news")?"Live news context":"Educational workspace"}</span></header>
-   <div className={motionStyles.toolbar}><MotionControls/></div>
+   <header className={shell.toolbar}><div className={shell.toolbarStart}><button ref={opener} type="button" className={shell.menuButton} aria-label={menuLabel} title={menuLabel} aria-controls="workspace-context" aria-expanded={panelOpen} onClick={toggleMenu}>{panelOpen?<PanelLeftClose size={20} aria-hidden="true"/>:<PanelLeftOpen size={20} aria-hidden="true"/>}</button><span className={shell.toolbarBrand}>VAMM</span><span className={shell.toolbarDivider} aria-hidden="true">/</span><span className={shell.location}>{active.name}</span></div><div className={shell.toolbarEnd}><span className={shell.workspacePill}><span className={shell.dot} aria-hidden="true"/>{external?"Live market context":pathname.startsWith("/news")?"Live news context":"Educational workspace"}</span><AccountControls/></div></header>
    <main id="main-content" className={shell.main} tabIndex={-1}>
     <MotionBoundary preset="route-arrival" state="ready" motionKey={pathname}>{children}</MotionBoundary>
     <footer className={shell.footer}><p><LockKeyhole size={13} aria-hidden="true"/>Stored on this device; anyone using this browser profile can access it.</p><p>{pathname.startsWith("/research")?"Live company context and separate mentor evidence labeled clearly · Educational use":external?"External market data · Provider timing and availability apply · Educational use":pathname.startsWith("/news")?"External news feed · Provider and publisher timing apply · Educational use":pathname.startsWith("/academy")||pathname.startsWith("/missions")||pathname.startsWith("/profile")?"Reviewed learning material · Progress on this device · Educational use":"Synthetic data · Educational use only"}</p></footer>

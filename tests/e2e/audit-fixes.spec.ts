@@ -95,7 +95,7 @@ test("keyboard retry retains focus through loading and ready without stealing fo
   await expect(hide).toBeFocused();
 });
 
-test("shared motion covers every route and pause/static/device controls stop motion without hiding content", async ({ page }) => {
+test("shared motion covers every route and live device reduction stops motion without hiding content or exposing removed controls", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   for (const route of ["dashboard", "market", "compare", "research", "simulation", "news"]) {
     await page.goto("/" + route);
@@ -106,22 +106,18 @@ test("shared motion covers every route and pause/static/device controls stop mot
     const current = page.getByRole("navigation", { name: "Main navigation" }).locator('[aria-current="page"]');
     const duration = () => current.evaluate(element => getComputedStyle(element).transitionDuration.split(",").map(Number.parseFloat));
     expect((await duration()).some(value => value > 0)).toBe(true);
-    await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-    await expect(scope).toHaveAttribute("data-motion-paused", "true");
-    expect((await duration()).every(value => value === 0)).toBe(true);
-    await expect.poll(() => page.locator("[data-site-motion]").evaluate(element => element.getAnimations({ subtree: true }).filter(animation => animation.playState === "running").length)).toBe(0);
-    await page.getByRole("button", { name: "Resume animations", exact: true }).click();
-    await page.getByRole("switch", { name: "Static motion", exact: true }).click();
-    await expect(scope).toHaveAttribute("data-motion-static", "true");
-    expect((await duration()).every(value => value === 0)).toBe(true);
-    await page.getByRole("switch", { name: "Static motion", exact: true }).click();
+    await expect(page.getByRole("button", { name: /^(Pause|Resume) animations$/ })).toHaveCount(0);
+    await expect(page.getByRole("switch", { name: "Static motion", exact: true })).toHaveCount(0);
     await current.focus();
     await page.emulateMedia({ reducedMotion: "reduce" });
     await expect(scope).toHaveAttribute("data-motion-os-reduced", "true");
+    await expect(scope).toHaveAttribute("data-motion-static", "true");
+    await expect.poll(() => page.locator("[data-site-motion]").evaluate(element => element.getAnimations({ subtree: true }).filter(animation => animation.playState === "running").length)).toBe(0);
     await expect(current).toBeFocused();
     expect((await duration()).every(value => value === 0)).toBe(true);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
     await page.emulateMedia({ reducedMotion: "no-preference" });
+    await expect(scope).toHaveAttribute("data-motion-static", "false");
   }
 });

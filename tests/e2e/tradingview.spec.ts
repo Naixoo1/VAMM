@@ -255,8 +255,9 @@ test("Market exposes only the live chart while selection and frozen API fixtures
   const provider = widget(page);
   const instance = await provider.getAttribute("data-tv-probe-instance");
   await provider.evaluate(element => element.setAttribute("symbol", "NYSE:IBM"));
-  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
-  await page.getByRole("button", { name: "Resume animations", exact: true }).click();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator("[data-motion-scope]")).toHaveAttribute("data-motion-static", "true");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(provider).toHaveAttribute("symbol", "NYSE:IBM");
   await expect(provider).toHaveAttribute("data-tv-probe-instance", instance!);
   await expect(page.getByTestId("tradingview-host")).toHaveCount(1);

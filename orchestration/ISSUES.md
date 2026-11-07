@@ -166,4 +166,18 @@ Walkthrough and proof: reviews/LOGO-LIVE-WALKTHROUGH-2026-11-07.md and reviews/e
 | LEARNING-CONTRAST-02 | Correct midnight canvas #edf2f7 exposed legacy #657184 shared text at4.39 contrast, producing52 findings across54 states. Use final-source muted #5d6c7f consistently in shared primitives. | Final expanded54-state scan: zero findings, including toolbar/animation controls and all10 lesson readers. |
 | LEARNING-PROVIDER-01 | One initial mobile iframe request aborted during symbol replacement; the replacement chart rendered. | Final six real-provider checks had no page errors, failed requests or overflow; actual US/IDX chart lines and News headlines reviewed. Provider availability/quote timing remain external. |
 
-All new learning/design application findings above are resolved locally. External credential revocation (LEARNING-SEC-01), historical workspace-root alignment/development advisories and explicitly unbuilt paid-generation/search/trading features remain disclosed limitations. No deployment was performed.
+All new learning/design application findings above were resolved locally before the user authorized deployment. External credential revocation (LEARNING-SEC-01), historical workspace-root alignment/development advisories and explicitly unbuilt paid-generation/search/trading features remain disclosed limitations.
+
+## Production and Google OAuth follow-up — 2026-11-07
+
+| ID | Observed cause / approach | Status |
+| --- | --- | --- |
+| DEPLOY-AUTH-01 | Existing Vercel OAuth grant expired. User reconnected; authenticated deployment then reached READY from fc8b9e4. | Resolved; public production HTTPS verified. |
+| DEPLOY-QA-01 | Worker browser DNS denied the production host; root browser reached it. CEO executed staged scripts. Hidden lazy-image decode and ambiguous quiz Back selector were harness errors, corrected outside source. |18route/viewport checks and15learning checks passed. |
+| DEPLOY-QA-02 | Simulation runner's final network assertion rejected navigation-canceled prefetch/image requests. Full financial/reset/history assertions succeeded in both widths; independent logo decoding succeeded. | Raw exit1 preserved and classified, no financial defect inferred. |
+| DEPLOY-PROVIDER-01 | TradingView technical-analysis scanner requests failed externally/CORS and emitted widget-error. Other main widgets loaded; targeted in-view follow-up confirmed Home chart and Fundamentals after initial blank captures. | External technical-panel fallback remains visible; no synthetic replacement. |
+| AUTH-SETUP-01 | No project/process Google credential names or Vercel Google client variables exist. Device access is authorized, but the required Computer Use node_repl runtime and authenticated Google Cloud connection are unavailable in this session. | Code/setup/deployment proceed; actual Google activation awaits secure client credentials. |
+| AUTH-DEPS-01 | New Better Auth dependency preserves existing versions. Full audit retains8moderate development-tool advisories; production-only audit is clean. | No automatic dependency upgrades or security-control weakening. |
+| AUTH-TYPE-01 | Array.findLast is outside the protected TypeScript library target. Replaced with copied reverse/find; no configuration edit. | Final types/build pass. |
+| AUTH-CONFIG-01 | URL parsing normalizes a bare trailing fragment/query marker. Enforce exact raw canonical origin or its trailing-slash form before accepting configuration. |43wrapper/config and15actual-SDK tests pass. |
+| AUTH-UI-01 | Retry controls could unmount during status refresh; action error and query error had inconsistent disabled semantics. Keep controls mounted and distinguish failed status reads from retryable actions. |22focused UI tests and6final browser cases pass, including focus and duplicate guards. |
