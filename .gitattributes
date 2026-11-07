@@ -1,0 +1,5 @@
+* text=auto eol=lf
+# Preserve accepted document/reference bytes and recorded SHA-256 values.
+*.md -text -eol
+*.txt -text -eol
+*.toml -text -eol

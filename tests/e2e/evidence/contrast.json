@@ -1,0 +1,82 @@
+[
+  {
+    "viewport": "1440x900",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "compare",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-answer",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation-pending",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "news",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "compare",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-answer",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation-pending",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "news",
+    "failures": []
+  }
+]

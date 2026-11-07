@@ -1,0 +1,60 @@
+# VAMM Task Ledger
+
+CEO-maintained. Documentation freeze v2 is complete; all application tasks remain Queued.
+No scaffold, fixtures, storage, services, tests, or deployment have been implemented.
+Status/handoff: `AGENTS.md`. Contract: `src/contracts/README.md`; data: `docs/FIXTURES.md`.
+
+| ID | Owner | Dependencies | Status |
+|---|---|---|---|
+| VAMM-BOOT-01: Scaffold, v2 types, preview | CEO | Frozen specifications | Queued |
+| VAMM-UI-01: Five-screen demo | Interface | BOOT-01; typed gateway/data adapters for integration | Queued |
+| VAMM-DATA-01: Fixtures and IndexedDB | Data/platform | BOOT-01; frozen manifest/signatures | Queued |
+| VAMM-SIM-01: Engine, local gateway, research | Simulation/AI | BOOT-01; scenarios/repository for integration | Queued |
+| VAMM-VERIFY-01: Integrated review | CEO + reviewer | Integrated journey | Queued |
+| VAMM-DEMO-01: Deploy and rehearse | CEO | VERIFY-01 | Queued |
+
+Contract-matching stubs may unblock workers. Implementation requires explicit user approval.
+
+## Incoming work and recovery
+
+Prepared `incoming/README.md`, `orchestration/INTAKE.md`, and `orchestration/ISSUES.md`.
+No teammate batch has arrived in this step. CEO records incoming dispositions, reconciles
+overlapping guidance, versions changed contracts/fixtures, and refreshes affected briefs.
+Use the intake and issue registers for source/conflict/error details; keep accepted
+decisions and dependency/status changes here. All six app tasks remain Queued.
+
+## Frozen readiness decisions — 2026-11-06
+
+| Decision | Owner / resolution |
+|---|---|
+| Contract/schema boundaries | CEO: v2 signatures, result/error shapes, canonical replay, turn-record transitions frozen |
+| Fixture IDs/values | CEO: FIXTURES manifest; Data/platform implements exact catalog/scenarios/charts/news |
+| Persistence/guest identity | IndexedDB local-only; Data/platform owns owner/bootstrap/active pointer; no auth/Supabase default |
+| Adapter boundary | Simulation/AI owns gateway.ts/preview helper; Interface calls it; Data/platform owns repository |
+| Preview/reset/chart | Engine preview; create new session and retain old history; fixed synthetic index series |
+| Rounding/pending state | Half-up; floor then ordered remainder; pending cost null and bill undeducted |
+| Feedback/news/model calls | Prewritten feedback/news; research alone uses model, timeout/fallback frozen |
+
+These close documentation blockers; they do not prove running behavior or authorize work.
+Future service/deployment access checks remain implementation-stage prerequisites;
+fixtures/prewritten research keep the core journey independent of service availability.
+
+## Live records
+
+For each running task: agent, checkout/worktree, owned paths, contract version,
+start/checkpoint, blockers. Record later changes and actual verification evidence.
+
+| Time | Decision/reason | Affected tasks |
+|---|---|---|
+
+| Task | Executed check/evidence | Result | Remaining issue |
+|---|---|---|---|
+| DOC-FREEZE-v2 | Three read-only worker reviews; corrected and independently checked reference arithmetic | Documentation decisions resolved | Application behavior unimplemented/unverified |
+
+## Demo readiness
+
+- [ ] Five screens; three completed turns; nominal/real reconciliation
+- [ ] Preview parity; explicit funding; safe duplicate/stale requests; reset/history
+- [ ] Local namespace/transaction checks; visible storage/model failures
+- [ ] Synthetic/prewritten/device-sharing labels; desktop/mobile checks
+- [ ] Final deployment checked and demo rehearsed

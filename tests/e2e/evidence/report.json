@@ -1,0 +1,77 @@
+{
+  "contract": "Frozen VAMM contract v2 and docs/MVP.md: a student explores five routes, previews and commits three annual savings turns from zero, explicitly funds shocks, and resets without erasing history. Warm, calm workspace for ages 15–18; primary action is advancing a validated annual turn. No stock trading, additional stores or live-news scope.",
+  "targetViewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "Observed keyboard Tab to visible skip link, Enter focus transfer to main, labeled research/funding controls, text alongside sentiment/chart color, and reduced-motion spinner animation:none. Computed rendered text-contrast checks found zero failures across 16 screen/state/viewport combinations; chart colors were darkened for graphical contrast. Actual range and checkbox-label heights were at least 44 CSS px. These are scoped checks, not exhaustive assistive-technology certification."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "Chromium checks at 1440x900 and 390x844 rendered all five routes without document overflow or page errors. Explicit funding and completed-turn screens also fit; tables scroll within their containers. Desktop sidebar and horizontally scrolling mobile navigation were inspected in screenshots."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "pass",
+      "evidence": "A deliberately delayed market response displayed Loading the educational baskets; reduced-motion disabled spinner animation. Manual retry after a simulated503 restored the baskets."
+    },
+    "empty": {
+      "status": "pass",
+      "evidence": "A fresh local profile displayed the explicit start-session state; a mocked empty news response displayed No teaching stories are available."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "Simulated503 and unavailable IndexedDB displayed specific alerts. Retry recovered market data; unavailable storage disabled session creation and never silently reset history."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "Both comparison annual-fee cells displayed Unavailable with the frozen explanation while cumulative-return metrics remained available."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "Production-browser tests completed all three funded turns, checked version6, retained three history rows, reset to a second zero-balance session, and verified prior records survived reload. Two tabs competing against version0 produced one pending turn and a visible conflict."
+    },
+    "permission": {
+      "status": "pass",
+      "evidence": "The simulated browser-storage access boundary displayed Local storage is unavailable and a safe reload action; start was disabled. Device-sharing limits are visible on desktop/mobile. No account/auth permission flow was added."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "1440x900",
+      "artifact": "dashboard-desktop.png",
+      "observation": "Final production dashboard: navigation, three exact synthetic baskets, dated index chart and provenance."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "dashboard-mobile.png",
+      "observation": "Final production mobile dashboard: wrapped text, contained chart/navigation and visible device disclosure."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "completed-desktop.png",
+      "observation": "Three settled annual turns, nominal/real balances, prewritten reflection and separate contribution/gain/bill history."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "funding-mobile.png",
+      "observation": "Pending bill is separate from undeducted holdings; explicit funding and acknowledgment controls fit the viewport."
+    }
+  ],
+  "checks": {
+    "unitIntegrationTests": 83,
+    "productionBrowserTests": 14,
+    "typecheck": "pass",
+    "lint": "pass with no warnings",
+    "productionBuild": "pass",
+    "liveModelCalls": "none",
+    "deployment": "not performed"
+  },
+  "limitations": [
+    "The preserved-session navigation index is in QueryClient memory; prior records remain in IndexedDB across refresh, while the frozen gateway has no operation to enumerate all old session IDs.",
+    "Model/provider service access was not configured or exercised; provider failures use labeled fixtures.",
+    "Research rate/concurrency limits are per instance, not a distributed billing quota."
+  ]
+}

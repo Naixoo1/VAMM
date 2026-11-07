@@ -1,0 +1,12 @@
+[
+  {
+    "viewport": "1440x900",
+    "rangeHeight": 44,
+    "checkboxLabelHeight": 44
+  },
+  {
+    "viewport": "390x844",
+    "rangeHeight": 44,
+    "checkboxLabelHeight": 64.78125
+  }
+]

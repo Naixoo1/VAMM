@@ -1,0 +1,22 @@
+# VAMM-DATA-01: Frozen Data and Local Persistence
+
+Owner: Data/platform. Contract: v2 + `docs/FIXTURES.md`. Mode: IndexedDB, already decided.
+Depends on CEO scaffold/types; no database/auth/provisioning prerequisite. Implementation queued.
+Ownership: `orchestration/roles/DATA_PLATFORM.md`; handoff: `AGENTS.md`.
+
+## Deliver and accept
+
+- Exact instrument/evidence/news/chart/scenario IDs, values, units, periods, and versions.
+- Market/news endpoints and matching fixture adapters; prewritten synthetic sentiment.
+- local-owner.ts/local-repository.ts implement every frozen repository signature.
+- Owner namespace/bootstrap, active restore, idempotent create/reset, retained history.
+  Describe local isolation honestly, without authentication/tamper-resistance claims.
+- Atomic state/current-turn/request-outcome commits; concurrent writes cannot both
+  commit against one version. Settlement updates pending turn; old turns immutable.
+- Replay precedes stale versions; same create ID returns same session; changed mutation
+  payload conflicts. Local namespaces cannot cross-read/write.
+- Visible unavailable/corrupt storage errors, no silent reset/store fallback or exposed
+  secrets. No default migrations, cloud resources, or identity-provider setup.
+
+Checkpoints: fixture endpoints/adapters 1.5h; repository 2.5h; persistence 3.5h.
+Handoff: manifest parity, interfaces, namespace/transaction/reset/replay evidence and gaps.

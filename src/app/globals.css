@@ -1,0 +1,11 @@
+@import "tailwindcss";
+:root { --background: #f6f5f0; --foreground: #172b34; --surface: #fffefa; --muted: #607078; --border: #dce1db; --accent: #235e52; --ring: #c17d2d; color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: "Segoe UI", Arial, sans-serif; font-size: 15px; line-height: 1.6; }
+a { color: inherit; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: wait; }
+:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
+::selection { background: #d5e7ce; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }

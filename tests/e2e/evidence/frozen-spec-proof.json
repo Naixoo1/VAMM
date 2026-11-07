@@ -1,0 +1,13 @@
+{
+  "originalFilesChecked": 30,
+  "changed": [
+    "C:\\code\\VAMM\\AGENTS.md",
+    "C:\\code\\VAMM\\orchestration\\AGENT_SETUP.md",
+    "C:\\code\\VAMM\\orchestration\\ISSUES.md",
+    "C:\\code\\VAMM\\orchestration\\TASKS.md"
+  ],
+  "unexpectedChanges": [],
+  "frozenContractUnchanged": true,
+  "frozenFixturesUnchanged": true,
+  "mvpUnchanged": true
+}

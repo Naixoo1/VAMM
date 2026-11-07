@@ -1,0 +1,11 @@
+// @vitest-environment jsdom
+import {afterEach,describe,expect,it,vi} from "vitest";
+import {cleanup,fireEvent,render,screen} from "@testing-library/react";
+import {FundingForm} from "@/components/features/funding-form";
+afterEach(()=>cleanup());
+const balances={cash:780000,bonds:811200,equity:1123200};
+describe("Explicit shock funding",()=>{
+ it("requires acknowledgment for partial funding and submits exactly the chosen amounts",()=>{const onSettle=vi.fn();render(<FundingForm balances={balances} costRupiah={150000} onSettle={onSettle} disabled={false}/>);const confirm=screen.getByRole("button",{name:"Confirm funding decision"}) as HTMLButtonElement;fireEvent.change(screen.getByLabelText("Cash · Rp"),{target:{value:"100000"}});expect(confirm.disabled).toBe(true);fireEvent.click(screen.getByRole("checkbox"));expect(confirm.disabled).toBe(false);fireEvent.click(confirm);expect(onSettle).toHaveBeenCalledWith({cash:100000,bonds:0,equity:0},true)});
+ it("rejects overfunding and accepts an exactly funded bill without acknowledgment",()=>{const onSettle=vi.fn();render(<FundingForm balances={balances} costRupiah={150000} onSettle={onSettle} disabled={false}/>);const confirm=screen.getByRole("button",{name:"Confirm funding decision"}) as HTMLButtonElement;fireEvent.change(screen.getByLabelText("Cash · Rp"),{target:{value:"150001"}});expect(confirm.disabled).toBe(true);expect(screen.getByText(/Total funding cannot exceed/)).toBeTruthy();fireEvent.change(screen.getByLabelText("Cash · Rp"),{target:{value:"150000"}});expect(confirm.disabled).toBe(false);fireEvent.click(confirm);expect(onSettle).toHaveBeenCalledWith({cash:150000,bonds:0,equity:0},false)});
+ it("rejects fractional or unavailable holdings before any mutation",()=>{const onSettle=vi.fn();render(<FundingForm balances={balances} costRupiah={150000} onSettle={onSettle} disabled={false}/>);fireEvent.click(screen.getByRole("checkbox"));const confirm=screen.getByRole("button",{name:"Confirm funding decision"}) as HTMLButtonElement;fireEvent.change(screen.getByLabelText("Cash · Rp"),{target:{value:"1.5"}});expect(confirm.disabled).toBe(true);fireEvent.change(screen.getByLabelText("Cash · Rp"),{target:{value:"780001"}});expect(confirm.disabled).toBe(true);expect(onSettle).not.toHaveBeenCalled()});
+});
