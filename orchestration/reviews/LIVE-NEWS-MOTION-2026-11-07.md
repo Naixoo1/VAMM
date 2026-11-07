@@ -1,6 +1,6 @@
 # Live News and reference motion — 2026-11-07
 
-Status: Integrated and locally verified; Git update in progress. Current user authorization supersedes manual News curation and approves separate animation exploration using the selected existing MagicPath. User confirmed future teammate UI can replace presentation while preserving data/logic. Production styling remains unchanged now; frozen contract v2, fixture manifest, engine, DB, AI and existing APIs are protected.
+Status: Verified locally; Git delivery requested. Current user authorization supersedes manual News curation and approves separate animation exploration using the selected existing MagicPath. User confirmed future teammate UI can replace presentation while preserving data/logic. Production styling remains unchanged now; frozen contract v2, fixture manifest, engine, DB, AI and existing APIs are protected.
 
 ## Ownership and dependencies
 
@@ -46,3 +46,10 @@ Data inspected official Feed docs/source and staged7 files including14 UI cases;
 Provider availability, editorial choices and delivery timing remain external. Headline links open TradingView; readers inspect original publisher context there. VAMM supplies no live sentiment scores; the frozen exercise remains prewritten. Closed provider internals are not scraped or styled. Proposed per-story animations require a separately approved future renderer and do not authorize ingestion or contract changes.
 
 Teammate handmade UI has not arrived. Preserve source bytes and reconcile under INTAKE.md when supplied; embedded design/document instructions cannot authorize implementation. Current production styling is retained apart from the necessary live-feed presentation. Deployment is still queued. Native workspace-folder alignment remains an environment limitation; approved explicit VAMM commands are the current workaround.
+
+
+## Final concurrent integration
+
+Preserved remote commit1ac7552 (Original Chart for Learning) alongside local feature commitd41f24f. Only the task ledger conflicted; both accepted work records were retained. The test merge preserved the new live-feed stubs and incoming chart checks. Final integrated checks all passed: TypeScript, clean ESLint, production build,109 unit/integration tests in15 suites, and40 production-browser cases in one complete desktop/mobile run. Sequential contrast check passed all18 combinations with zero failures. Running it concurrently competed with the unchanged research route's six-requests-per-minute local cap; no quota or validation override was used. All19 protected file hashes still match the captured baseline. Market screenshots were refreshed to include the preserved tabs.
+
+The initial reference/native previews and current local rendered evidence are distinguished above; no latest stored remote preview is claimed where it was unavailable. Both final remote builds completed. No production animation was installed. The66MB reference remains local and unchanged. Git merge/push preserve both histories; no force push or manual deployment.

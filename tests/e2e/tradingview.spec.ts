@@ -141,6 +141,9 @@ test("blocked external module gives a useful fallback while the deterministic jo
   await expect(providerLink).toHaveAttribute("target", "_blank");
   await expect(providerLink).toHaveAttribute("rel", /\b(?:noopener|noreferrer)\b/);
   await noHorizontalOverflow(page);
+  await page.getByRole("tab", { name: "Original Chart for Learning", exact: true }).click();
+  await expect(page.getByRole("img", { name: /Synthetic index chart/ })).toBeVisible();
+  await noHorizontalOverflow(page);
   await navigation(page, "Simulation").click();
   await page.getByRole("button", { name: "Start your simulation", exact: true }).click();
   await expect(page.getByRole("button", { name: "Advance one year", exact: true })).toBeEnabled();
@@ -238,5 +241,41 @@ test("independent widget and live-news interactions preserve saved simulation st
   expect(after.turns).toHaveLength(1);
   expect(after.sessions[0]).toMatchObject({ session: { age: 16, turnIndex: 1, version: 2,
     balances: { cash: 630000, bonds: 811200, equity: 1123200 } } });
+  await noHorizontalOverflow(page);
+});
+
+test("Practice Workspace exposes the original index chart and preserves TradingView selection", async ({ page }) => {
+  await stubOfficialModule(page);
+  const marketBefore = await (await page.request.get("/api/market")).json();
+  await page.goto("/market");
+  await readyStub(page);
+  const tradingTab = page.getByRole("tab", { name: "TradingView Chart", exact: true });
+  const learningTab = page.getByRole("tab", { name: "Original Chart for Learning", exact: true });
+  await expect(tradingTab).toHaveAttribute("aria-selected", "true");
+  const provider = widget(page);
+  const instance = await provider.getAttribute("data-tv-probe-instance");
+  await provider.evaluate(element => element.setAttribute("symbol", "NYSE:IBM"));
+
+  await learningTab.click();
+  await expect(learningTab).toHaveAttribute("aria-selected", "true");
+  await expect(provider).toBeHidden();
+  const learning = page.getByRole("tabpanel", { name: "Original Chart for Learning", exact: true });
+  const instruments = learning.getByRole("list", { name: "Available educational instruments" });
+  await expect(instruments.getByRole("listitem")).toHaveText([
+    "Simulated cash", "Simulated bond basket", "Simulated diversified equity basket"
+  ]);
+  await expect(learning.getByRole("img", { name: /Synthetic index chart/ })).toBeVisible();
+  await expect(learning.getByText(/Synthetic teaching data · IDR · 6 Nov 2026/)).toBeVisible();
+  await learning.locator("summary").filter({ hasText: "View index values as a table" }).click();
+  await expect(learning.getByRole("row", { name: "2026-11-06 100.00 112.48 104.54" })).toBeVisible();
+  await noHorizontalOverflow(page);
+
+  await learningTab.focus();
+  await page.keyboard.press("Home");
+  await expect(tradingTab).toBeFocused();
+  await expect(tradingTab).toHaveAttribute("aria-selected", "true");
+  await expect(provider).toHaveAttribute("symbol", "NYSE:IBM");
+  await expect(provider).toHaveAttribute("data-tv-probe-instance", instance!);
+  expect(await (await page.request.get("/api/market")).json()).toEqual(marketBefore);
   await noHorizontalOverflow(page);
 });

@@ -70,7 +70,7 @@ DEP-01 remains a development-only lint-chain advisory: production-only npm audit
 | ID | Evidence and action | Actual result |
 |---|---|---|
 | QA-02 | New refresh test used clock.fastForward, which invokes repeating timers once; changed only that case to runFor while retaining >=3 refresh assertion. | Both failed desktop/mobile cases passed on rerun. App untouched. |
-| QA-03 | Contrast helper timed out awaiting fallback during concurrent checks; isolated rerun completed. | All18 rendered combinations had zero contrast failures; initial timeout remains recorded. |
+| QA-03 | Contrast helper timed out awaiting fallback during concurrent checks. Source inspection found the research cap of6/local/minute; the full e2e run consumes that budget. Sequential rerun completed without changing the safeguard. | All18 rendered combinations had zero contrast failures; initial timeout remains recorded. |
 | MEDIA-01 | Installed Playwright ffmpeg supports only WebM/image demuxing; MP4 inspection failed. | Existing browser decoded local24s video;12 frames captured, six reviewed. No installation, original edit or external video upload. |
 | MOTION-01 | Prototype static switch initially omitted forced OS state; two select names included nested option text. | Corrected effective static state/disable and explicit labels. Remote builds completed; four local responsive interaction checks passed. |
 
