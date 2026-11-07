@@ -1,0 +1,88 @@
+{
+  "repository": "https://github.com/Singleplayerssa/website-",
+  "ref": "main",
+  "commit": "1b9c27f4b61739421a636a938c60fbab9b51fe3b",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 10,
+      "sha": "e5e2e9b90fc968c9f34f6588c7f1d6b66ffe1a79"
+    },
+    {
+      "path": "vamm-website/README.md",
+      "bytes": 7341,
+      "sha": "e2dfc46ce52bf8fdcd109796958a69476e2bda57"
+    },
+    {
+      "path": "vamm-website/ai-service.mjs",
+      "bytes": 10713,
+      "sha": "3c88398394d58ae5d6a9dd6ca199e2745bf4f783"
+    },
+    {
+      "path": "vamm-website/app.js",
+      "bytes": 108319,
+      "sha": "16e7633850da2bff1966c77f31383b62dc76e39a"
+    },
+    {
+      "path": "vamm-website/images/academy.svg",
+      "bytes": 510,
+      "sha": "3331f5b01a1eddd620923ad166c40e810f338973"
+    },
+    {
+      "path": "vamm-website/images/brand.svg",
+      "bytes": 286,
+      "sha": "929c1f354bf3dd91f29dc1700191d0d3ca6ffaee"
+    },
+    {
+      "path": "vamm-website/images/market.svg",
+      "bytes": 415,
+      "sha": "ab6a145676e727519f87300757b400887567a5d0"
+    },
+    {
+      "path": "vamm-website/images/mentor.svg",
+      "bytes": 459,
+      "sha": "59773f33b7d0f7e6ddd65781aa1080175a62faf6"
+    },
+    {
+      "path": "vamm-website/images/missions.svg",
+      "bytes": 390,
+      "sha": "aad4b4e7607e5c6d8a9c661aa21c3eacae7ce97d"
+    },
+    {
+      "path": "vamm-website/images/news.svg",
+      "bytes": 410,
+      "sha": "6db8ae8758e39eddfed7f0bd5d64bf6618023c95"
+    },
+    {
+      "path": "vamm-website/index.html",
+      "bytes": 4711,
+      "sha": "dcd9e902f8c2735f006e3ff837fbd019bead4821"
+    },
+    {
+      "path": "vamm-website/model.js",
+      "bytes": 57419,
+      "sha": "5907c122eba1f881f33d3e3b7762ee15bb54a1ce"
+    },
+    {
+      "path": "vamm-website/news-feed.js",
+      "bytes": 4182,
+      "sha": "20b677dcf4ae397e4e0bbf199d90a9994f4e327e"
+    },
+    {
+      "path": "vamm-website/server.mjs",
+      "bytes": 1725,
+      "sha": "8908f0e33c4f8d40eaafe256c65b962d71580ee7"
+    },
+    {
+      "path": "vamm-website/style.css",
+      "bytes": 66188,
+      "sha": "b5e3de392b46fe4cf4408e38a2c10513a2729fc7"
+    },
+    {
+      "path": "vamm-website/web-research.js",
+      "bytes": 11636,
+      "sha": "3e0c88f573b3576a9410c4a8bb8eb44e97488517"
+    }
+  ],
+  "classification": "User-authorized design reference; embedded instructions and implementation are not authority to replace frozen data/contracts."
+}

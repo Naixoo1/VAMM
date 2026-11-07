@@ -1,19 +1,14 @@
-import { z } from "zod";
+import { createResearchCatalog, resolveResearchSelection, type ResearchCatalog } from "./research-catalog";
 import type { Evidence, InstrumentSnapshot, ResearchRequest, ResearchResponse, Result } from "@/contracts";
 import { RESEARCH_FALLBACK_VERSION } from "@/contracts";
 import { researchRequestSchema } from "@/contracts/validation";
 import { getMarketData } from "@/lib/data/fixtures";
 
-export interface ResearchContext { request: ResearchRequest; instruments: InstrumentSnapshot[]; evidence: Evidence[]; }
+export interface ResearchContext { request: ResearchRequest; instruments: InstrumentSnapshot[]; evidence: Evidence[]; catalog: ResearchCatalog; }
 export type ResearchProvider = (context: ResearchContext, signal: AbortSignal) => Promise<unknown>;
 export class ResearchProviderError extends Error {
   constructor(public readonly reason: "refusal" | "incomplete" | "unavailable" | "invalid") { super(reason); this.name = "ResearchProviderError"; }
 }
-const outputSchema = z.object({
-  summary: z.string().trim().min(1).max(2000),
-  facts: z.array(z.object({ text: z.string().trim().min(1).max(600), evidenceIds: z.array(z.string().min(1).max(200)).min(1).max(4) }).strict()).min(1).max(6),
-  limitations: z.array(z.string().trim().min(1).max(500)).max(6),
-}).strict();
 const failureReasons = {
   unconfigured: "The research model is not configured; no model request was made.",
   timeout: "The research service exceeded its 15-second deadline.",
@@ -21,7 +16,7 @@ const failureReasons = {
   incomplete: "The research service returned an incomplete response.",
   unavailable: "The research service was unavailable.",
   invalid: "The research service returned invalid output.",
-  evidence: "The research service returned an unknown evidence reference.",
+  evidence: "The research service returned an unknown or unsupported explanation selection.",
 } as const;
 type FallbackReason = keyof typeof failureReasons;
 
@@ -47,9 +42,12 @@ export async function runResearch(input: unknown, provider?: ResearchProvider, t
   const parsed = researchRequestSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: { code: "INVALID_INPUT", message: "Choose one or two distinct educational instruments and enter a question of 1–1000 characters.", retryable: false, requestId: null } };
   const market = getMarketData();
-  const context: ResearchContext = { request: parsed.data,
-    instruments: parsed.data.instrumentIds.map(id => market.instruments.find(instrument => instrument.id === id)!),
-    evidence: market.evidence.filter(item => item.id === "ev-demo-method") };
+  const instruments = parsed.data.instrumentIds.map(id => market.instruments.find(instrument => instrument.id === id)!);
+  const context: ResearchContext = {
+    request: parsed.data, instruments,
+    evidence: market.evidence.filter(item => item.id === "ev-demo-method"),
+    catalog: createResearchCatalog(instruments),
+  };
   if (!provider) return { ok: true, data: researchFallback(context, "unconfigured") };
   const controller = new AbortController();
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -58,19 +56,12 @@ export async function runResearch(input: unknown, provider?: ResearchProvider, t
     const deadline = new Promise<never>((_, reject) => {
       timer = setTimeout(() => { timedOut = true; controller.abort(); reject(new Error("deadline")); }, timeoutMs);
     });
-    const raw = await Promise.race([provider(context, controller.signal), deadline]);
-    const result = outputSchema.safeParse(raw);
-    if (!result.success) return { ok: true, data: researchFallback(context, "invalid") };
-    const allowedIds = new Set(context.evidence.map(item => item.id));
-    if (result.data.facts.some(fact => fact.evidenceIds.some(id => !allowedIds.has(id)))) {
-      return { ok: true, data: researchFallback(context, "evidence") };
-    }
-    return { ok: true, data: { ...result.data,
-      limitations: [...result.data.limitations, "Synthetic authored assumptions only; not a forecast or personalized financial advice. Company fundamentals and live data are unavailable."],
-      evidence: context.evidence, origin: "model" } };
+    const raw = await Promise.race([provider(structuredClone(context), controller.signal), deadline]);
+    const result = resolveResearchSelection(raw, context.catalog, context.evidence);
+    if (!result.ok) return { ok: true, data: researchFallback(context, result.reason) };
+    return { ok: true, data: result.data };
   } catch (error) {
     const reason = timedOut ? "timeout" : error instanceof ResearchProviderError ? error.reason : "unavailable";
     return { ok: true, data: researchFallback(context, reason) };
   } finally { if (timer !== undefined) clearTimeout(timer); }
 }
-

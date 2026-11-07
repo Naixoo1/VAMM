@@ -1,0 +1,88 @@
+[
+  {
+    "case": "reset-history-after-reload",
+    "viewport": "desktop",
+    "before": {
+      "counts": {
+        "sessions": 2,
+        "turns": 1
+      },
+      "historyLinks": 1
+    },
+    "after": {
+      "counts": {
+        "sessions": 2,
+        "turns": 1
+      },
+      "historyLinks": 0,
+      "historyHeading": 0
+    },
+    "failure": true
+  },
+  {
+    "case": "chart-external-link-current-symbol",
+    "viewport": "desktop",
+    "publicSymbol": "NASDAQ:MSFT",
+    "link": "https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAPL",
+    "failure": true
+  },
+  {
+    "case": "retry-keyboard-focus",
+    "viewport": "desktop",
+    "focus": {
+      "tag": "BODY",
+      "text": null
+    },
+    "failure": true
+  },
+  {
+    "case": "screenshot-analysis-entry",
+    "viewport": "desktop",
+    "fileInputs": 0,
+    "analysisUploadButtons": 0,
+    "status": "Missing in accepted source/UI; not a completed analysis flow"
+  },
+  {
+    "case": "reset-history-after-reload",
+    "viewport": "mobile",
+    "before": {
+      "counts": {
+        "sessions": 2,
+        "turns": 1
+      },
+      "historyLinks": 1
+    },
+    "after": {
+      "counts": {
+        "sessions": 2,
+        "turns": 1
+      },
+      "historyLinks": 0,
+      "historyHeading": 0
+    },
+    "failure": true
+  },
+  {
+    "case": "chart-external-link-current-symbol",
+    "viewport": "mobile",
+    "publicSymbol": "NASDAQ:MSFT",
+    "link": "https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAPL",
+    "failure": true
+  },
+  {
+    "case": "retry-keyboard-focus",
+    "viewport": "mobile",
+    "focus": {
+      "tag": "BODY",
+      "text": null
+    },
+    "failure": true
+  },
+  {
+    "case": "screenshot-analysis-entry",
+    "viewport": "mobile",
+    "fileInputs": 0,
+    "analysisUploadButtons": 0,
+    "status": "Missing in accepted source/UI; not a completed analysis flow"
+  }
+]

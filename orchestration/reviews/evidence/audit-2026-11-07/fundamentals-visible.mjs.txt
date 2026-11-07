@@ -1,0 +1,30 @@
+import {createRequire} from 'node:module';
+import {writeFile} from 'node:fs/promises';
+const require = createRequire('C:/code/VAMM/package.json');
+const {chromium} = require('playwright');
+const root = 'C:/Users/vloxm/.codex/visualizations/2026/11/07/01a1b3e0-b0cf-7bf3-af13-730fde3d7215/vamm-audit-staging/evidence';
+const browser = await chromium.launch();
+let results;
+try {
+  results = await Promise.allSettled([['desktop',1440,1000],['mobile',390,844]].map(async ([name,width,height]) => {
+    const page = await browser.newPage({viewport:{width,height}});
+    const failedRequests=[], pageErrors=[];
+    page.on('requestfailed',request=>failedRequests.push({url:request.url(),error:request.failure()?.errorText}));
+    page.on('pageerror',error=>pageErrors.push(error.message));
+    await page.goto('http://127.0.0.1:3000/research');
+    const host = page.locator('[data-live-market-kind="fundamentals"]');
+    const iframe = host.locator('iframe');
+    await iframe.waitFor();
+    await iframe.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(15000);
+    const frame = await (await iframe.elementHandle()).contentFrame();
+    const text = await frame.locator('body').innerText();
+    const numericTokens = text.match(/\b\d+(?:[.,]\d+)*(?:[KMBT%])?/g) ?? [];
+    const result = {name,width,state:await host.getAttribute('data-live-market-state'),hasFinancialLabels:text.includes('Market capitalization'),numericTokenCount:numericTokens.length,failedRequests,pageErrors,documentWidth:await page.evaluate(()=>document.documentElement.scrollWidth)};
+    await iframe.screenshot({path:root+'/fundamentals-visible-15s-'+name+'.png'});
+    await page.close();
+    return result;
+  }));
+} finally { await browser.close(); }
+await writeFile(root+'/fundamentals-visible-report.json',JSON.stringify(results,null,2)+'\n');
+console.log(JSON.stringify(results));

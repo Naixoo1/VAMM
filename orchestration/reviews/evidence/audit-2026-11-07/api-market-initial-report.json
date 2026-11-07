@@ -1,0 +1,79 @@
+{
+  "api": [
+    {
+      "path": "market",
+      "method": "GET",
+      "expected": 200,
+      "actual": 200,
+      "pass": true
+    },
+    {
+      "path": "news",
+      "method": "GET",
+      "expected": 200,
+      "actual": 200,
+      "pass": true
+    },
+    {
+      "path": "research",
+      "method": "GET",
+      "expected": 405,
+      "actual": 405,
+      "pass": true
+    },
+    {
+      "path": "market",
+      "method": "POST",
+      "expected": 405,
+      "actual": 405,
+      "pass": true
+    },
+    {
+      "path": "news",
+      "method": "POST",
+      "expected": 405,
+      "actual": 405,
+      "pass": true
+    },
+    {
+      "path": "research",
+      "method": "PUT",
+      "expected": 405,
+      "actual": 405,
+      "pass": true
+    },
+    {
+      "case": "multipart screenshot rejected",
+      "expected": 400,
+      "actual": 400,
+      "pass": true
+    },
+    {
+      "case": "JSONP media type rejected",
+      "expected": 400,
+      "actual": 200,
+      "origin": "prewritten",
+      "pass": false
+    }
+  ],
+  "market": [
+    {
+      "status": "rejected",
+      "reason": {
+        "log": [
+          "  - waiting for getByRole('table') to be visible"
+        ],
+        "name": "TimeoutError"
+      }
+    },
+    {
+      "status": "rejected",
+      "reason": {
+        "log": [
+          "  - waiting for getByRole('table') to be visible"
+        ],
+        "name": "TimeoutError"
+      }
+    }
+  ]
+}

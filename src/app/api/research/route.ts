@@ -47,7 +47,8 @@ async function readInput(request: Request): Promise<unknown> {
   return JSON.parse(body);
 }
 export async function POST(request: Request): Promise<Response> {
-  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+  const mediaType = request.headers.get("content-type")?.split(";", 1)[0].trim().toLowerCase();
+  if (mediaType !== "application/json") {
     return error("INVALID_INPUT", "Send an application/json research request.", 400);
   }
   if (!allowed(request)) return error("RATE_LIMITED", "Research request limit reached. Please wait before trying again.", 429);
@@ -61,4 +62,3 @@ export async function POST(request: Request): Promise<Response> {
     return error("INTERNAL_ERROR", "Research could not be completed.", 500);
   } finally { inFlight -= 1; }
 }
-

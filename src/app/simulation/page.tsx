@@ -7,7 +7,7 @@ import {ASSET_IDS,type ContributionPreview,type ErrorResponse,type MoneyByAsset,
 import {getFeedback,previewContribution} from "@/lib/simulation/gateway";
 import {useSimulation} from "@/hooks/use-simulation";
 import {FundingForm} from "@/components/features/funding-form";
-import {PreservedSession,TurnHistory} from "@/components/features/simulation-history";
+import {PreservedHistory,TurnHistory} from "@/components/features/simulation-history";
 import {Badge,ErrorNotice,LoadingPanel,PageHeading,Panel,SourceLine,assetColors,assetNames,money,ratio,styles} from "@/components/features/workspace";
 import {MotionBoundary,MotionMark} from "@/components/motion";
 
@@ -39,7 +39,7 @@ export default function SimulationPage(){
  <Panel title="Your journey so far" description="Contributions, investment changes, and costs remain separate."><TurnHistory turns={bundle.turns}/></Panel>
  </>}
  {session&&session.turnIndex===0&&session.version===0&&sim.preserved.length>0&&<MotionMark preset="reset-confirmed" state="ready" label="New session saved; your previous history is preserved."/>}
- {sim.preserved.length>0&&<Panel title="Preserved sessions" description="Starting fresh keeps your earlier session and history.">{sim.preserved.map((snapshot,index)=><PreservedSession key={snapshot.session.id} snapshot={snapshot} index={index}/>)}</Panel>}
+ <PreservedHistory sessions={sim.preserved} loading={sim.preservedLoading} error={sim.preservedError} onReload={()=>{void sim.reloadHistory()}}/>
  <div className={styles.callout}><ShieldCheck size={18} style={{flexShrink:0}} aria-hidden="true"/><p>Stored on this device; anyone using this browser profile can access it. Local namespaces provide no authentication or tamper protection. Storage failures are shown without a silent reset.</p></div></div>
  <dialog ref={dialog} className={styles.dialog} aria-labelledby="reset-title"><h2 id="reset-title">Make room for a fresh start?</h2><p>A new session starts at age 15 with zero holdings. Your current session and its history will be preserved. The active session switches only after the new one is saved.</p><div className={styles.actions}><button type="button" className={[styles.button,styles.secondary].join(" ")} onClick={()=>dialog.current?.close()}>Keep this session</button><button type="button" className={styles.button} onClick={()=>{dialog.current?.close();void sim.create()}}>Create new session</button></div></dialog>
  </>

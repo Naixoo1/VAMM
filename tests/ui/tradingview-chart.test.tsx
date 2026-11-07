@@ -21,7 +21,7 @@ describe("TradingView Web Component boundary",()=>{
   fireEvent.load(scripts[0]);expect(screen.getAllByRole("status").every(item=>item.textContent?.includes("Loading TradingView chart"))).toBe(true);
   await act(async()=>{fireEvent.error(scripts[0]);await Promise.resolve()});
   expect(screen.getAllByRole("alert")).toHaveLength(2);expect(screen.getAllByRole("button",{name:"Reload page"})).toHaveLength(2);
-  expect(screen.getAllByRole("link",{name:"Open on TradingView"})[0].getAttribute("href")).toContain("NASDAQ%3AAAPL");
+  expect(screen.getAllByRole("link",{name:"Open default AAPL on TradingView"})[0].getAttribute("href")).toContain("NASDAQ%3AAAPL");
   mounted.unmount();expect(document.querySelector(tag)).toBeNull();expect(scripts[0].isConnected).toBe(true);
  });
  it("never reports ready merely because the definition exists",async()=>{
@@ -51,7 +51,7 @@ describe("TradingView Web Component boundary",()=>{
   vi.useFakeTimers();render(<TradingViewChart/>);
   await act(async()=>{await Promise.resolve();vi.advanceTimersByTime(TRADINGVIEW_LOAD_TIMEOUT_MS)});
   expect(screen.getByRole("alert").textContent).toBe("TradingView couldn’t load this chart here.");
-  const region=screen.getByRole("region",{name:"TradingView market chart"});expect(within(region).getByRole("link",{name:"Open on TradingView"})).toBeTruthy();expect(within(region).getByRole("button",{name:"Retry chart"})).toBeTruthy();
+  const region=screen.getByRole("region",{name:"TradingView market chart"});expect(within(region).getByRole("link",{name:"Open default AAPL on TradingView"})).toBeTruthy();expect(within(region).getByRole("button",{name:"Retry chart"})).toBeTruthy();
  });
  it("does not time out an offscreen chart and restarts its deadline only when visible",async()=>{
   vi.useFakeTimers();let notify!:IntersectionObserverCallback;

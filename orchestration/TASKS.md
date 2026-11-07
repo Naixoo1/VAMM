@@ -143,3 +143,35 @@ All four live-feature/motion tasks progressed Running → Review (actual three w
 
 
 Final live-feature/motion verification:134 unit/integration tests,48 production-browser cases in one full run, clean TypeScript/ESLint/build,24 contrast combinations with zero failures; actual provider displays reviewed,24/24 motion treatments reached at both viewports,21 protected hashes and financial/request controller syntax unchanged. All three workers completed through saved-role fallback. Both existing Market chart views remain supported. Git delivery is to origin/main; public deployment remains queued.
+
+## Read-only feature audit and hourly review — 2026-11-07
+
+Latest user instruction: continue testing every feature, especially screenshot chart analysis/buy-sell, review the plan from09:30 Jakarta, and report failures/missing features. This audit adds no application implementation, plugin or paid data service.
+
+| ID | Owner / method | Outcome / status |
+|---|---|---|
+| VAMM-FEATURE-AUDIT-2026-11-07 | CEO + all three existing generic workers using saved role guides; no recursive delegation | Audit completed; **Review: six confirmed defects remain open** as AUDIT-01…06 in ISSUES.md. This is not a new clean release sign-off. |
+| VAMM-HOURLY-REVIEW-2026-11-07 | CEO + Simulation/AI independent schedule check | 09:30 anchor translated into hourly windows in reviews/FEATURE-AUDIT-2026-11-07.md; target16:30. User planning anchor is not a reconstructed execution log. Early deployed preview has no verified evidence; final deployment/rehearsal remains Queued. |
+
+Fresh CEO execution: TypeScript/ESLint/build,134 existing unit/integration tests and48 canonical browser cases pass. New isolated adversarial probes:20 pass/7 fail. Additional desktop/mobile UI probes reproduce history-discovery, chart-destination and retry-focus failures. Direct local HTTP confirms the MIME gap. Real public-provider panels/Market views were checked separately; fundamentals populated after a longer visible wait despite an auxiliary provider request failure. No model call or deployment was performed.
+
+The historical implementation checklist has no09:30 anchor and retains a superseded live-News exclusion. It is not evidence of current hourly completion or public deployment. Screenshot analysis/personalized buy-sell are unbuilt and explicitly excluded; external technical ratings do not implement them. Live News has no VAMM live sentiment classifier; the basket mentor still consumes synthetic evidence only.
+
+No source file was edited (59 SHA-256 hashes match fe56e99). Contract v2, fixtures and deterministic Simulation remain unchanged. Repairs are proposed in the review, not implemented or marked Verified. Reports/evidence are local and uncommitted; no Git push was requested or performed by this audit.
+
+## Failure repair and site-wide motion authorization — 2026-11-07
+
+User authorized reproducing/fixing the six audit defects, comparing alternative repairs, extending animation across the website and updating Git with the three workers. User explicitly confirmed protected main files means contract v2, fixtures, simulation calculations, identity files and project configuration; targeted feature repairs are allowed. Existing audit documentation/evidence is preserved.
+
+Assignments/statuses: VAMM-REPAIR-UI-01 (Interface), VAMM-REPAIR-DATA-01 (Data/platform), VAMM-REPAIR-AI-01 (Simulation/AI), VAMM-MOTION-COVERAGE-03 (Interface), VAMM-REPAIR-VERIFY-03 (CEO) are **Running**. Saved-role fallback, disjoint temporary ownership, dependencies and protected paths are recorded in reviews/FIXES-MOTION-2026-11-07.md. No recursive delegation; no new plugin/paid data service, dependency, model call or deployment. Screenshot/trading/live-sentiment additions remain outside scope.
+
+## Teammate design adoption — 2026-11-07
+
+Latest user steering supplies https://github.com/Singleplayerssa/website- and authorizes adapting its UI, preventing collisions and updating Git while preserving protected files. Active failure repairs and site-wide motion remain included. TEAM-UI-01 (Interface), TEAM-DATA-DESIGN-01 (Data/platform), TEAM-DESIGN-VERIFY-01 (Simulation/AI) and TEAM-DESIGN-INTEGRATE-01 (CEO) are Running. Same three generic workers use saved role instructions; no recursive delegation. New ownership/intake boundaries and source provenance are in reviews/TEAM-DESIGN-2026-11-07.md. Incoming behavior/Node services are not adopted. No new plugin/paid resource, dependency or deployment.
+## Repair and teammate-design verification — 2026-11-07
+
+CEO reviewed all three actual worker handoffs and integrated their disjoint outputs. VAMM-REPAIR-UI-01, VAMM-REPAIR-DATA-01, VAMM-REPAIR-AI-01, VAMM-MOTION-COVERAGE-03, VAMM-REPAIR-VERIFY-03, TEAM-UI-01, TEAM-DATA-DESIGN-01, TEAM-DESIGN-VERIFY-01 and TEAM-DESIGN-INTEGRATE-01 progressed Running → Review → Integrated → **Verified locally**. Reviews: FIXES-MOTION-2026-11-07.md and TEAM-DESIGN-2026-11-07.md.
+
+Observed final checks:201 unit/integration tests,60 browser cases in one full run, TypeScript/ESLint/production build, original27 adversarial probes,30 route-width checks,24 contrast combinations with zero failures, all24 motion treatments reached and36 protected hashes unchanged. Six original application defects AUDIT-01…06 are resolved by the bounded approaches documented in the repair report. Actual public provider displays and direct local HTTP/Market were checked separately; provider auxiliary errors remain external limitations, not fabricated success.
+
+The teammate design is adapted across the existing six routes. Incoming Node/model/trading/quiz/Google research/localStorage logic is not adopted; no configuration, engine, v2/fixtures, identity or persistence-schema replacement. No plugin/paid service/dependency or real model call. Native workspace-root alignment remains unresolved but approved project operations work. Public deployment/rehearsal remains **Queued**, and the09:30 hourly review's16:30 target is not claimed as a verified deployment. Git delivery targets existing origin/main only, preserving history.

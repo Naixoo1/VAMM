@@ -1,0 +1,43 @@
+import {createRequire} from 'node:module';
+import {writeFile} from 'node:fs/promises';
+import {installLiveFeatureWidgetStubs} from 'file:///C:/code/VAMM/tests/e2e/live-features-widget-stub.ts';
+const require=createRequire('C:/code/VAMM/package.json');const {chromium,expect}=require('@playwright/test');
+const browser=await chromium.launch();const out='C:/Users/vloxm/.codex/visualizations/2026/11/07/01a1b3e0-b0cf-7bf3-af13-730fde3d7215/vamm-audit-staging';
+const results=[];
+try{
+ for(const [name,width,height] of [['desktop',1440,900],['mobile',390,844]]){
+  const page=await browser.newPage({viewport:{width,height}});await installLiveFeatureWidgetStubs(page);
+  const counts=()=>page.evaluate(async()=>{const db=await new Promise((resolve,reject)=>{const req=indexedDB.open('vamm-demo-v2',1);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});try{const tx=db.transaction(['sessions','turns'],'readonly');const totals=await Promise.all(['sessions','turns'].map(store=>new Promise((resolve,reject)=>{const r=tx.objectStore(store).count();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})));return{sessions:totals[0],turns:totals[1]};}finally{db.close();}});
+  await page.goto('http://127.0.0.1:3000/simulation');
+  await page.getByRole('button',{name:'Start your simulation',exact:true}).click();
+  await page.getByRole('button',{name:'Advance one year',exact:true}).click();
+  await page.getByLabel('Cash · Rp',{exact:true}).fill('150000');
+  await page.getByRole('button',{name:'Confirm funding decision',exact:true}).click();
+  await expect(page.getByRole('button',{name:'Advance one year',exact:true})).toBeEnabled();
+  await page.getByRole('button',{name:'New session',exact:true}).click();
+  await page.getByRole('dialog').getByRole('button',{name:'Create new session',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Preserved sessions',exact:true})).toBeVisible();
+  const before={counts:await counts(),historyLinks:await page.locator('summary').filter({hasText:'View preserved session'}).count()};
+  await page.reload();await expect(page.getByRole('button',{name:'Advance one year',exact:true})).toBeEnabled();
+  const after={counts:await counts(),historyLinks:await page.locator('summary').filter({hasText:'View preserved session'}).count(),historyHeading:await page.getByRole('heading',{name:'Preserved sessions',exact:true}).count()};
+  results.push({case:'reset-history-after-reload',viewport:name,before,after,failure:before.historyLinks>0&&after.historyLinks===0});
+  await page.screenshot({path:out+`/history-after-reload-${name}.png`,fullPage:true});
+  await page.goto('http://127.0.0.1:3000/market');
+  const chart=page.locator('tv-advanced-chart');await expect(page.locator('[data-tradingview-state]')).toHaveAttribute('data-tradingview-state','ready');
+  await chart.evaluate(e=>e.setAttribute('symbol','NASDAQ:MSFT'));
+  const link=await page.getByRole('region',{name:'TradingView market chart',exact:true}).getByRole('link',{name:'Open on TradingView',exact:false}).getAttribute('href');
+  results.push({case:'chart-external-link-current-symbol',viewport:name,publicSymbol:await chart.getAttribute('symbol'),link,failure:link.includes('AAPL')});
+  await page.goto('http://127.0.0.1:3000/news');
+  const news=page.locator('[data-live-news-state]');await expect(news).toHaveAttribute('data-live-news-state','ready');
+  const screenshotInputs=await page.locator('input[type=file]').count();
+  await page.locator('tv-news-feed').evaluate(e=>e.dispatchEvent(new CustomEvent('tv-widget-error',{bubbles:true,composed:true})));
+  const retry=news.getByRole('button',{name:'Retry live feed',exact:true});await retry.focus();await expect(retry).toBeFocused();
+  await page.keyboard.press('Enter');await expect(news).toHaveAttribute('data-live-news-state','ready');
+  const focus=await page.evaluate(()=>({tag:document.activeElement?.tagName,text:document.activeElement?.getAttribute('aria-label')}));
+  results.push({case:'retry-keyboard-focus',viewport:name,focus,failure:focus.tag==='BODY'});
+  await page.goto('http://127.0.0.1:3000/research');
+  results.push({case:'screenshot-analysis-entry',viewport:name,fileInputs:screenshotInputs+await page.locator('input[type=file]').count(),analysisUploadButtons:await page.getByRole('button',{name:/upload.*chart|analy[sz]e.*screenshot|buy\/sell/i}).count(),status:'Missing in accepted source/UI; not a completed analysis flow'});
+  await page.close();
+ }
+}finally{await browser.close();}
+await writeFile(out+'/browser-probe-results.json',JSON.stringify(results,null,2)+'\n');console.log(JSON.stringify(results,null,2));

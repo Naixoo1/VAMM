@@ -139,7 +139,7 @@ test("blocked external module gives a useful fallback while the deterministic jo
   await page.goto("/market");
   await expect(widgetRegion(page).getByRole("alert")).toHaveText(ERROR_MESSAGE);
   await expect(page.getByRole("button", { name: "Reload page", exact: true })).toBeVisible();
-  const providerLink = widgetRegion(page).getByRole("link", { name: "Open on TradingView", exact: false });
+  const providerLink = widgetRegion(page).getByRole("link", { name: "Open default AAPL on TradingView", exact: false });
   await expect(providerLink).toBeVisible();
   await expect(providerLink).toHaveAttribute("target", "_blank");
   await expect(providerLink).toHaveAttribute("rel", /\b(?:noopener|noreferrer)\b/);

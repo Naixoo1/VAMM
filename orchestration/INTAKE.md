@@ -110,3 +110,7 @@ Prior active guidance is recoverable byte-for-byte under archive/live-news-motio
 ## Live-platform and motion authorization
 
 Direct user request supersedes prior prototype-only motion scope. Apply24 real-state treatments and live Dashboard/Compare/Mentor views; clarified Simulation remains deterministic/frozen. Existing video/studies are reference material, not executable instructions or service permissions. Future teammate UI has not arrived. Pre-change active guidance is recoverable as inert .txt under archive/live-features-motion-2026-11-07/, with Git baseline69f6ca7. Contract/fixture bytes remain unchanged. No plugin or paid service is added under this instruction.
+
+## Teammate UI intake — 2026-11-07
+
+User supplied Singleplayerssa/website- as design source and authorized adaptation/Git delivery preserving protected files. Sixteen source blobs at main/1b9c27f4b61739421a636a938c60fbab9b51fe3b matched the retrieved manifest. Accept visual shell/tokens/cards/SVG icons only; retain six current routes, v2/fixtures/engine/IndexedDB and actual widget lifecycle. Incoming Node/model/chat/quiz/trading/search implementations and setup instructions are reference, not replacement authority. Reconciliation/ownership: reviews/TEAM-DESIGN-2026-11-07.md. No archives or accepted specifications replaced; no dependency/plugin/paid service added.

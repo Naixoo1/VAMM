@@ -1,0 +1,238 @@
+[
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\globals.css",
+    "Hash": "EF657A34601E243077839AB2470BE48A16DE66EE2832697F1130A960E92BE94B"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\layout.tsx",
+    "Hash": "C8A2D5B23FB6998FD229491D97B487ECCAE838C3BFB5BC1F4662BCB708490DBD"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\page.tsx",
+    "Hash": "FCBFF3CC940495F70F224D9A9B5F47E7242FC469112E311715E905EDE63ABB31"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\providers.tsx",
+    "Hash": "9F1ECE69D462ABDC873643F41C7355E7105992ED58D355E99D7B27A9F472DCBF"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\api\\market\\route.ts",
+    "Hash": "A09107982570FC16E273BA671CED003614F575C71E1CE35C9F4365D526561B02"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\api\\news\\route.ts",
+    "Hash": "5DE41FB3052BD2C71355F16D2EA4C6706616BAAE364473A5B7FFF135D0B7136C"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\api\\research\\route.ts",
+    "Hash": "DD226170A60D87B220766B20D536DF6F172405E9603DD3D1B92455DD3A90960E"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\compare\\page.tsx",
+    "Hash": "4C91BC52C75F8DFD1B45104A10074B7FFC2A905441090E74A48FA59727615021"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\dashboard\\page.tsx",
+    "Hash": "762FDA7CD511F0987D9C57E38967CC24199A562D381FEDE3D4BF3DB119F2FFA5"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\market\\market.module.css",
+    "Hash": "5DB2388DA68D5119A12AA3A13787B74D92BD91D38256D7D89034590351A3C410"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\market\\page.tsx",
+    "Hash": "2200214E915A9EE8DB0B6D74110EF761C870EFEAF302FEDE4EE0BE62DD3F6EC1"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\news\\page.tsx",
+    "Hash": "AFBA189F4F6A80A64196D98BE3410FC45158C644516CD301C6773A19F69B4F3E"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\research\\page.tsx",
+    "Hash": "8ABF2A957C6498D9EC9BFE62E01AEB9F3A4304D2A2AD4FFF76C94AB2DFAAE11F"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\app\\simulation\\page.tsx",
+    "Hash": "392C3E84CE1DB5450F9096D90F280549BE66039F9EB2AE5B345F2AC0A1687AA2"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\app-shell-motion.module.css",
+    "Hash": "44F3DEBCDB276A251092A66299F3A07B691BCF4095329C705EF23CBFED02D0F5"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\app-shell.tsx",
+    "Hash": "9640BA372DBE8AD759D0842D52062F522F8E679BB351F4442D50F1A4E679748B"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\funding-form.tsx",
+    "Hash": "C7DE43076997CF12DEF79A45A7C267ED553E7788EB75CAB44B4B3410BA08E185"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\index-chart.tsx",
+    "Hash": "DF946B7440E212B7C3490A6CD02563BBD5E9602E59F21F080A79C8E972092B13"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-market-compare-learning.tsx",
+    "Hash": "2FF1FEFA1B88F7C2DE259BA7AEB09A186A4EF5383C5C3406E4E9D759FFABBA10"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-market-comparison.tsx",
+    "Hash": "877C2E1ABC3F3F193EB9F273F53F5A2444DD9D76A28CBD1DC640FB865B0F3CB6"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-market-dashboard-learning.tsx",
+    "Hash": "91238F06B97F407B75AA4270B86246CB834A4BADD48F930EFE49262812709645"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-market-learning.tsx",
+    "Hash": "90F23A9366E5551959905C0104B44CBE74C38C1E18B6C23BA575ADC9F326D028"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-market-widget.module.css",
+    "Hash": "4B5EF6B08C760C430B0E7CC38FE8F90A738FA3B886918AD070A57EBB1D7B4234"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-market-widget.tsx",
+    "Hash": "D719AC810F42D5D3139EBC093CB1044BA8B3CC23E28843573D01ED51983FBC02"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-news.module.css",
+    "Hash": "A849030637A4E7ADDE908BD89AD986685F81FD321B98999EEDB47AE623C82EA8"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-news.tsx",
+    "Hash": "364E8F7F6B836A899E07EAF408FA4F00D09546C8813DCCD1B885166417D7364C"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-research-learning.tsx",
+    "Hash": "9ED7D3020E261A3FDEAE65DD69736C7E2F7FB3CEFC3AD55524F79D9A6476BF6F"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\live-research.tsx",
+    "Hash": "931F26AC7CE0A35CA1069123D4D5E923BE120193FED38A5E0CC27C50C5A23981"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\market-workspace.module.css",
+    "Hash": "621A6D4F262C51D6C290791EEDECED8AD8F45CD8F115735791AC8F6B6E4047C5"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\market-workspace.tsx",
+    "Hash": "CF63F65C0443A23DF3E4227CD9CB7AFBD65E3AB2B7888AB5139413D3385D616D"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\simulation-history.tsx",
+    "Hash": "E23FF32391DF2C78FE5ADE12E19A7D2B4FB660A6F1EA6D8E6F21A075EE37563B"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\source-news.module.css",
+    "Hash": "CB6386EF4FAF288124A03882CB6091D28275FB4686323DDB9B4D90921518A6BE"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\source-news.tsx",
+    "Hash": "ED761F0C6438E72D43018BA4E516E52186B1F3C93F466EF975724C52E947C84C"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\tradingview-chart.module.css",
+    "Hash": "F2FE96A3A1DF4B8004C3E8FA585B82CFFFD13901FAD0DEAECAFA2DAA108DF24A"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\tradingview-chart.tsx",
+    "Hash": "BCC72051E1D053E8385F79D81640D38E0309BE126D6ACCD8DB026481AB0348FE"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\workspace.module.css",
+    "Hash": "98D89BC9730CE2F118E89810A6EAB2FB1809A778EEF0E2DCCD0359EB727B6BD6"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\features\\workspace.tsx",
+    "Hash": "CD81DC758F9006C6E2D711359F8F700244BA371F29AA268ABED610BD34862B0F"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\motion\\index.ts",
+    "Hash": "0B2286CF538932ADCD06853056E7DBF50973A8A6AB5ED31F42526DF49A5D788E"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\motion\\motion.module.css",
+    "Hash": "DB2103C5002C167A253EC8D5C4B9152D52650A17158FFABABA36EE6690201608"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\motion\\motion.tsx",
+    "Hash": "7BF9C14A965E0742E06E2A14470CAEE42AA280C8D4DA421DE40B36CDDC0A6F71"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\components\\motion\\preferences.tsx",
+    "Hash": "8A38A6AF402A6D76A53A61EB1A0972843B211E19F055A6E68318AAE23DB1B9E9"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\contracts\\index.ts",
+    "Hash": "80A9605A1DC356F59A28F13495B3C0551A75254D25A3241F8A447ED0202A60A3"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\contracts\\README.md",
+    "Hash": "1426C23A761F6D2B9AC685BE240B426465BC397C39E6AFA7BC57526E7F508FB1"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\contracts\\validation.ts",
+    "Hash": "E8C95EACB5692F986C2436149A6F88A9FD9DEB2C255E095AC44750951368B077"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\hooks\\use-api-data.ts",
+    "Hash": "8CDBA96B3D67E03C74D62EB7A4591A660C66EB8A788CD95CD67D69F285857D5A"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\hooks\\use-simulation.ts",
+    "Hash": "CC45FA2184C65E656B5C16C95355C41941E62DB98006705DC9ED0D2218CC8D49"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\ai\\feedback.ts",
+    "Hash": "4E7D5A95ECEE591A955A9F609A382FCFCB52F628E912F5806E48CA506BDAE2C1"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\ai\\research.ts",
+    "Hash": "C6C7D6707880C08DF17555C4ABC6A4261505FD59E20F6F3028FF23D4CF3E74E9"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\ai\\server-provider.ts",
+    "Hash": "BF533B0581C30D844DAA2342394E47D4C529989AFDDF769BF148D1217FD2D188"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\data\\fixtures.ts",
+    "Hash": "A7ECD5EEB6D70CCCEA61DE62FF9A3D98466B9CE831EB5318977FD9766C69697B"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\data\\live-news.ts",
+    "Hash": "E61FE1C2AEF96789B961D3F1ADAE4F618BCD2E1181D3F32969FB62CBF1C41A43"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\data\\tradingview-widgets.ts",
+    "Hash": "7268D221D3A5D69DFECFDADA01BE03B3F18ACDE35793155E3186ECB200614BB1"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\db\\database.ts",
+    "Hash": "2AC1CEBE8A54A812BD5C5F6728CEE671CBED7F5714CFEAC4F1B02DAC705B7E69"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\db\\local-owner.ts",
+    "Hash": "EC5DACC78DA6E51CC8A80B483C4E75F73838C38B0545ACA10E5AB8E77E2D9667"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\db\\local-repository.ts",
+    "Hash": "881AE5F61CDD33BDA981F69CC64223B669A93172A40024BF1368C6C94BFCCDF4"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\db\\state-validation.ts",
+    "Hash": "4C2B1C89660CAB42A87974EAD4851EE7FE08CDE2D8165C4BF1423E240003D5CD"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\motion\\presets.ts",
+    "Hash": "9438FEF6051490DF51C9EC6C589B66F4C2B9A68E82E1A41571C1B102F4AA1736"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\simulation\\engine.ts",
+    "Hash": "E6DC6FCE6EC6415588F29B0BAAF7C0407816E8ED4BA6DFE6F00F817C34894306"
+  },
+  {
+    "Path": "C:\\code\\VAMM\\src\\lib\\simulation\\gateway.ts",
+    "Hash": "213DE03B500D406EEA258619D01877E886DD091DC3A3F3AE6C3FAABFABA7B838"
+  }
+]

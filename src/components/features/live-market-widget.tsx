@@ -23,6 +23,7 @@ function WidgetInstance({ spec }: { spec: TradingViewWidgetSpec }) {
   const [attempt, setAttempt] = useState(0);
   const [hidden, setHidden] = useState(false);
   const [moduleAvailable, setModuleAvailable] = useState(false);
+  const [retryRequested, setRetryRequested] = useState(false);
   useEffect(() => {
     const container = host.current;
     if (!container || hidden) return;
@@ -120,10 +121,12 @@ function WidgetInstance({ spec }: { spec: TradingViewWidgetSpec }) {
   }, [spec, attempt, hidden]);
 
   function retry() {
+    if (state === "loading") return;
     if (spec.format === "web-component" && (typeof customElements === "undefined" || !customElements.get(spec.element))) {
       window.location.reload();
       return;
     }
+    setRetryRequested(true);
     setState("loading");
     setAttempt(value => value + 1);
   }
@@ -136,7 +139,7 @@ function WidgetInstance({ spec }: { spec: TradingViewWidgetSpec }) {
     state === "paused" ? "Live panel hidden." :
     state === "offline" ? "You’re offline. The live panel is unavailable until this browser reconnects." :
     "This live panel couldn’t load here.";
-  return <MotionBoundary preset="content-arrival" state={state === "paused" ? "idle" : failed ? "error" : usable ? "ready" : "loading"} motionKey={state}><section className={styles.card} aria-labelledby={headingId} data-live-market-kind={spec.kind} data-live-market-state={state}>
+  return <MotionBoundary preset="content-arrival" state={state === "paused" ? "idle" : failed ? "error" : usable ? "ready" : "loading"} motionKey={state}><section className={styles.card} aria-labelledby={headingId} data-live-market-kind={spec.kind} data-live-market-state={state} data-motion-surface="provider">
     <header className={styles.header}>
       <div><h2 id={headingId} className={styles.title}>{spec.title}</h2><p className={styles.description}>{spec.description}</p></div>
       <div className={styles.actions}><span className={styles.provider}>External market data</span><button type="button" className={styles.button} aria-expanded={!hidden} aria-controls={frameId} onClick={toggle}>{hidden ? "Show live panel" : "Hide live panel"}</button></div>
@@ -157,7 +160,7 @@ function WidgetInstance({ spec }: { spec: TradingViewWidgetSpec }) {
         <p className={styles.note}>Data by <a href={spec.externalUrl} target="_blank" rel="noopener noreferrer">TradingView</a> · Separate from synthetic learning and simulation calculations.</p>
       </div>
       <div className={styles.actions}>
-        {(failed || (spec.format === "iframe" && state === "panel")) && !hidden && <button type="button" className={styles.button} onClick={retry}><RefreshCw size={14} aria-hidden="true" />{spec.format === "web-component" && !moduleAvailable ? "Reload page" : "Retry live panel"}</button>}
+        {(failed || retryRequested || (spec.format === "iframe" && state === "panel")) && !hidden && <button type="button" className={styles.button} aria-disabled={state === "loading"} onClick={retry}><RefreshCw size={14} aria-hidden="true" />{state === "loading" ? "Reconnecting live panel…" : spec.format === "web-component" && !moduleAvailable ? "Reload page" : failed || state === "panel" ? "Retry live panel" : "Refresh live panel"}</button>}
         <a href={spec.externalUrl} target="_blank" rel="noopener noreferrer" className={styles.link}>Open on TradingView<ExternalLink size={14} aria-hidden="true" /></a>
       </div>
     </footer>

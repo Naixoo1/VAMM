@@ -1,0 +1,74 @@
+import { webcrypto } from "node:crypto";
+import { IDBFactory } from "fake-indexeddb";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { MutationRequest, Result } from "@/contracts";
+import { getScenario } from "@/lib/data/fixtures";
+import { DATABASE_NAME } from "@/lib/db/database";
+import { getOrCreateLocalOwner } from "@/lib/db/local-owner";
+import { commitMutation, createSession, getActiveSession, getSession } from "@/lib/db/local-repository";
+import { calculateNextBundle } from "@/lib/simulation/engine";
+
+function value<T>(result: Result<T>): T {
+  if (!result.ok) throw new Error(result.error.code + ": " + result.error.message);
+  return result.data;
+}
+function read<T>(operation: IDBRequest<T>): Promise<T> {
+  return new Promise((resolve, reject) => {
+    operation.onsuccess = () => resolve(operation.result);
+    operation.onerror = () => reject(operation.error);
+  });
+}
+async function setup() {
+  const owner = value(await getOrCreateLocalOwner());
+  const initial = value(await createSession(owner, "audit-create"));
+  const action: MutationRequest = { sessionId: initial.session.id, requestId: "audit-turn", expectedVersion: 0, action: "ADVANCE", savingsRateBps: 5000, contributionAllocation: { cash: 3000, bonds: 3000, equity: 4000 } };
+  const next = calculateNextBundle(initial, action, getScenario(1));
+  expect(next.turns[0].realBalanceRupiah).toBe(2635340);
+  expect(next.session.cumulativeInflationIndex).toBe(1.03);
+  value(await commitMutation(owner, action, next));
+  return { owner, sessionId: initial.session.id };
+}
+async function editDerivedFields(owner: string, sessionId: string, field: "real" | "inflation") {
+  const db = await new Promise<IDBDatabase>((resolve, reject) => {
+    const opening = indexedDB.open(DATABASE_NAME, 1);
+    opening.onsuccess = () => resolve(opening.result);
+    opening.onerror = () => reject(opening.error);
+  });
+  try {
+    const tx = db.transaction(["sessions", "turns"], "readwrite");
+    const complete = new Promise<void>((resolve, reject) => {
+      tx.oncomplete = () => resolve();
+      tx.onabort = () => reject(tx.error);
+    });
+    const turns = tx.objectStore("turns");
+    const sessions = tx.objectStore("sessions");
+    const row = await read(turns.get([owner, sessionId, 1]));
+    if (field === "real") row.turn.realBalanceRupiah += 1;
+    else {
+      const stored = await read(sessions.get([owner, sessionId]));
+      stored.session.cumulativeInflationIndex = 1.5;
+      row.turn.cumulativeInflationIndex = 1.5;
+      await read(sessions.put(stored));
+    }
+    await read(turns.put(row));
+    await complete;
+  } finally { db.close(); }
+}
+
+beforeEach(() => { vi.stubGlobal("indexedDB", new IDBFactory()); vi.stubGlobal("crypto", webcrypto); });
+afterEach(() => vi.unstubAllGlobals());
+
+describe("audit: derived fields in restored local history", () => {
+  // Anticipated red probes. These are data-integrity checks, not a claim of local tamper resistance.
+  it("reports a schema-valid but incorrect persisted real balance as storage corruption", async () => {
+    const { owner, sessionId } = await setup();
+    await editDerivedFields(owner, sessionId, "real");
+    expect(await getSession(owner, sessionId)).toMatchObject({ ok: false, error: { code: "STORAGE_UNAVAILABLE" } });
+  });
+
+  it("reports jointly altered session/history inflation indexes instead of accepting false purchasing power", async () => {
+    const { owner, sessionId } = await setup();
+    await editDerivedFields(owner, sessionId, "inflation");
+    expect(await getActiveSession(owner)).toMatchObject({ ok: false, error: { code: "STORAGE_UNAVAILABLE" } });
+  });
+});

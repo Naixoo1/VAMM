@@ -1,0 +1,32 @@
+{
+  "scope": "Local repaired VAMM with teammate visual design; no deployment or live model claim",
+  "baseline": "fe56e991b2a36c396f9fe21053b924c65d63f7a0",
+  "teammateSource": "https://github.com/Singleplayerssa/website-",
+  "teammateCommit": "1b9c27f4b61739421a636a938c60fbab9b51fe3b",
+  "productionBuild": "PASS",
+  "typecheck": "PASS",
+  "lint": "PASS",
+  "unitIntegration": {"passed": 201, "failed": 0, "suites": 25},
+  "browser": {"passed": 60, "failed": 0, "viewports": ["1440x900", "390x844"], "seconds": 36.0},
+  "originalAuditProbes": {"passed": 27, "failed": 0, "previouslyFailed": 7},
+  "additionalRouteWidths": {"checks": 30, "overflow": 0, "pageErrors": 0, "widths": [320, 768, 1024, 1440, 1920]},
+  "renderedContrast": {"combinations": 24, "failures": 0},
+  "http": {"passed": 8, "failed": 0, "modelDisabled": true},
+  "realMarketViews": {"viewportChecks": 2, "defaultSymbol": "NASDAQ:AAPL", "interval": "1D", "providerReady": true, "originalChartTableVisible": true},
+  "realProviderPanels": {"routeViewportChecks": 8, "pageErrors": 0, "overflow": 0, "coreDisplaysVisuallyReviewed": true, "auxiliaryFailuresRecorded": true, "iframeLoadDoesNotCertifyDataFreshness": true},
+  "motion": {"existingTreatmentsReachedPerViewport": 24, "pauseStaticReducedMotionVerified": true, "financialRecordsUnchangedByPresentation": true},
+  "protected": {"checked": 36, "changed": 0},
+  "finalProvenanceBadge": {"text": "Model-selected explanation", "affectedUiTestsPassed": 7, "exactFinalBuild": "PASS"},
+  "coveragePercentage": null,
+  "realModelDelivery": "NOT PERFORMED",
+  "publicDeployment": "NOT PERFORMED",
+  "pluginsAdded": 0,
+  "paidServicesAdded": 0,
+  "dependenciesAdded": 0,
+  "incomingNodeServicesAdopted": 0,
+  "intermediateFailures": [
+    "One asynchronous React-query observer assertion corrected to verify actual rendered recovery; full201 then pass",
+    "One localhost ECONNRESET in earlier56-case run; unchanged isolated rerun and final60-case full run pass; exact transport cause unconfirmed",
+    "Early lazy Home illustration screenshot preceded decode; explicit image-decode checks and usable previews pass"
+  ]
+}

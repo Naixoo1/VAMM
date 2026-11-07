@@ -1,0 +1,38 @@
+import {createRequire} from 'node:module';
+import {writeFile} from 'node:fs/promises';
+const require=createRequire('C:/code/VAMM/package.json');
+const {chromium}=require('playwright');
+const browser=await chromium.launch();const results=[];
+try{
+ for(const [name,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
+  const page=await browser.newPage({viewport:{width,height}});
+  for(const route of ['dashboard','compare','research','news']){
+   const pageErrors=[],failedRequests=[],scripts=[];
+   const onError=e=>pageErrors.push(e.message);
+   const onFailed=r=>failedRequests.push({url:r.url(),error:r.failure()?.errorText});
+   const onResponse=r=>{if(/widgets\.tradingview-widget\.com\/w\/en\/tv-|s3\.tradingview\.com\/external-embedding\/embed-widget/.test(r.url()))scripts.push({url:r.url(),status:r.status()});};
+   page.on('pageerror',onError);page.on('requestfailed',onFailed);page.on('response',onResponse);
+   await page.goto('http://127.0.0.1:3000/'+route);
+   // Provider panels may defer work until visible; scroll each host into view.
+   for(const panel of await page.locator('[data-live-market-state],[data-live-news-state],[data-tradingview-state]').all()){
+    await panel.scrollIntoViewIfNeeded();
+    const frame=panel.locator('iframe');
+    if(await frame.count())await frame.first().scrollIntoViewIfNeeded();
+    await page.waitForTimeout(route==='compare'||route==='research'?2500:400);
+   }
+   await page.waitForFunction(()=>{
+    const panels=[...document.querySelectorAll('[data-live-market-state],[data-live-news-state],[data-tradingview-state]')];
+    return panels.length&&panels.every(e=>!['loading'].includes(e.getAttribute('data-live-market-state')??e.getAttribute('data-live-news-state')??e.getAttribute('data-tradingview-state')));
+   },{timeout:30000});
+   if(route==='compare'||route==='research')await page.waitForTimeout(2500);
+   await page.screenshot({path:`C:/Users/vloxm/.codex/visualizations/2026/11/07/01a1b3e0-b0cf-7bf3-af13-730fde3d7215/vamm-audit-staging/evidence/live-features-${route}-${name}.png`,fullPage:true});
+   const panels=await page.locator('[data-live-market-state],[data-live-news-state],[data-tradingview-state]').evaluateAll(elements=>elements.map(e=>({kind:e.getAttribute('data-live-market-kind')??(e.hasAttribute('data-live-news-state')?'news':'chart'),state:e.getAttribute('data-live-market-state')??e.getAttribute('data-live-news-state')??e.getAttribute('data-tradingview-state')})));
+   results.push({route,name,width,height,documentWidth:await page.evaluate(()=>document.documentElement.scrollWidth),panels,scripts,pageErrors,failedRequests});
+   page.off('pageerror',onError);page.off('requestfailed',onFailed);page.off('response',onResponse);
+  }
+  await page.close();
+ }
+}finally{await browser.close();}
+await writeFile('C:/Users/vloxm/.codex/visualizations/2026/11/07/01a1b3e0-b0cf-7bf3-af13-730fde3d7215/vamm-audit-staging/evidence/live-features-provider-report.json',JSON.stringify(results,null,2)+'\n');
+console.log(JSON.stringify(results,null,2));
+if(results.some(r=>r.documentWidth>r.width||r.pageErrors.length||r.panels.some(p=>!['ready','panel'].includes(p.state))))process.exitCode=1;

@@ -1,0 +1,395 @@
+[
+  {
+    "route": "dashboard",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "summary",
+        "state": "ready"
+      },
+      {
+        "kind": "chart",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-market-summary.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://www.tradingview.com/support/support-portal-problems/?language=en",
+        "error": "net::ERR_FAILED"
+      }
+    ]
+  },
+  {
+    "route": "compare",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "comparison",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "research",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "profile",
+        "state": "ready"
+      },
+      {
+        "kind": "technical",
+        "state": "ready"
+      },
+      {
+        "kind": "fundamentals",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-financials.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-technical-analysis.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-company-profile.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://www.tradingview.com/api/v1/widget-data-business-info/?symbol=NASDAQ%3AAAPL",
+        "error": "net::ERR_FAILED"
+      }
+    ]
+  },
+  {
+    "route": "news",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "panels": [
+      {
+        "kind": "news",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-news-feed.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "route": "dashboard",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "summary",
+        "state": "ready"
+      },
+      {
+        "kind": "chart",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-market-summary.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://www.tradingview.com/support/support-portal-problems/?language=en",
+        "error": "net::ERR_FAILED"
+      }
+    ]
+  },
+  {
+    "route": "compare",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "comparison",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/79549.727b5c58225bbd5ac460.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/73628.9357951d99367f27ed4a.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/chart-widget-gui.f01d715de24b09d31e81.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.89618.fe292496e4f33bc5290b.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/branding-source.69c0917c9bd4620ec85c.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.4022.887fe35be244698296f9.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/38786.45174b240301fc8e8ebd.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/53993.db685e29964379f867c4.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/26041.7ab78feac15f69d70acb.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/45098.2058e5e1bf577cc12046.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/8581.a8cf230767f89bddac62.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/53910.e3af042f329fb5f48492.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/74661.bbaacb4e2a5af90a2454.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/76297.586bb57bdc6f5eff11ba.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/61798.a705ca555b6726ed47d9.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/80281.fd2da723024e526db8b7.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.55636.6c7137a88bbdf9b35015.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/widget-toptoolbar.1c8a5aa1fa9e7ad6d9a3.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.14622.e092a3fe139ca2adec1b.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/chart-toolbar-hosts.4c4a0a9b730ed174b2f5.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.98948.c4896ac37e475e304892.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/5919.21ffd0eb3e004731ca14.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/12832.a305554cfe9198e9298f.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/79857.647c9ec20162c27640a0.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/93658.f1a746809cf8de1337b0.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/87427.f56f1ef5a7b1c85e29c5.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/23192.af5075147a2c7a101e45.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/85785.c705e46bc13e9ac21a2d.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/971.e04efbcddc1f253a93cb.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/71189.8a708d3f52c2d27b812d.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/tpo-study.5072deef3ddcad4cd50f.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/studies.159fa491b05a110e04aa.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.22510.c6272459a17c5398fd7b.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/price-scale-mode-buttons-renderer.33a2afb969293638329c.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.66922.894331e295264ece89bc.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/overnight-primary-exchange-snackbar-controller.de26290d14997439b451.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/en.40528.289cbeb8632c78beb058.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/19412.4706e2a19b87a6f20b4a.js",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "https://www.tradingview-widget.com/static/bundles/embed/change-interval-dialog.649d15968ad36ffdf2bb.js",
+        "error": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  {
+    "route": "research",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "profile",
+        "state": "ready"
+      },
+      {
+        "kind": "technical",
+        "state": "ready"
+      },
+      {
+        "kind": "fundamentals",
+        "state": "panel"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-company-profile.js",
+        "status": 200
+      },
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-technical-analysis.js",
+        "status": 200
+      },
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-financials.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://www.tradingview.com/api/v1/widget-data-business-info/?symbol=NASDAQ%3AAAPL",
+        "error": "net::ERR_FAILED"
+      }
+    ]
+  },
+  {
+    "route": "news",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "panels": [
+      {
+        "kind": "news",
+        "state": "ready"
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://widgets.tradingview-widget.com/w/en/tv-news-feed.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": []
+  }
+]

@@ -1,0 +1,95 @@
+import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
+import type { ResearchContext } from "@/lib/ai/research";
+
+/** Audit only: never imports a configured real provider or calls a model endpoint. */
+const mocks = vi.hoisted(() => ({ provider: vi.fn() }));
+vi.mock("@/lib/ai/server-provider", () => ({ configuredResearchProvider: () => mocks.provider }));
+const valid = { instrumentIds: ["edu-bonds", "edu-equity"], question: "Explain the synthetic baskets." };
+const output = { summary: "Synthetic fixture context only.", facts: [{ text: "Educational basket fees are not modeled.", evidenceIds: ["ev-demo-method"] }], limitations: ["Synthetic teaching data only."] };
+let post: (request: Request) => Promise<Response>;
+
+beforeEach(async () => {
+  vi.resetModules();
+  mocks.provider.mockReset().mockResolvedValue(output);
+  vi.stubGlobal("fetch", vi.fn(() => { throw new Error("Unexpected external network call during audit."); }));
+  post = (await import("@/app/api/research/route")).POST;
+});
+afterEach(() => vi.unstubAllGlobals());
+function request(body: unknown, contentType = "application/json") {
+  return new Request("http://localhost/api/research", { method: "POST", headers: { "Content-Type": contentType }, body: JSON.stringify(body) });
+}
+async function expectInvalid(input: Request) {
+  const response = await post(input);
+  expect(response.status).toBe(400);
+  expect(await response.json()).toMatchObject({ ok: false, error: { code: "INVALID_INPUT", retryable: false } });
+  expect(mocks.provider).not.toHaveBeenCalled();
+  expect(fetch).not.toHaveBeenCalled();
+}
+
+describe("audit: research attachment and input boundaries", () => {
+  it.each(["application/json", "Application/JSON; charset=utf-8"])("accepts the exact JSON media type with permitted parameters: %s", async type => {
+    const response = await post(request(valid, type));
+    expect(response.status).toBe(200);
+    expect(mocks.provider).toHaveBeenCalledOnce();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  // The two JSON-prefix impostors are anticipated red findings until CEO runs this audit.
+  it.each(["text/plain", "application/jsonp", "application/json-not-really", "application/problem+json"])("rejects unsupported media type before provider use: %s", async type => {
+    await expectInvalid(request(valid, type));
+  });
+
+  it("rejects an actual multipart screenshot upload instead of pretending to analyze it", async () => {
+    const form = new FormData();
+    form.set("question", "Read this chart.");
+    form.set("image", new Blob(["not-a-real-png"], { type: "image/png" }), "chart.png");
+    await expectInvalid(new Request("http://localhost/api/research", { method: "POST", body: form }));
+  });
+
+  it("rejects an image body without entering multimodal processing", async () => {
+    await expectInvalid(new Request("http://localhost/api/research", { method: "POST", headers: { "Content-Type": "image/png" }, body: new Uint8Array([137, 80, 78, 71]) }));
+  });
+
+  it.each([
+    ["embedded screenshot", { ...valid, images: [{ image_url: "data:image/png;base64,aGVsbG8=" }] }],
+    ["multimodal messages", { ...valid, messages: [{ role: "user", content: [{ type: "input_image", image_url: "https://untrusted.example/chart.png" }] }] }],
+    ["client evidence", { ...valid, evidence: [{ id: "live-fact", text: "Invented live quote" }], sourceUrl: "https://untrusted.example" }],
+    ["real company ID", { ...valid, instrumentIds: ["NASDAQ:AAPL"] }],
+    ["financial mutation", { ...valid, action: "ADVANCE", balances: { cash: 10000000 } }],
+  ])("rejects unsupported %s input before invoking any provider", async (_label, input) => {
+    await expectInvalid(request(input));
+  });
+
+  it("rejects malformed JSON", async () => {
+    await expectInvalid(new Request("http://localhost/api/research", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{broken" }));
+  });
+
+  it("rejects a missing request body", async () => {
+    await expectInvalid(new Request("http://localhost/api/research", { method: "POST", headers: { "Content-Type": "application/json" } }));
+  });
+
+  it.each([undefined, "1"])("enforces actual streamed body bytes even with misleading content length %s", async length => {
+    const headers = new Headers({ "Content-Type": "application/json" });
+    if (length !== undefined) headers.set("Content-Length", length);
+    await expectInvalid(new Request("http://localhost/api/research", { method: "POST", headers, body: JSON.stringify(valid) + " ".repeat(8192) }));
+  });
+
+  it("rejects a malformed declared content length", async () => {
+    const input = request(valid);
+    input.headers.set("Content-Length", "12x");
+    await expectInvalid(input);
+  });
+
+  it("does not manufacture image context when a plain question merely mentions a screenshot", async () => {
+    const question = "Explain why a screenshot alone cannot establish whether I should buy or sell.";
+    const response = await post(request({ ...valid, question }));
+    expect(response.status).toBe(200);
+    const context = mocks.provider.mock.calls[0][0] as ResearchContext;
+    expect(context.request).toEqual({ instrumentIds: ["edu-bonds", "edu-equity"], question });
+    expect(context.evidence.map(item => item.id)).toEqual(["ev-demo-method"]);
+    expect(context.instruments.every(item => item.dataMode === "synthetic")).toBe(true);
+    expect("images" in context).toBe(false);
+    expect("messages" in context).toBe(false);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+});

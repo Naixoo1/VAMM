@@ -1,0 +1,76 @@
+import { describe, expect, it } from "vitest";
+import type { AdvanceRequest, SessionBundle, SettleShockRequest } from "@/contracts";
+import { CALCULATION_VERSION, DATASET_VERSION, SCENARIO_SEQUENCE_ID } from "@/contracts";
+import { getScenario } from "@/lib/data/fixtures";
+import { calculateNextBundle, calculatePreview } from "@/lib/simulation/engine";
+
+function fresh(): SessionBundle {
+  return {
+    session: {
+      id: "audit-funding", contractVersion: 2, version: 0, phase: "ready", turnIndex: 0,
+      age: 15, balances: { cash: 0, bonds: 0, equity: 0 }, cumulativeInflationIndex: 1,
+      pendingShock: null, scenarioSequenceId: SCENARIO_SEQUENCE_ID,
+      datasetVersion: DATASET_VERSION, calculationVersion: CALCULATION_VERSION,
+    },
+    turns: [],
+  };
+}
+const advance: AdvanceRequest = {
+  sessionId: "audit-funding", expectedVersion: 0, requestId: "audit-advance", action: "ADVANCE",
+  savingsRateBps: 5000, contributionAllocation: { cash: 3000, bonds: 3000, equity: 4000 },
+};
+function settle(funding: SettleShockRequest["funding"], acknowledgeUnmetCost = false): SettleShockRequest {
+  return { sessionId: "audit-funding", expectedVersion: 1, requestId: "audit-settle",
+    action: "SETTLE_SHOCK", funding, acknowledgeUnmetCost };
+}
+
+describe("audit: explicit funding preserves financial invariants", () => {
+  it("honors all three chosen funding sources without rebalancing or changing earned returns", () => {
+    const initial = fresh();
+    const pending = calculateNextBundle(initial, advance, getScenario(1));
+    const snapshot = structuredClone(pending);
+    const mixed = calculateNextBundle(pending, settle({ cash: 20000, bonds: 50000, equity: 80000 }), getScenario(1));
+    const cashOnly = calculateNextBundle(pending, settle({ cash: 150000, bonds: 0, equity: 0 }), getScenario(1));
+
+    expect(mixed.session.balances).toEqual({ cash: 760000, bonds: 761200, equity: 1043200 });
+    expect(mixed.session.balances).not.toEqual(cashOnly.session.balances);
+    expect(mixed.turns[0]).toMatchObject({
+      funding: { cash: 20000, bonds: 50000, equity: 80000 },
+      paidShockCostRupiah: 150000, unmetShockCostRupiah: 0,
+      investmentGainRupiah: 114400, nominalBalanceRupiah: 2564400, realBalanceRupiah: 2489709,
+      contributionRupiah: 2600000, cumulativeInflationIndex: 1.03,
+    });
+    expect(mixed.turns[0].nominalBalanceRupiah).toBe(cashOnly.turns[0].nominalBalanceRupiah);
+    expect(pending).toEqual(snapshot);
+  });
+
+  it("does not substitute available assets when the student's selected funding exceeds its holding", () => {
+    const pending = calculateNextBundle(fresh(), {
+      ...advance, savingsRateBps: 100,
+      contributionAllocation: { cash: 0, bonds: 0, equity: 10000 },
+    }, getScenario(1));
+    expect(pending.session.balances).toEqual({ cash: 0, bonds: 0, equity: 56160 });
+    const snapshot = structuredClone(pending);
+    expect(() => calculateNextBundle(pending, settle({ cash: 1, bonds: 0, equity: 0 }, true), getScenario(1))).toThrow(/holdings/);
+    const settled = calculateNextBundle(pending, settle({ cash: 0, bonds: 0, equity: 56160 }, true), getScenario(1));
+    expect(settled.session.balances).toEqual({ cash: 0, bonds: 0, equity: 0 });
+    expect(settled.turns[0]).toMatchObject({ paidShockCostRupiah: 56160, unmetShockCostRupiah: 93840 });
+    expect(pending).toEqual(snapshot);
+  });
+
+  it("keeps preview and committed allocation identical at the smallest nonzero contribution", () => {
+    const bundle = fresh();
+    const scenario = { ...getScenario(1), weeklyAllowanceRupiah: 1, allowanceMultiplier: 0.01 };
+    const request: AdvanceRequest = {
+      ...advance, savingsRateBps: 10000, contributionAllocation: { cash: 0, bonds: 5000, equity: 5000 },
+    };
+    const preview = calculatePreview(bundle, {
+      sessionId: request.sessionId, expectedVersion: request.expectedVersion,
+      savingsRateBps: request.savingsRateBps, contributionAllocation: request.contributionAllocation,
+    }, scenario);
+    const pending = calculateNextBundle(bundle, request, scenario);
+    expect(preview.contributionRupiah).toBe(1);
+    expect(preview.allocatedContribution).toEqual({ cash: 0, bonds: 1, equity: 0 });
+    expect(pending.turns[0].allocatedContribution).toEqual(preview.allocatedContribution);
+  });
+});

@@ -3,6 +3,7 @@ import { ASSET_IDS } from "@/contracts";
 import { sessionBundleSchema, turnRecordSchema } from "@/contracts/validation";
 import { getScenario } from "@/lib/data/fixtures";
 import { RepositoryFault } from "./database";
+import { hasExpectedDerivedValues, hasExpectedInflationIndex } from "./derived-values";
 
 export function canonicalJson(value: unknown): string {
   if (Array.isArray(value)) return "[" + value.map(canonicalJson).join(",") + "]";
@@ -18,7 +19,7 @@ function invalid(candidate: boolean): never {
   throw new RepositoryFault(candidate ? "INVALID_INPUT" : "STORAGE_UNAVAILABLE", candidate ? "The proposed simulation state is inconsistent." : "Stored simulation data is invalid. Your history has not been reset.");
 }
 
-/** Structural linkage and accounting checks only; annual-return/preview math stays in the engine. */
+/** Linkage/accounting and shared-engine derived-value checks; no financial formulas here. */
 export function validateTurn(raw: unknown, candidate = false): TurnRecord {
   const parsed = turnRecordSchema.safeParse(raw);
   if (!parsed.success) invalid(candidate);
@@ -27,6 +28,7 @@ export function validateTurn(raw: unknown, candidate = false): TurnRecord {
   if (turn.scenarioId !== scenario.id || !same(turn.shock, scenario.shock) || turn.inflationRate !== scenario.inflationRate ||
       turn.ageBefore !== 14 + turn.turnIndex || turn.ageAfter !== 15 + turn.turnIndex ||
       total(turn.allocatedContribution) !== turn.contributionRupiah || total(turn.endingBalances) !== turn.nominalBalanceRupiah ||
+      !hasExpectedDerivedValues(turn) ||
       !Number.isSafeInteger(total(turn.startingBalances) + turn.contributionRupiah + turn.investmentGainRupiah) ||
       total(turn.postReturnBalances) !== total(turn.startingBalances) + turn.contributionRupiah + turn.investmentGainRupiah) invalid(candidate);
   if (turn.decisionStatus === "pending") {
@@ -48,6 +50,7 @@ export function validateBundle(raw: unknown, candidate = false): SessionBundle {
   const parsed = sessionBundleSchema.safeParse(raw);
   if (!parsed.success) invalid(candidate);
   const bundle = parsed.data;
+  if (!hasExpectedInflationIndex(bundle.session.turnIndex, bundle.session.cumulativeInflationIndex)) invalid(candidate);
   let previousBalances: MoneyByAsset = { cash: 0, bonds: 0, equity: 0 };
   for (const [index, item] of bundle.turns.entries()) {
     const turn = validateTurn(item, candidate);
@@ -88,4 +91,3 @@ export function validateTransition(current: SessionBundle, next: SessionBundle, 
     }
   }
 }
-

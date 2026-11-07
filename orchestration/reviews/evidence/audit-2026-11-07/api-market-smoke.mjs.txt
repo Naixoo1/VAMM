@@ -1,0 +1,47 @@
+import {createRequire} from 'node:module';
+import {writeFile} from 'node:fs/promises';
+const require = createRequire('C:/code/VAMM/package.json');
+const {chromium} = require('playwright');
+const root = 'C:/Users/vloxm/.codex/visualizations/2026/11/07/01a1b3e0-b0cf-7bf3-af13-730fde3d7215/vamm-audit-staging/evidence';
+const origin = 'http://127.0.0.1:3000';
+// This local production process was started with VAMM_DISABLE_MODEL=1.
+const api=[];
+for (const [path,method,expected] of [['market','GET',200],['news','GET',200],['research','GET',405],['market','POST',405],['news','POST',405],['research','PUT',405]]) {
+  const response=await fetch(origin+'/api/'+path,{method});
+  api.push({path,method,expected,actual:response.status,pass:response.status===expected});
+}
+const multipart = new FormData();
+multipart.set('image',new Blob([new Uint8Array([137,80,78,71])],{type:'image/png'}),'audit-not-a-real-chart.png');
+const imageResponse=await fetch(origin+'/api/research',{method:'POST',body:multipart});
+api.push({case:'multipart screenshot rejected',expected:400,actual:imageResponse.status,pass:imageResponse.status===400});
+const mimeResponse=await fetch(origin+'/api/research',{method:'POST',headers:{'Content-Type':'application/jsonp'},body:JSON.stringify({instrumentIds:['edu-bonds'],question:'Explain this synthetic basket.'})});
+const mimeBody=await mimeResponse.json();
+api.push({case:'JSONP media type rejected',expected:400,actual:mimeResponse.status,origin:mimeBody.data?.origin,pass:mimeResponse.status===400});
+const browser=await chromium.launch();
+let market;
+try {
+  market=await Promise.allSettled([['desktop',1440,900],['mobile',390,844]].map(async ([name,width,height])=>{
+    const page=await browser.newPage({viewport:{width,height}});
+    const pageErrors=[];
+    page.on('pageerror',error=>pageErrors.push(error.message));
+    await page.goto(origin+'/market');
+    const host=page.locator('[data-tradingview-state]');
+    await host.scrollIntoViewIfNeeded();
+    await page.waitForFunction(()=>document.querySelector('[data-tradingview-state]')?.getAttribute('data-tradingview-state')==='ready',null,{timeout:30000});
+    const widget=page.locator('tv-advanced-chart');
+    const result={name,width,state:await host.getAttribute('data-tradingview-state'),symbol:await widget.getAttribute('symbol'),interval:await widget.getAttribute('interval'),documentWidth:await page.evaluate(()=>document.documentElement.scrollWidth),pageErrors};
+    await page.screenshot({path:root+'/market-real-'+name+'.png',fullPage:true});
+    await page.getByRole('tab',{name:'Original Chart for Learning'}).click();
+    await page.locator('summary').filter({hasText:'View index values as a table'}).click();
+    await page.getByRole('table').waitFor();
+    result.originalTableCount=await page.getByRole('table').count();
+    result.originalDocumentWidth=await page.evaluate(()=>document.documentElement.scrollWidth);
+    await page.screenshot({path:root+'/market-original-'+name+'.png',fullPage:true});
+    await page.close();
+    return result;
+  }));
+} finally {await browser.close();}
+const result={api,market};
+await writeFile(root+'/api-market-report.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result));
+if(api.some(test=>!test.pass)||market.some(result=>result.status==='rejected'))process.exitCode=1;

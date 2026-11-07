@@ -30,3 +30,37 @@
 @keyframes motion-arrive{from{transform:scale(.96);opacity:.65}to{transform:scale(1);opacity:1}}
 @media(max-width:600px){.artwork{width:48px;height:24px}.compact .artwork{width:32px;height:18px}.controls{gap:6px}.controls button{padding:8px 9px}.preferenceNote{flex-basis:100%;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.mark .artwork,.mark .artwork *,.boundary .boundaryAccent .artwork,.boundary .boundaryAccent .artwork *{animation:none!important;transition:none!important}}
+
+/* Site presentation: short arrivals and input feedback share the existing preference scope.
+   No animation changes layout, waits for data, or transforms chart paths/financial values. */
+.scope{--site-motion-fast:140ms;--site-motion-normal:220ms;--site-motion-ease:cubic-bezier(.2,.7,.3,1)}
+.scope[data-motion-static="false"] :global([data-site-motion] [data-motion-surface]){animation:site-surface-arrive var(--site-motion-normal) var(--site-motion-ease)}
+.scope[data-motion-static="false"] :global([data-site-motion] details[open]>:not(summary)),
+.scope[data-motion-static="false"] :global([data-site-motion] [role="tabpanel"][data-state="active"]){animation:site-disclosure-arrive var(--site-motion-fast) var(--site-motion-ease)}
+.scope[data-motion-static="false"] :global([data-site-motion] dialog[open]){animation:site-dialog-arrive var(--site-motion-normal) var(--site-motion-ease)}
+.scope[data-motion-static="false"] :global([data-site-motion] nav a),
+.scope[data-motion-static="false"] :global([data-site-motion] :is(button,summary,select)),
+.scope[data-motion-static="false"] :global([data-site-motion] main a){transition:transform var(--site-motion-fast) var(--site-motion-ease)}
+.scope[data-motion-static="false"][data-motion-paused="false"] :global([data-site-motion] button:not(:disabled):not([aria-disabled="true"]):active){transform:scale(.985)}
+.scope :global([data-site-motion] button[aria-disabled="true"]){cursor:wait}
+.scope :global([data-site-motion] button[aria-disabled="true"] svg){opacity:.55}
+@media(hover:hover) and (pointer:fine){
+ .scope[data-motion-static="false"][data-motion-paused="false"] :global([data-site-motion] nav a:hover){transform:translateX(2px)}
+ .scope[data-motion-static="false"][data-motion-paused="false"] :global([data-site-motion] button:not(:disabled):not([aria-disabled="true"]):hover),
+ .scope[data-motion-static="false"][data-motion-paused="false"] :global([data-site-motion] summary:hover){transform:translateY(-1px)}
+ .scope[data-motion-static="false"][data-motion-paused="false"] :global([data-site-motion] main a:hover){transform:translateY(-1px)}
+}
+/* Pause halts VAMM animations in place; static removes them. Provider internals stay encapsulated. */
+.scope[data-motion-paused="true"] :global([data-site-motion] *),
+.scope[data-motion-paused="true"] :global([data-site-motion] *::before),
+.scope[data-motion-paused="true"] :global([data-site-motion] *::after){animation-play-state:paused!important;transition:none!important}
+.scope[data-motion-static="true"] :global([data-site-motion] *),
+.scope[data-motion-static="true"] :global([data-site-motion] *::before),
+.scope[data-motion-static="true"] :global([data-site-motion] *::after){animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@keyframes site-surface-arrive{from{transform:translateY(2px)}to{transform:translateY(0)}}
+@keyframes site-disclosure-arrive{from{transform:translateY(2px)}to{transform:translateY(0)}}
+@keyframes site-dialog-arrive{from{transform:scale(.995)}to{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){
+ .scope :global([data-site-motion] *),.scope :global([data-site-motion] *::before),.scope :global([data-site-motion] *::after){animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .scope :global([data-site-motion] :is(button,summary,nav a,main a,[data-motion-surface])){transform:none!important}
+}

@@ -1,10 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { configuredResearchProvider } from "@/lib/ai/server-provider";
-import { ResearchProviderError } from "@/lib/ai/research";
+import { ResearchProviderError, runResearch } from "@/lib/ai/research";
+import { createResearchCatalog, RESEARCH_SELECTION_VERSION } from "@/lib/ai/research-catalog";
 import { getMarketData } from "@/lib/data/fixtures";
-const output = { summary: "Synthetic baskets.", facts: [{ text: "Fees are unavailable.", evidenceIds: ["ev-demo-method"] }], limitations: ["No forecasts."] };
+const output = { protocolVersion: RESEARCH_SELECTION_VERSION, summaryId: "not-a-forecast", claimIds: ["edu-cash:annual-fee"], limitationIds: ["synthetic-only"] };
 const market = getMarketData();
-const context = { request: { instrumentIds: ["edu-cash"], question: "Explain" }, instruments: [market.instruments[0]], evidence: market.evidence.filter(e => e.id === "ev-demo-method") };
+const context = { request: { instrumentIds: ["edu-cash"], question: "Explain" }, instruments: [market.instruments[0]], evidence: market.evidence.filter(e => e.id === "ev-demo-method"), catalog: createResearchCatalog([market.instruments[0]]) };
 
 beforeEach(() => {
   vi.stubGlobal("fetch", vi.fn());
@@ -29,6 +30,16 @@ describe("server provider with mocked HTTP only", () => {
     const body = JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string);
     expect(body).toMatchObject({ store: false, max_output_tokens: 1200, text: { format: { type: "json_schema", strict: true } } });
     expect(body.tools).toBeUndefined();
+    expect(body.text.format.schema.properties.claimIds.items.enum).toContain("edu-cash:annual-fee");
+    expect(body.text.format.schema.properties.claimIds.items.enum).not.toContain("edu-bonds:annual-fee");
+    expect(Object.keys(body.text.format.schema.properties)).toEqual(["protocolVersion", "summaryId", "claimIds", "limitationIds"]);
+  });
+  it("supports the full model-backed path using only a mocked upstream response", async () => {
+    vi.stubEnv("OPENAI_API_KEY", "test-only-key");
+    vi.mocked(fetch).mockResolvedValue(new Response(JSON.stringify({ status: "completed", output: [{ content: [{ type: "output_text", text: JSON.stringify(output) }] }] })));
+    const result = await runResearch(context.request, configuredResearchProvider());
+    expect(result).toMatchObject({ ok: true, data: { origin: "model", facts: [{ text: "Simulated cash: annual fee is unavailable. Educational basket has no modeled product fee", evidenceIds: ["ev-demo-method"] }] } });
+    expect(fetch).toHaveBeenCalledOnce();
   });
   it.each([
     [{ status: "completed", output: [{ content: [{ type: "refusal", refusal: "No" }] }] }, "refusal"],
@@ -71,4 +82,3 @@ describe("research HTTP guards", () => {
     expect(await response.json()).toMatchObject({ ok: false, error: { code: "RATE_LIMITED", retryable: true } });
   });
 });
-

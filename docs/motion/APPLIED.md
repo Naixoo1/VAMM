@@ -34,3 +34,9 @@ Static variants are intentional treatments, not forced loops. There is no percen
 Animation preferences are memory-only: Pause/Resume, manual Static motion, live OS reduced-motion priority. Controls govern VAMM decoration, not provider updates or financial operations. Both keyboard and preference changes preserve inputs/focus. Provider internals are not scraped or restyled.
 
 Observed coverage: production-motion-coverage-{desktop,mobile}.json in tests/e2e/evidence records all24 numbers reached through actual UI states, with explicitly labeled provider/research fixtures. The sampled screens had at most6 artworks and36 SVG primitives per artwork. This is a DOM budget, not an FPS/GPU benchmark. Separate real-provider screenshots prove actual display integration; stubs do not prove live content or freshness.
+
+## Site-wide motion and teammate design — 2026-11-07
+
+The existing24 recipes remain intact. Shared scoped CSS now also animates shell/navigation, headings/panels, controls, disclosures/tabs, outer provider frames, history and reset dialogs on all6 routes. Brief140/220ms transforms keep content fully opaque and immediately usable. Pause stops VAMM timelines/transitions; static/live OS reduction removes decorative animation and control transforms. No animated money, hidden result, forced wait, financial callback or controller remount. Provider internals remain external. The teammate hero/feature cards use the same layer; capability values describe fixed teaching defaults.
+
+Actual final checks:60 browser cases including all24 recipes at both widths,30 additional route/width renders with no overflow/page errors,24 contrast combinations with no failures, and exact four-store preservation through shell/pref/navigation changes. Details and initial failures: orchestration/reviews/FIXES-MOTION-2026-11-07.md and TEAM-DESIGN-2026-11-07.md. No new animation dependency.

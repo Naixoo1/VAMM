@@ -23,6 +23,8 @@ export function LiveNewsFeed() {
   const [attempt, setAttempt] = useState(0);
   const [hidden, setHidden] = useState(false);
   const [moduleAvailable, setModuleAvailable] = useState(false);
+  // Keep the retry control mounted after activation, so keyboard focus stays where it was.
+  const [retryRequested, setRetryRequested] = useState(false);
 
   useEffect(() => {
     const container = host.current;
@@ -87,11 +89,13 @@ export function LiveNewsFeed() {
   }, [attempt, hidden]);
 
   function retry() {
+    if (state === "loading") return;
     if (typeof customElements === "undefined" || !customElements.get(LIVE_NEWS_ELEMENT)) {
       // A failed ES module may be cached for this document. Reload retries its registration.
       window.location.reload();
       return;
     }
+    setRetryRequested(true);
     setState("loading");
     setAttempt(value => value + 1);
   }
@@ -102,7 +106,7 @@ export function LiveNewsFeed() {
   }
 
   const failed = state === "error" || state === "offline";
-  return <section className={styles.card} aria-labelledby={headingId} data-live-news-state={state}>
+  return <section className={styles.card} aria-labelledby={headingId} data-live-news-state={state} data-motion-surface="provider">
     <header className={styles.header}>
       <div>
         <h2 id={headingId} className={styles.title}>Live market news</h2>
@@ -135,7 +139,7 @@ export function LiveNewsFeed() {
         <p className={styles.note}>Live headlines are separate from VAMM’s synthetic practice and simulation. VAMM adds no sentiment scores to this feed.</p>
       </div>
       <div className={styles.actions}>
-        {failed && !hidden && <button type="button" className={styles.button} onClick={retry}><RefreshCw size={14} aria-hidden="true" />{moduleAvailable ? "Retry live feed" : "Reload page"}</button>}
+        {(failed || retryRequested) && !hidden && <button type="button" className={styles.button} aria-disabled={state === "loading"} onClick={retry}><RefreshCw size={14} aria-hidden="true" />{state === "loading" ? "Reconnecting live feed…" : !moduleAvailable ? "Reload page" : failed ? "Retry live feed" : "Refresh live feed"}</button>}
         <a href={LIVE_NEWS_EXTERNAL_URL} target="_blank" rel="noopener noreferrer" className={styles.link}>Open news on TradingView<ExternalLink size={14} aria-hidden="true" /></a>
       </div>
     </footer>

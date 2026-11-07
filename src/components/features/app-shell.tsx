@@ -1,32 +1,83 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {BookOpenText,ChartNoAxesCombined,GitCompareArrows,House,Leaf,LineChart,LockKeyhole,Newspaper,Sparkles} from "lucide-react";
-import type {ReactNode} from "react";
+import {ChartNoAxesCombined,ChevronRight,GitCompareArrows,House,LockKeyhole,PanelLeftClose,PanelLeftOpen,ShieldCheck,X} from "lucide-react";
+import {useEffect,useRef,useState,useSyncExternalStore,type ReactNode} from "react";
 import {MotionBoundary,MotionControls} from "@/components/motion";
-import styles from "./workspace.module.css";
+import {styles} from "./workspace";
+import shell from "./app-shell.module.css";
 import motionStyles from "./app-shell-motion.module.css";
 
-const links=[{href:"/dashboard",name:"Home",icon:House},{href:"/market",name:"Market",icon:LineChart},{href:"/research",name:"AI Investment Mentor",icon:Sparkles},{href:"/compare",name:"Compare",icon:GitCompareArrows},{href:"/simulation",name:"Simulation",icon:ChartNoAxesCombined},{href:"/news",name:"News & Sentiment Lab",icon:Newspaper}];
+const mobileQuery="(max-width: 760px)";
+function subscribeMobile(listener:()=>void){if(typeof window==="undefined"||typeof window.matchMedia!=="function")return()=>{};const media=window.matchMedia(mobileQuery);media.addEventListener("change",listener);return()=>media.removeEventListener("change",listener)}
+function mobileSnapshot(){return typeof window!=="undefined"&&typeof window.matchMedia==="function"&&window.matchMedia(mobileQuery).matches}
+const links=[
+ {href:"/dashboard",name:"Home",icon:House,image:null},
+ {href:"/market",name:"Market",icon:null,image:"market"},
+ {href:"/research",name:"AI Investment Mentor",icon:null,image:"mentor"},
+ {href:"/compare",name:"Compare",icon:GitCompareArrows,image:null},
+ {href:"/simulation",name:"Simulation",icon:ChartNoAxesCombined,image:null},
+ {href:"/news",name:"News & Sentiment Lab",icon:null,image:"news"},
+];
+const contexts:Record<string,{kicker:string;description:string;links:{href:string;label:string}[]}>={
+ "/dashboard":{kicker:"Start with curiosity",description:"Explore market context, then practice with the separate teaching tools.",links:[{href:"/market",label:"Explore the charts"},{href:"/simulation",label:"Practice from zero"},{href:"/research",label:"Ask a basket question"}]},
+ "/market":{kicker:"Observe & understand",description:"Real market charts and the original learning chart each keep their own source labels.",links:[{href:"/market",label:"Charts & learning"},{href:"/compare",label:"Compare instruments"}]},
+ "/research":{kicker:"Follow your questions",description:"Explore company context. The basket mentor answers separately from frozen teaching evidence.",links:[{href:"/research",label:"Company & basket research"},{href:"/compare",label:"Explore the differences"}]},
+ "/compare":{kicker:"A little perspective",description:"Compare compatible company views, or open the synthetic basket comparison for practice.",links:[{href:"/compare",label:"Instrument comparison"},{href:"/research",label:"Ask a basket question"}]},
+ "/simulation":{kicker:"Learn through choices",description:"Start at zero. Save, allocate, and address one unexpected cost in each of three years.",links:[{href:"/simulation",label:"Your simulation"},{href:"/compare",label:"Explore the baskets"}]},
+ "/news":{kicker:"Read the context",description:"Follow provider headlines, then explore the separate prewritten sentiment exercise.",links:[{href:"/news",label:"Live news & practice"},{href:"/research",label:"Explore a question"}]},
+};
 
 export function AppShell({children}:{children:ReactNode}){
  const pathname=usePathname();
+ const isMobile=useSyncExternalStore(subscribeMobile,mobileSnapshot,()=>false);
+ const[collapsed,setCollapsed]=useState(false);const[mobileOpen,setMobileOpen]=useState(false);
+ const aside=useRef<HTMLElement>(null);const opener=useRef<HTMLButtonElement>(null);const closer=useRef<HTMLButtonElement>(null);
+ const active=links.find(link=>pathname.startsWith(link.href))??links[0];const context=contexts[active.href];
+ const panelOpen=isMobile?mobileOpen:!collapsed;const modalOpen=isMobile&&mobileOpen;
  const external=["/market","/dashboard","/compare","/research"].some(route=>pathname.startsWith(route));
- const active=links.find(link=>pathname.startsWith(link.href));
- return <div className={styles.shell}>
-  <a href="#main-content" className={styles.skip}>Skip to main content</a>
-  <aside className={styles.sidebar}>
-   <Link href="/dashboard" className={styles.brand} aria-label="VAMM home"><span className={styles.brandMark}><ChartNoAxesCombined size={21} strokeWidth={1.6} aria-hidden="true"/></span><span>VAMM<small>LEARN. SIMULATE. GROW.</small></span></Link>
-   <p className={styles.navLabel}>Your workspace</p>
-   <MotionBoundary preset="focus-ring" state="idle"><nav className={styles.nav} aria-label="Main navigation">{links.map(link=><Link key={link.href} href={link.href} aria-current={pathname.startsWith(link.href)?"page":undefined} className={[styles.navLink,pathname.startsWith(link.href)?styles.navActive:""].join(" ")}><link.icon size={17} strokeWidth={1.6} aria-hidden="true"/>{link.name}</Link>)}</nav></MotionBoundary>
-   <div className={styles.sidebarFoot}><Leaf size={20} strokeWidth={1.4} aria-hidden="true"/><strong>A little learning, every day.</strong><p>Explore how your choices shape a simulated financial future.</p><p><LockKeyhole size={10} aria-hidden="true"/> Stored on this device; anyone using this browser profile can access it.</p></div>
+ const menuLabel=isMobile?(mobileOpen?"Close workspace menu":"Open workspace menu"):(collapsed?"Show sidebar":"Hide sidebar");
+ useEffect(()=>{
+  if(!modalOpen)return;
+  // The trigger becomes inert before this effect; capture its ref rather than the blurred BODY.
+  const previous=opener.current;
+  const previousOverflow=document.body.style.overflow;document.body.style.overflow="hidden";
+  closer.current?.focus();
+  function onKey(event:KeyboardEvent){
+   if(event.key==="Escape"){event.preventDefault();setMobileOpen(false);return}
+   if(event.key!=="Tab")return;
+   const focusable=Array.from(aside.current?.querySelectorAll<HTMLElement>('a[href],button:not(:disabled),[tabindex="0"]')??[]).filter(element=>!element.closest("[inert]")&&element.getClientRects().length>0);
+   const first=focusable[0],last=focusable.at(-1);if(!first||!last)return;
+   if(event.shiftKey&&(document.activeElement===first||!aside.current?.contains(document.activeElement))){event.preventDefault();last.focus()}
+   else if(!event.shiftKey&&(document.activeElement===last||!aside.current?.contains(document.activeElement))){event.preventDefault();first.focus()}
+  }
+  document.addEventListener("keydown",onKey);
+  return()=>{document.removeEventListener("keydown",onKey);document.body.style.overflow=previousOverflow;if(previous?.isConnected)previous.focus()};
+ },[modalOpen]);
+ function toggleMenu(){if(isMobile)setMobileOpen(value=>!value);else setCollapsed(value=>!value)}
+ function followLink(){if(isMobile)setMobileOpen(false)}
+ return <div className={[styles.shell,shell.shell].join(" ")} data-site-motion="" data-context-collapsed={collapsed} data-mobile-menu-open={mobileOpen}>
+  <a href="#main-content" className={shell.skip}>Skip to main content</a>
+  <aside ref={aside} className={shell.sidebar} role={modalOpen?"dialog":undefined} aria-label={modalOpen?"Workspace menu":undefined} aria-modal={modalOpen?true:undefined}>
+   <div className={shell.rail}>
+    <MotionBoundary preset="focus-ring" state="idle"><nav className={shell.nav} aria-label="Main navigation">{links.map(link=><Link key={link.href} href={link.href} aria-label={link.name} title={link.name} aria-current={active.href===link.href?"page":undefined} className={[shell.railLink,link.href==="/dashboard"?shell.homeLink:""].join(" ")} onClick={followLink}>{link.image?<Image src={"/team-design/"+link.image+".svg"} width={34} height={34} alt="" unoptimized/>:link.icon?<link.icon size={24} strokeWidth={1.7} aria-hidden="true"/>:null}</Link>)}</nav></MotionBoundary>
+    <span className={shell.railFoot} aria-hidden="true">V</span>
+   </div>
+   <section id="workspace-context" className={shell.contextPanel} aria-labelledby="workspace-context-title" inert={!panelOpen} aria-hidden={!panelOpen}>
+    <Link href="/dashboard" className={shell.brand} aria-label="VAMM home" onClick={followLink}><Image src="/team-design/brand.svg" width={36} height={36} alt="" unoptimized/><span>VAMM<small>THE MONEY LAB</small></span></Link>
+    <div className={shell.contextHeading}><div><p>Your space</p><h2 id="workspace-context-title">{active.name}</h2></div><button ref={closer} type="button" className={shell.close} aria-label="Close workspace menu" onClick={()=>setMobileOpen(false)}><X size={19} aria-hidden="true"/></button></div>
+    <div className={shell.contextBody}><p className={shell.contextKicker}>{context.kicker}</p><ul className={shell.contextLinks}>{context.links.map(link=><li key={link.href}><Link href={link.href} className={shell.contextLink} aria-current={active.href===link.href?"page":undefined} onClick={followLink}>{link.label}<ChevronRight size={14} aria-hidden="true"/></Link></li>)}</ul><div className={shell.contextNote}><ShieldCheck size={20} strokeWidth={1.6} aria-hidden="true"/><p>{context.description}</p></div></div>
+    <div className={shell.panelFoot}><span className={shell.dot} aria-hidden="true"/><div><strong>Student workspace</strong><p>Learn · practice · reflect</p></div></div>
+   </section>
   </aside>
-  <div className={styles.workspace}>
-   <div className={styles.topbar}><span className={styles.topbarTitle}><BookOpenText size={14} aria-hidden="true"/>Your learning workspace <span aria-hidden="true">/</span><strong>{active?.name??"VAMM"}</strong></span><span className={styles.topbarRight}><span className={styles.dot} aria-hidden="true"/>{external?"Live market context":"Educational workspace"}<span className={styles.avatar} aria-hidden="true">V</span></span></div>
+  {modalOpen&&<button type="button" className={shell.backdrop} aria-label="Dismiss workspace menu" tabIndex={-1} onClick={()=>setMobileOpen(false)}/>}
+  <div className={shell.workspace} inert={modalOpen}>
+   <header className={shell.toolbar}><div className={shell.toolbarStart}><button ref={opener} type="button" className={shell.menuButton} aria-label={menuLabel} title={menuLabel} aria-controls="workspace-context" aria-expanded={panelOpen} onClick={toggleMenu}>{panelOpen?<PanelLeftClose size={20} aria-hidden="true"/>:<PanelLeftOpen size={20} aria-hidden="true"/>}</button><span className={shell.toolbarBrand}>VAMM</span><span className={shell.toolbarDivider} aria-hidden="true">/</span><span className={shell.location}>{active.name}</span></div><span className={shell.workspacePill}><span className={shell.dot} aria-hidden="true"/>{external?"Live market context":pathname.startsWith("/news")?"Live news context":"Educational workspace"}</span></header>
    <div className={motionStyles.toolbar}><MotionControls/></div>
-   <main id="main-content" className={styles.main} tabIndex={-1}>
+   <main id="main-content" className={shell.main} tabIndex={-1}>
     <MotionBoundary preset="route-arrival" state="ready" motionKey={pathname}>{children}</MotionBoundary>
-    <footer className={styles.footer}><span className={styles.footerDisclosure}>Stored on this device; anyone using this browser profile can access it.</span><span>{external?"Live market context and synthetic learning tools labeled separately · Educational use":pathname.startsWith("/news")?"Live news and synthetic practice labeled separately · Educational use":"Synthetic data · Educational use only"}</span></footer>
+    <footer className={shell.footer}><p><LockKeyhole size={13} aria-hidden="true"/>Stored on this device; anyone using this browser profile can access it.</p><p>{external?"Live market context and synthetic learning tools labeled separately · Educational use":pathname.startsWith("/news")?"Live news and synthetic practice labeled separately · Educational use":"Synthetic data · Educational use only"}</p></footer>
    </main>
   </div>
  </div>;

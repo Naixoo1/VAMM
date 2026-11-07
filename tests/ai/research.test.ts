@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ResearchProviderError, runResearch } from "@/lib/ai/research";
 import type { ResearchContext } from "@/lib/ai/research";
+import { RESEARCH_SELECTION_VERSION } from "@/lib/ai/research-catalog";
 const request = { instrumentIds: ["edu-bonds", "edu-equity"], question: "Explain the modeled changes." };
-const validOutput = { summary: "These baskets show synthetic changes.", facts: [{ text: "Fees are not modeled.", evidenceIds: ["ev-demo-method"] }], limitations: ["Synthetic teaching assumptions."] };
+const validOutput = { protocolVersion: RESEARCH_SELECTION_VERSION, summaryId: "not-a-forecast", claimIds: ["edu-bonds:annual-fee"], limitationIds: ["synthetic-only"] };
 afterEach(() => vi.useRealTimers());
 
 describe("grounded research and labeled fallback", () => {
@@ -28,17 +29,21 @@ describe("grounded research and labeled fallback", () => {
     expect(await runResearch(input, provider)).toMatchObject({ ok: false, error: { code: "INVALID_INPUT" } });
     expect(provider).not.toHaveBeenCalled();
   });
-  it("selects evidence server-side, validates output and labels model origin", async () => {
+  it("selects evidence server-side, resolves supported model selections and labels their origin", async () => {
     const provider = vi.fn().mockResolvedValue(validOutput);
     const result = await runResearch({ ...request, question: "  Explain  " }, provider);
     expect(provider).toHaveBeenCalledOnce();
     const context = provider.mock.calls[0][0];
     expect(context.request.question).toBe("Explain");
     expect(context.evidence).toMatchObject([{ id: "ev-demo-method", sourceUrl: null, dataMode: "synthetic" }]);
-    expect(result).toMatchObject({ ok: true, data: { origin: "model", summary: validOutput.summary } });
+    expect(result).toMatchObject({ ok: true, data: { origin: "model", summary: "The selected baskets show synthetic teaching assumptions. Their modeled changes are not forecasts or recommendations." } });
+    if (result.ok) {
+      expect(result.data.facts).toEqual([{ text: "Simulated bond basket: annual fee is unavailable. Educational basket has no modeled product fee", evidenceIds: ["ev-demo-method"] }]);
+      expect(result.data.limitations.join(" ")).toContain("A model selected and ordered");
+    }
   });
   it.each([
-    ["unknown evidence", { ...validOutput, facts: [{ text: "Unsupported", evidenceIds: ["ev-made-up"] }] }, "unknown evidence"],
+    ["unknown claim", { ...validOutput, claimIds: ["ev-made-up"] }, "unknown or unsupported"],
     ["malformed", { summary: "Missing facts" }, "invalid output"],
     ["extra field", { ...validOutput, action: "ADVANCE" }, "invalid output"],
   ])("falls back on %s without retrying", async (_label, output, expected) => {
@@ -65,5 +70,3 @@ describe("grounded research and labeled fallback", () => {
     expect(provider).toHaveBeenCalledOnce();
   });
 });
-
-

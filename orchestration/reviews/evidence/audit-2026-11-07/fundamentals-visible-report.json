@@ -1,0 +1,38 @@
+[
+  {
+    "status": "fulfilled",
+    "value": {
+      "name": "desktop",
+      "width": 1440,
+      "state": "panel",
+      "hasFinancialLabels": true,
+      "numericTokenCount": 63,
+      "failedRequests": [
+        {
+          "url": "https://www.tradingview.com/api/v1/widget-data-business-info/?symbol=NASDAQ%3AAAPL",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "pageErrors": [],
+      "documentWidth": 1440
+    }
+  },
+  {
+    "status": "fulfilled",
+    "value": {
+      "name": "mobile",
+      "width": 390,
+      "state": "panel",
+      "hasFinancialLabels": true,
+      "numericTokenCount": 63,
+      "failedRequests": [
+        {
+          "url": "https://www.tradingview.com/api/v1/widget-data-business-info/?symbol=NASDAQ%3AAAPL",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "pageErrors": [],
+      "documentWidth": 390
+    }
+  }
+]
