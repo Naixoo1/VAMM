@@ -1,6 +1,8 @@
 # CaGa CaGa
 
-A local frontend for the Autonomous Life-Stage Simulator. Run this from the folder containing these files with Node.js 18 or newer.
+A local frontend for the Autonomous Life-Stage Simulator. Open index.html directly in a browser. Keep index.html, style.css, model.js, and app.js in the same folder.
+
+To serve the same files over localhost, open a terminal in this folder with Node.js 18 or newer and run the following command.
 
 ```powershell
 node server.mjs

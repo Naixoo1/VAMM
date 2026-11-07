@@ -1,4 +1,4 @@
-import { lessons, assets, annualRates, inflation, stageAt, scenarios, watchlist, advance, market, sum } from './model.js';
+const { lessons, assets, annualRates, inflation, stageAt, scenarios, watchlist, advance, market, sum } = simulationModel;
 
 const main = document.querySelector('main');
 const sidebar = document.querySelector('#sidebar');
@@ -44,7 +44,7 @@ function persist() {
 
 function newSession(kind, example = false) {
   session = {
-    id: crypto.randomUUID(), kind, title: kind === 'chat' ? 'Coach conversation' : example ? 'Example · First allowance' : 'Life-stage simulation',
+    id: crypto.randomUUID?.() ?? crypto.getRandomValues(new Uint32Array(4)).join('-'), kind, title: kind === 'chat' ? 'Coach conversation' : example ? 'Example · First allowance' : 'Life-stage simulation',
     messages: [],
   };
   if (kind === 'sim') {
