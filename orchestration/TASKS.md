@@ -91,3 +91,18 @@ User authorized /market (dark, NASDAQ:AAPL, symbol changing,1D), TradingView das
 Same three workers resumed using saved-role fallback. Temporary path ownership is in the reconciliation report; workers must not touch frozen sources. CEO recorded19 protected file hashes. Git main now preserves remote16607b0 and local baseline005549f, using connected GitHub identity with a private noreply address scoped to this repository. Nothing pushed yet.
 
 TradingView/News tasks progressed Running → Review (worker handoffs) → Integrated (CEO-reviewed imports) → Verified. Evidence: 96 unit tests, 26 production-browser checks, TypeScript/lint/build; actual TradingView ready/render at desktop/mobile; 19 protected hashes unchanged. Full reconciliation/evidence in reviews/TRADINGVIEW-2026-11-07.md. Source reading is curated/non-live; no plugins, paid services or chart APIs added. Git changes are ready for the requested commit/push; no manual deployment.
+
+## Original Chart for Learning — 2026-11-07
+
+Latest user request adds a Practice Workspace tab named **Original Chart for Learning** alongside the existing default TradingView chart on /market. The original view reuses IndexChart and useMarketData with every currently available educational basket. Display the frozen synthetic index provenance and exact instrument names. This is a presentation extension under contract v2, without new market providers, API shapes, dependencies, or simulation/storage changes.
+
+Saved-role instructions were passed to generic workers. Work is isolated in C:/Users/Acer/Documents/Codex/2026-11-07/that-the-features-that-should-have/work/vamm from main 98ceffe. Interface owns src/app/market/**, the new market-workspace component/styles, and its focused UI test. A separate read-only preservation reviewer checks scope and provenance. CEO owns integration, verification, task records and Git.
+
+| ID | Owner | Dependencies | Status |
+|---|---|---|---|
+| VAMM-ORIGINAL-CHART-01 | Interface | Existing TradingViewChart, IndexChart and market hook | Verified |
+| VAMM-ORIGINAL-VERIFY-01 | CEO + preservation reviewer | Interface handoff | Verified |
+
+Interface handoff and independent source review completed, followed by CEO integration and verification. Both tasks progressed Running → Review → Integrated → Verified. Observed checks passed: 102 unit/integration tests, TypeScript, clean ESLint, production build, and 28 desktop/mobile production browser tests. An additional isolated real-provider check passed 24 assertions across 320, 390, 768, 1024, 1366, and 1920px: TradingView emitted ready, both chart views fit the document, the original chart retained all three exact instruments/table rows, and no application page errors occurred. Provider registration alone was not counted as ready.
+
+The original tab retains the connected TradingView element and its selected symbol while hidden. Original synthetic series, contract v2, fixture manifest, APIs, simulation/AI/storage, dependencies and configuration have no diff from task baseline 98ceffe. Historical SHA proofs were not reused. No backend, quote API, dependency, deployment or paid service was added.
