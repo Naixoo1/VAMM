@@ -10,7 +10,14 @@ import styles from "./live-market-widget.module.css";
 type PanelState = "loading" | "ready" | "panel" | "error" | "offline" | "paused";
 interface Props { kind: LiveWidgetKind; symbol?: LiveCompanySymbol; comparison?: LiveCompanySymbol }
 export function LiveMarketWidget({ kind, symbol = "NASDAQ:AAPL", comparison = "NASDAQ:MSFT" }: Props) {
-  const spec = useMemo(() => getTradingViewWidgetSpec(kind, symbol, comparison), [kind, symbol, comparison]);
+  const spec = useMemo(() => {
+    try { return getTradingViewWidgetSpec(kind, symbol, comparison); }
+    catch { return null; }
+  }, [kind, symbol, comparison]);
+  if (!spec) return <section className={styles.card} aria-label="Unavailable provider panel" data-live-market-kind={kind} data-live-market-state="error">
+    <div className={styles.header}><h2 className={styles.title}>Choose a valid listing</h2></div>
+    <div className={styles.footer}><MotionMark preset="empty-line" state="error" /><p className={styles.error} role="alert">Enter an exchange-qualified listing. Comparison needs two different listings.</p></div>
+  </section>;
   // Selecting a different company deliberately replaces the provider instance and its loading state.
   return <WidgetInstance key={JSON.stringify(spec)} spec={spec} />;
 }
@@ -147,7 +154,7 @@ function WidgetInstance({ spec }: { spec: TradingViewWidgetSpec }) {
     <div id={frameId} className={[styles.frame, styles[spec.kind]].join(" ")} hidden={hidden}>
       <div ref={host} className={styles.host} data-testid={"live-" + spec.kind + "-host"} inert={!usable} aria-hidden={!usable} />
       {!usable && state !== "paused" && <div className={styles.placeholder} aria-hidden="true">
-        {state === "loading" && <MotionMark preset={spec.kind === "summary" ? "reference-helix" : "query-inline"} state="loading" label={"Opening " + spec.title} />}
+        {state === "loading" ? <MotionMark preset={spec.kind === "summary" ? "reference-helix" : "query-inline"} state="loading" label={"Opening " + spec.title} /> : <MotionMark preset="empty-line" state="error" />}
         <strong>{state === "loading" ? "Opening the provider’s panel…" : status}</strong>
         <p>{state === "loading" ? "Connecting to the external provider." : "The provider may be blocked or unavailable. Retry below or open its website."}</p>
       </div>}
@@ -156,6 +163,7 @@ function WidgetInstance({ spec }: { spec: TradingViewWidgetSpec }) {
       <div className={styles.provenance}>
         <p className={[styles.status, failed ? styles.error : ""].join(" ")} role={failed ? "alert" : "status"}>{status}</p>
         <p className={styles.note}>{spec.currencyNote} Check the provider’s market status, chart range, or reporting period for timing.</p>
+        {spec.kind !== "summary" && <p className={styles.note}>Symbol format is checked, not data access. If a listing or company report is unavailable, check the provider’s notice or try another listing.</p>}
         {spec.kind === "technical" && <p className={styles.note}>Technical labels are TradingView’s indicator summaries, not VAMM recommendations or AI answers.</p>}
         <p className={styles.note}>Data by <a href={spec.externalUrl} target="_blank" rel="noopener noreferrer">TradingView</a> · Separate from synthetic learning and simulation calculations.</p>
       </div>

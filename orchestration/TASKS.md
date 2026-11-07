@@ -175,3 +175,24 @@ CEO reviewed all three actual worker handoffs and integrated their disjoint outp
 Observed final checks:201 unit/integration tests,60 browser cases in one full run, TypeScript/ESLint/production build, original27 adversarial probes,30 route-width checks,24 contrast combinations with zero failures, all24 motion treatments reached and36 protected hashes unchanged. Six original application defects AUDIT-01…06 are resolved by the bounded approaches documented in the repair report. Actual public provider displays and direct local HTTP/Market were checked separately; provider auxiliary errors remain external limitations, not fabricated success.
 
 The teammate design is adapted across the existing six routes. Incoming Node/model/trading/quiz/Google research/localStorage logic is not adopted; no configuration, engine, v2/fixtures, identity or persistence-schema replacement. No plugin/paid service/dependency or real model call. Native workspace-root alignment remains unresolved but approved project operations work. Public deployment/rehearsal remains **Queued**, and the09:30 hourly review's16:30 target is not claimed as a verified deployment. Git delivery targets existing origin/main only, preserving history.
+
+## Logo and live-only market views — 2026-11-07
+
+Direct user authorization: add the supplied VAMM AI logo, remove redundant synthetic displays where live replacements already exist, broaden stock-comparison choices, write a walkthrough and update Git using three workers. Prior explicit protection of contract v2, frozen Simulation, fixtures, identity files and project configuration remains in force. This supersedes older requirements to display duplicate synthetic Home/Compare/Market/News panels; their public v2 fixtures/APIs remain preserved. The basket mentor remains a clearly separated teaching feature because no live-grounded AI replacement exists.
+
+| ID | Owner / bounded ownership | Status |
+|---|---|---|
+| BRAND-LIVE-UI-01 | Interface: exact logo asset, branding component, shell and Home presentation/copy | Running |
+| LIVE-SYMBOLS-01 | Data/platform: TradingView widget helper, comparison/company symbol inputs, focused data/UI tests | Running |
+| BRAND-LIVE-VERIFY-01 | Simulation/AI: browser specs, protected-file and financial-boundary review; no engine edits | Running |
+| BRAND-LIVE-INTEGRATE-01 | CEO: route cleanup, retired presentation components, existing unit tests, walkthrough/integration/Git | Running |
+
+Actual checkout C:/code/VAMM; configured session cwd C:/code/VAAM is not used. Direct project operations now work without permission overrides; no device-wide ACL/trust/config change. Reused three generic workers with saved role instructions/document paths; no native named-role selection or recursive delegation claimed. Baseline29150d5. No new plugin, dependency, paid service, model invocation or deployment is authorized by the logo file. See the forthcoming reviews/LOGO-LIVE-WALKTHROUGH-2026-11-07.md for final evidence.
+
+Worker execution note: reused workers retained their earlier restricted filesystem profile and received Access denied on direct project writes. They are preparing disjoint files under the existing visualization staging root/vamm-brand-live-staging; CEO reviews/imports with current direct workspace access. No ACL/configuration escalation or claim of refreshed worker permissions.
+
+## Logo/live integration verification — 2026-11-07
+
+BRAND-LIVE-UI-01, LIVE-SYMBOLS-01, BRAND-LIVE-VERIFY-01 and BRAND-LIVE-INTEGRATE-01 progressed Running → Review (three actual handoffs) → Integrated → Verified locally. Full walkthrough: reviews/LOGO-LIVE-WALKTHROUGH-2026-11-07.md. Exact original logo is integrated; redundant synthetic Home/Compare/Market/News components are retired; comparison/company-context fields accept broad exchange-qualified symbols with explicit submission and provider-availability limits. The frozen Simulation and separately labeled basket mentor remain intact.
+
+Observed checks: 237 unit/integration tests, 66 browser cases, final production build/TypeScript/lint, 11 affected News unit checks after final wording cleanup, 19 responsive checks, 20 contrast combinations with zero failures, all 24 motion treatments, 36 protected hashes unchanged. Actual NVDA/KO and BBCA/BBRI provider charts and News were inspected at desktop/mobile. Initial failures and fixes are recorded in the walkthrough and ISSUES. No new plugin, dependency, paid service, real model call or deployment. Git delivery is to existing origin/main; public deployment remains queued.

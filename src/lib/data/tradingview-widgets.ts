@@ -1,10 +1,13 @@
 /** Provider presentation configuration only. Never financial state or AI evidence. */
+import { liveSymbolUrl, normalizeLiveSymbol } from "./live-symbols";
+
 export const LIVE_COMPANIES = [
   { symbol: "NASDAQ:AAPL", name: "Apple", ticker: "AAPL", currency: "USD" },
   { symbol: "NASDAQ:MSFT", name: "Microsoft", ticker: "MSFT", currency: "USD" },
   { symbol: "NASDAQ:GOOGL", name: "Alphabet", ticker: "GOOGL", currency: "USD" },
 ] as const;
-export type LiveCompanySymbol = typeof LIVE_COMPANIES[number]["symbol"];
+/** Exchange-qualified user input; validated at runtime, not restricted to examples. */
+export type LiveCompanySymbol = string;
 export type LiveWidgetKind = "summary" | "comparison" | "profile" | "fundamentals" | "technical";
 export const LIVE_WIDGET_TIMEOUT_MS = 20_000;
 export const LIVE_WIDGET_MODULES = {
@@ -30,28 +33,29 @@ export type TradingViewWidgetSpec = WidgetDescription & (
 );
 
 export function isLiveCompanySymbol(value: string): value is LiveCompanySymbol {
-  return LIVE_COMPANIES.some(company => company.symbol === value);
+  return normalizeLiveSymbol(value) !== null;
 }
 function companyFor(symbol: string) {
-  const company = LIVE_COMPANIES.find(item => item.symbol === symbol);
-  if (!company) throw new RangeError("Choose a supported company listing.");
-  return company;
+  const normalized = normalizeLiveSymbol(symbol);
+  if (!normalized) throw new RangeError("Enter an exchange-qualified listing.");
+  const known = LIVE_COMPANIES.find(item => item.symbol === normalized);
+  return { symbol: normalized, name: known?.name ?? normalized };
 }
 
 export function getTradingViewWidgetSpec(kind: LiveWidgetKind, symbol: LiveCompanySymbol = "NASDAQ:AAPL", comparison: LiveCompanySymbol = "NASDAQ:MSFT"): TradingViewWidgetSpec {
   if (!["summary", "comparison", "profile", "fundamentals", "technical"].includes(kind)) throw new RangeError("Choose a supported provider panel.");
   const company = companyFor(symbol);
   const other = companyFor(comparison);
-  const symbolUrl = "https://www.tradingview.com/symbols/" + company.symbol.replace(":", "-") + "/";
-  const currencyNote = "Selected NASDAQ listings quote in USD. Provider/exchange delays and availability apply.";
+  const symbolUrl = liveSymbolUrl(company.symbol);
+  const currencyNote = "Each listing uses its own quote currency. Provider/exchange delays and availability apply. No currency conversion is performed.";
   if (kind === "summary") return {
     kind, title: "Live market summary", description: "Apple, Microsoft, and Alphabet · NASDAQ listings · Provider quotes and market status",
-    externalUrl: "https://www.tradingview.com/markets/stocks-usa/", currencyNote,
+    externalUrl: "https://www.tradingview.com/markets/stocks-usa/", currencyNote: "These summary examples are NASDAQ listings in USD. Provider/exchange delays and availability apply.",
     format: "web-component", element: "tv-market-summary", moduleUrl: LIVE_WIDGET_MODULES.summary,
     attributes: { theme: "light", mode: "custom", "symbol-sectors": JSON.stringify([{ sectionName: "US companies", symbols: LIVE_COMPANIES.map(item => item.symbol) }]), "time-frame": "1D", "layout-mode": "grid", "item-size": "normal" },
   };
   if (kind === "comparison") {
-    if (symbol === comparison) throw new RangeError("Choose two different companies.");
+    if (company.symbol === other.symbol) throw new RangeError("Choose two different exchange-qualified listings.");
     return {
       kind, title: "Live company comparison", description: company.name + " and " + other.name + " · Price movement on a percentage scale",
       externalUrl: symbolUrl, currencyNote,
@@ -70,19 +74,19 @@ export function getTradingViewWidgetSpec(kind: LiveWidgetKind, symbol: LiveCompa
     kind, title: "Company profile", description: company.name + " · Company description, sector, and industry supplied by TradingView",
     externalUrl: symbolUrl, currencyNote,
     format: "web-component", element: "tv-company-profile", moduleUrl: LIVE_WIDGET_MODULES.profile,
-    attributes: { theme: "light", symbol },
+    attributes: { theme: "light", symbol: company.symbol },
   };
   if (kind === "fundamentals") return {
     kind, title: "Company fundamentals", description: company.name + " · Provider financial information and reporting periods",
     externalUrl: symbolUrl + "financials-overview/", currencyNote,
     format: "iframe", scriptUrl: LIVE_WIDGET_EMBEDS.fundamentals,
-    configuration: { symbol, colorTheme: "light", displayMode: "regular", isTransparent: false, locale: "en", width: "100%", height: "100%" },
+    configuration: { symbol: company.symbol, colorTheme: "light", displayMode: "regular", isTransparent: false, locale: "en", width: "100%", height: "100%" },
   };
   return {
     kind, title: "Technical context", description: company.name + " · Daily indicator summaries supplied by TradingView",
     externalUrl: symbolUrl + "technicals/", currencyNote,
     format: "web-component", element: "tv-technical-analysis", moduleUrl: LIVE_WIDGET_MODULES.technical,
-    attributes: { theme: "light", symbol, interval: "1D" },
+    attributes: { theme: "light", symbol: company.symbol, interval: "1D" },
   };
 }
 

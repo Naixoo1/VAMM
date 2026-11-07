@@ -41,30 +41,28 @@ function setDisclosure(title: string, open: boolean) {
 }
 
 describe("primary live views and isolated teaching areas", () => {
-  it("puts real market providers first and loads frozen dashboard baskets only on request", () => {
+  it("renders live dashboard providers without duplicate synthetic baskets", () => {
     renderPage(<DashboardPage />);
     expect(screen.getByRole("region", { name: "provider summary" })).toBeTruthy();
     expect(screen.getByRole("region", { name: "Existing TradingView chart" })).toBeTruthy();
     expect(useMarketData).not.toHaveBeenCalled();
     expect(screen.queryByText("Simulated cash")).toBeNull();
-    setDisclosure("Synthetic learning baskets", true);
-    expect(useMarketData).toHaveBeenCalled();
-    expect(screen.getByText("Simulated cash")).toBeTruthy();
+    expect(screen.queryByText("Synthetic learning baskets")).toBeNull();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 
-  it("uses live company selectors independently of the old frozen comparison", () => {
+  it("compares exchange-qualified listings without the retired synthetic comparison", () => {
     renderPage(<ComparePage />);
     const provider = screen.getByRole("region", { name: "provider comparison" });
     expect(provider.getAttribute("data-symbol")).toBe("NASDAQ:AAPL");
     expect(provider.getAttribute("data-comparison")).toBe("NASDAQ:MSFT");
-    fireEvent.change(screen.getByLabelText("First company"), { target: { value: "NASDAQ:GOOGL" } });
-    expect(screen.getByRole("region", { name: "provider comparison" }).getAttribute("data-symbol")).toBe("NASDAQ:GOOGL");
+    fireEvent.change(screen.getByLabelText("First company"), { target: { value: "IDX:BBCA" } });
+    expect(provider.getAttribute("data-symbol")).toBe("NASDAQ:AAPL");
+    fireEvent.click(screen.getByRole("button", { name: "Compare listings" }));
+    expect(screen.getByRole("region", { name: "provider comparison" }).getAttribute("data-symbol")).toBe("IDX:BBCA");
     expect(useMarketData).not.toHaveBeenCalled();
-    setDisclosure("Synthetic basket comparison", true);
-    expect((screen.getByLabelText("First instrument") as HTMLSelectElement).value).toBe("edu-bonds");
-    expect((screen.getByLabelText("Second instrument") as HTMLSelectElement).value).toBe("edu-equity");
-    expect(screen.getAllByText("Unavailable", { exact: true })).toHaveLength(2);
+    expect(screen.queryByText("Synthetic basket comparison")).toBeNull();
+    expect(screen.queryByLabelText("First instrument")).toBeNull();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 
@@ -72,6 +70,7 @@ describe("primary live views and isolated teaching areas", () => {
     renderPage(<ResearchPage />);
     expect(screen.getByText(/They do not provide facts to the AI form or create live-grounded AI answers/)).toBeTruthy();
     fireEvent.change(screen.getByLabelText("Company context"), { target: { value: "NASDAQ:MSFT" } });
+    fireEvent.click(screen.getByRole("button", { name: "Load company" }));
     for (const kind of ["profile", "technical", "fundamentals"]) expect(screen.getByRole("region", { name: "provider " + kind }).getAttribute("data-symbol")).toBe("NASDAQ:MSFT");
     expect(useMarketData).not.toHaveBeenCalled();
     expect(fetch).not.toHaveBeenCalled();

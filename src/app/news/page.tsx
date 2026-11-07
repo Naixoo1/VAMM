@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Info } from "lucide-react";
 import { Badge, PageHeading, Panel, styles } from "@/components/features/workspace";
 import { LiveNewsFeed } from "@/components/features/live-news";
-import { SyntheticPractice } from "@/components/features/source-news";
 import sourceStyles from "@/components/features/source-news.module.css";
 
 export default function NewsPage() {
-  const [practiceOpen, setPracticeOpen] = useState(false);
   return <>
     <PageHeading eyebrow="Read between the headlines" title="News & Sentiment Lab" description="Follow automatically updated market headlines, check publishers and story times, and practice thinking critically about financial stories.">
       <Badge>Auto-updating news</Badge>
@@ -28,13 +25,9 @@ export default function NewsPage() {
           </ol>
         </Panel>
         <Panel title="Control the pace">
-          <p className={[styles.small, styles.muted].join(" ")} style={{ lineHeight: 1.9, margin: 0 }}>Use Hide live feed to stop viewing changing headlines, then Show live feed to reconnect. The separate practice below uses three synthetic stories with prewritten sentiment for learning.</p>
+          <p className={[styles.small, styles.muted].join(" ")} style={{ lineHeight: 1.9, margin: 0 }}>Use Hide live feed to stop viewing changing headlines, then Show live feed to reconnect. Headlines come from the provider; VAMM does not assign a live sentiment score. If the feed is unavailable, retry or open TradingView to check its coverage.</p>
         </Panel>
       </div>
-      <details className={sourceStyles.practice} onToggle={event => setPracticeOpen(event.currentTarget.open)}>
-        <summary className={sourceStyles.summary}>Synthetic practice<span className={sourceStyles.summaryHint}>Three teaching stories with prewritten sentiment</span></summary>
-        {practiceOpen && <SyntheticPractice />}
-      </details>
     </div>
   </>;
 }

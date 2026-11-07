@@ -106,10 +106,9 @@ test("stubbed official widget defaults, client navigation, singleton loader and 
   await expect(widget(page)).toHaveAttribute("allow-symbol-change", "");
   await expect(page.locator(`script[src="${MODULE_URL}"]`)).toHaveCount(1);
   await expect(page.locator(`script[src="${MODULE_URL}"]`)).toHaveAttribute("type", "module");
-  await page.locator("summary").filter({hasText:"Synthetic learning baskets"}).click();
-  await expect(page.getByRole("heading", { name: "Meet the educational baskets", exact: true })).toBeVisible();
-  await expect(page.getByText("Simulated cash", { exact: true })).toBeVisible();
-  await expect(page.getByText(/Synthetic teaching data · IDR · 6 Nov 2026/)).toBeVisible();
+  await expect(page.locator("summary").filter({hasText:"Synthetic learning baskets"})).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Meet the educational baskets", exact: true })).toHaveCount(0);
+  await expect(page.getByText("Simulated cash", { exact: true })).toHaveCount(0);
   await noHorizontalOverflow(page);
   const firstInstance = await widget(page).getAttribute("data-tv-probe-instance");
 
@@ -144,8 +143,8 @@ test("blocked external module gives a useful fallback while the deterministic jo
   await expect(providerLink).toHaveAttribute("target", "_blank");
   await expect(providerLink).toHaveAttribute("rel", /\b(?:noopener|noreferrer)\b/);
   await noHorizontalOverflow(page);
-  await page.getByRole("tab", { name: "Original Chart for Learning", exact: true }).click();
-  await expect(page.getByRole("img", { name: /Synthetic index chart/ })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Original Chart for Learning", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("img", { name: /Synthetic index chart/ })).toHaveCount(0);
   await noHorizontalOverflow(page);
   await navigation(page, "Simulation").click();
   await page.getByRole("button", { name: "Start your simulation", exact: true }).click();
@@ -183,7 +182,7 @@ test("verified widget error events are sanitized and manual retry remounts witho
   expect(probe.requests()).toBe(1);
 });
 
-test("live news provenance and separate lazy synthetic practice", async ({ page }) => {
+test("live news provenance without redundant synthetic practice", async ({ page }) => {
   await installLiveNewsStub(page);
   let practiceRequests = 0;
   page.on("request", request => { if (new URL(request.url()).pathname === "/api/news") practiceRequests += 1; });
@@ -191,7 +190,7 @@ test("live news provenance and separate lazy synthetic practice", async ({ page 
   const feed = page.getByRole("region", { name: "Live market news", exact: true });
   await expect(feed).toHaveAttribute("data-live-news-state", "ready");
   await expect(page.getByText("Auto-updating news", { exact: true })).toBeVisible();
-  await expect(page.getByRole("main").locator("footer").last()).toContainText("Live news and synthetic practice labeled separately");
+  await expect(page.getByRole("main").locator("footer").last()).toContainText("External news feed · Provider and publisher timing apply");
   await expect(page.getByText("Curated · not live", { exact: true })).toHaveCount(0);
   await expect(feed).toContainText("VAMM adds no sentiment scores");
   const link = feed.getByRole("link", { name: "Open news on TradingView" });
@@ -199,10 +198,9 @@ test("live news provenance and separate lazy synthetic practice", async ({ page 
   await expect(link).toHaveAttribute("target", "_blank");
   await expect(link).toHaveAttribute("rel", "noopener noreferrer");
   expect(practiceRequests).toBe(0);
-  await page.locator("summary").filter({ hasText: "Synthetic practice" }).click();
-  await expect(page.getByText("Synthetic scenario: bond basket records a modest gain", { exact: true })).toBeVisible();
-  await expect(page.getByText("Mixed", { exact: true })).toBeVisible();
-  expect(practiceRequests).toBe(1);
+  await expect(page.locator("summary").filter({ hasText: "Synthetic practice" })).toHaveCount(0);
+  await expect(page.getByText("Mixed", { exact: true })).toHaveCount(0);
+  expect(practiceRequests).toBe(0);
   await expect(feed).toHaveAttribute("data-live-news-state", "ready");
   await noHorizontalOverflow(page);
 });
@@ -226,8 +224,8 @@ test("independent widget and live-news interactions preserve saved simulation st
   await expect(widget(page)).toHaveAttribute("symbol", "NYSE:IBM");
   await navigation(page, "News & Sentiment Lab").click();
   await expect(page.getByRole("region", { name: "Live market news", exact: true })).toBeVisible();
-  await page.locator("summary").filter({ hasText: "Synthetic practice" }).click();
-  await expect(page.getByText("Synthetic scenario: bond basket records a modest gain", { exact: true })).toBeVisible();
+  await expect(page.getByRole("region", { name: "Live market news", exact: true })).toHaveAttribute("data-live-news-state", "ready");
+  await expect(page.locator("summary").filter({ hasText: "Synthetic practice" })).toHaveCount(0);
   expect(await simulationSnapshot(page)).toEqual(before);
   expect(await (await request.get("/api/market")).json()).toEqual(marketBefore);
   expect(await (await request.get("/api/news")).json()).toEqual(newsBefore);
@@ -247,38 +245,21 @@ test("independent widget and live-news interactions preserve saved simulation st
   await noHorizontalOverflow(page);
 });
 
-test("Practice Workspace exposes the original index chart and preserves TradingView selection", async ({ page }) => {
+test("Market exposes only the live chart while selection and frozen API fixtures remain independent", async ({ page }) => {
   await stubOfficialModule(page);
   const marketBefore = await (await page.request.get("/api/market")).json();
   await page.goto("/market");
   await readyStub(page);
-  const tradingTab = page.getByRole("tab", { name: "TradingView Chart", exact: true });
-  const learningTab = page.getByRole("tab", { name: "Original Chart for Learning", exact: true });
-  await expect(tradingTab).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tab", { name: "Original Chart for Learning", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("img", { name: /Synthetic index chart/ })).toHaveCount(0);
   const provider = widget(page);
   const instance = await provider.getAttribute("data-tv-probe-instance");
   await provider.evaluate(element => element.setAttribute("symbol", "NYSE:IBM"));
-
-  await learningTab.click();
-  await expect(learningTab).toHaveAttribute("aria-selected", "true");
-  await expect(provider).toBeHidden();
-  const learning = page.getByRole("tabpanel", { name: "Original Chart for Learning", exact: true });
-  const instruments = learning.getByRole("list", { name: "Available educational instruments" });
-  await expect(instruments.getByRole("listitem")).toHaveText([
-    "Simulated cash", "Simulated bond basket", "Simulated diversified equity basket"
-  ]);
-  await expect(learning.getByRole("img", { name: /Synthetic index chart/ })).toBeVisible();
-  await expect(learning.getByText(/Synthetic teaching data · IDR · 6 Nov 2026/)).toBeVisible();
-  await learning.locator("summary").filter({ hasText: "View index values as a table" }).click();
-  await expect(learning.getByRole("row", { name: "2026-11-06 100.00 112.48 104.54" })).toBeVisible();
-  await noHorizontalOverflow(page);
-
-  await learningTab.focus();
-  await page.keyboard.press("Home");
-  await expect(tradingTab).toBeFocused();
-  await expect(tradingTab).toHaveAttribute("aria-selected", "true");
+  await page.getByRole("button", { name: "Pause animations", exact: true }).click();
+  await page.getByRole("button", { name: "Resume animations", exact: true }).click();
   await expect(provider).toHaveAttribute("symbol", "NYSE:IBM");
   await expect(provider).toHaveAttribute("data-tv-probe-instance", instance!);
+  await expect(page.getByTestId("tradingview-host")).toHaveCount(1);
   expect(await (await page.request.get("/api/market")).json()).toEqual(marketBefore);
   await noHorizontalOverflow(page);
 });

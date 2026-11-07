@@ -77,25 +77,26 @@ test("all24 production treatments are reached through real states while live dis
   expect(JSON.parse((await summary.getAttribute("symbol-sectors"))!)).toEqual([
     { sectionName: "US companies", symbols: ["NASDAQ:AAPL", "NASDAQ:MSFT", "NASDAQ:GOOGL"] },
   ]);
-  await openLearning(page, "Synthetic learning baskets");
-  await expect(page.locator('[data-motion-preset="query-inline"]').first()).toBeVisible();
-  releaseMarket();
-  await expect(page.getByText("Simulated cash", { exact: true })).toBeVisible();
+  await expect(page.locator("summary").filter({hasText:"Synthetic learning baskets"})).toHaveCount(0);
   budgets.push(await artworkBudget(page));
 
   await nav(page, "Compare").click();
   await expect(live(page, "comparison")).toHaveAttribute("data-live-market-state", "panel");
   await expect(live(page, "comparison").getByRole("status")).toContainText("Provider panel opened");
   await expect(live(page, "comparison").getByRole("status")).not.toContainText("ready");
-  await page.getByLabel("First company", { exact: true }).selectOption("NASDAQ:GOOGL");
+  await page.getByLabel("First company", { exact: true }).fill("NASDAQ:GOOGL");
+  await page.getByRole("button", { name: "Compare listings", exact: true }).click();
   await expect(live(page, "comparison")).toHaveAttribute("data-live-market-state", "panel");
   const comparisonProbe = await readLiveFeatureProbe(page);
   const comparison = comparisonProbe!.configurations.filter(item => item.kind === "comparison").at(-1)!.configuration;
-  expect(comparison.symbols).toEqual([["Alphabet", "NASDAQ:GOOGL|1D"]]);
+  expect(comparison.symbols).toEqual([[expect.any(String), "NASDAQ:GOOGL|1D"]]);
   expect(comparison.compareSymbol).toMatchObject({ symbol: "NASDAQ:MSFT" });
   expect(comparison.scaleMode).toBe("Percentage");
-  await openLearning(page, "Synthetic basket comparison");
-  await expect(page.getByRole("cell").filter({ hasText: /^Unavailable/ })).toHaveCount(2);
+  await expect(page.locator("summary").filter({hasText:"Synthetic basket comparison"})).toHaveCount(0);
+  await page.getByLabel("First company", { exact: true }).fill("NASDAQ:AAPL|1D");
+  await page.getByRole("button", { name: "Compare listings", exact: true }).click();
+  await page.locator('[data-motion-preset="empty-line"]').scrollIntoViewIfNeeded();
+  await expect(page.locator('[data-motion-preset="empty-line"]')).toBeVisible();
   budgets.push(await artworkBudget(page));
 
   await nav(page, "AI Investment Mentor").click();
@@ -103,11 +104,14 @@ test("all24 production treatments are reached through real states while live dis
   await expect(live(page, "technical")).toHaveAttribute("data-live-market-state", "ready");
   await expect(live(page, "fundamentals")).toHaveAttribute("data-live-market-state", "panel");
   await expect(page.getByText(/do not provide facts to the AI form/)).toBeVisible();
-  await page.getByLabel("Company context", { exact: true }).selectOption("NASDAQ:MSFT");
+  await page.getByLabel("Company context", { exact: true }).fill("NASDAQ:MSFT");
+  await page.getByRole("button", { name: "Load company", exact: true }).click();
   await expect(page.getByTestId("live-profile-host").locator("tv-company-profile")).toHaveAttribute("symbol", "NASDAQ:MSFT");
   await expect(live(page, "profile")).toHaveAttribute("data-live-market-state", "ready");
   await expect(live(page, "fundamentals")).toHaveAttribute("data-live-market-state", "panel");
   await openLearning(page, "Synthetic basket mentor");
+  await expect(page.locator('[data-motion-preset="query-inline"]').first()).toBeVisible();
+  releaseMarket();
   await expect(page.getByRole("checkbox", { name: "Simulated bond basket", exact: true })).toBeVisible();
   let releaseResearch!: () => void;
   const researchGate = new Promise<void>(resolve => { releaseResearch = resolve; });

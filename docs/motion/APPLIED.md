@@ -7,7 +7,7 @@ User authorized production use of the24 reference combinations; Simulation remai
 | 01 | reference-helix | LiveMarketWidget: initial Dashboard summary request pending |
 | 02 | workspace-restore | SimulationPage: local session restoration pending |
 | 03 | returning-static | SimulationPage: no saved active session or newly created zero-balance session |
-| 04 | content-arrival | LiveMarketWidget: actual ready/opened provider; MarketWorkspace: original learning content |
+| 04 | content-arrival | LiveMarketWidget: actual ready/opened provider |
 | 05 | query-inline | LoadingPanel and non-summary provider loading; retained teaching query pending |
 | 06 | chart-loading | TradingViewChart: provider chart pending, including visibility-aware waiting |
 | 07 | mentor-orbit | SyntheticBasketMentor: existing research mutation pending |
@@ -18,7 +18,7 @@ User authorized production use of the24 reference combinations; Simulation remai
 | 12 | turn-confirmed | SimulationPage: real ADVANCE committed, bill still pending |
 | 13 | shock-settled | SimulationPage: real settled turn, committed holdings immediately visible |
 | 14 | storage-error | SimulationPage: actual STORAGE_UNAVAILABLE failure |
-| 15 | empty-line | Synthetic comparison: unavailable fee; SimulationPage: genuine unavailable/error state |
+| 15 | empty-line | LiveMarketWidget: genuinely unavailable provider; live symbol validation error; SimulationPage: unavailable/error state |
 | 16 | news-thumbnail | LiveNewsFeed: real feed host loading |
 | 17 | news-skeleton | LiveNewsFeed: outer loading placeholder with regular motion preference |
 | 18 | news-static | LiveNewsFeed: outer loading placeholder with static/OS-reduced preference |
@@ -40,3 +40,7 @@ Observed coverage: production-motion-coverage-{desktop,mobile}.json in tests/e2e
 The existing24 recipes remain intact. Shared scoped CSS now also animates shell/navigation, headings/panels, controls, disclosures/tabs, outer provider frames, history and reset dialogs on all6 routes. Brief140/220ms transforms keep content fully opaque and immediately usable. Pause stops VAMM timelines/transitions; static/live OS reduction removes decorative animation and control transforms. No animated money, hidden result, forced wait, financial callback or controller remount. Provider internals remain external. The teammate hero/feature cards use the same layer; capability values describe fixed teaching defaults.
 
 Actual final checks:60 browser cases including all24 recipes at both widths,30 additional route/width renders with no overflow/page errors,24 contrast combinations with no failures, and exact four-store preservation through shell/pref/navigation changes. Details and initial failures: orchestration/reviews/FIXES-MOTION-2026-11-07.md and TEAM-DESIGN-2026-11-07.md. No new animation dependency.
+
+## Branding and live-only route cleanup — 2026-11-07
+
+All 24 motion treatments remain reachable after retiring redundant synthetic displays. Content arrival remains on live provider panels. Empty-line now also decorates actual invalid symbol submissions or provider unavailability; query-inline remains on pending provider/mentor requests. Final 66 browser cases cover all 24 at desktop/mobile with unchanged financial records. The final News footer copy-only cleanup passed its 11 affected unit checks and production build. No financial calculation, duration, pause/static behavior or animation dependency changed.

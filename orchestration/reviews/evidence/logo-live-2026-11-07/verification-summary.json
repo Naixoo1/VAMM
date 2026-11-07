@@ -1,0 +1,80 @@
+{
+  "baseline": "29150d5e01410685b53c23dd5cdd047579cb0d5b",
+  "date": "2026-11-07",
+  "timezone": "Asia/Jakarta",
+  "unit": {
+    "passed": 237,
+    "suites": 27
+  },
+  "browser": {
+    "passed": 66,
+    "durationSeconds": 44.2,
+    "initialPassed": 62,
+    "initialFailed": 4,
+    "corrections": [
+      "Scope comparison alert away from Next route announcer",
+      "Use current external-news footer provenance text"
+    ]
+  },
+  "finalNewsCopyUnit": {
+    "passed": 11
+  },
+  "build": "passed",
+  "typecheck": "passed",
+  "lint": "passed",
+  "responsive": {
+    "passed": 19,
+    "widths": [
+      320,
+      768,
+      1440
+    ],
+    "maximumLengthSymbolBeforeWidth": 579,
+    "maximumLengthSymbolAfterWidth": 320,
+    "pageErrors": 0
+  },
+  "contrast": {
+    "cases": 20,
+    "failures": 0,
+    "initialTimeout": "Research fallback wait; exact response not captured. Isolated fresh-server rerun passed."
+  },
+  "motion": {
+    "recipes": 24,
+    "viewports": [
+      "desktop",
+      "mobile"
+    ]
+  },
+  "protected": {
+    "checked": 36,
+    "changed": []
+  },
+  "actualProviders": {
+    "checks": 6,
+    "stockPairs": [
+      [
+        "NASDAQ:NVDA",
+        "NYSE:KO"
+      ],
+      [
+        "IDX:BBCA",
+        "IDX:BBRI"
+      ]
+    ],
+    "widths": [
+      1440,
+      390
+    ],
+    "comparisonLinesVisuallyInspected": true,
+    "newsReady": true,
+    "oneAbortedIframeDuringReplacement": true,
+    "appPageErrors": 0
+  },
+  "logoSha256": "E2B682BD9EC2634926AAF5E8C4505FC066494D9FF6C31D14316E285A3E6010C5",
+  "notPerformed": [
+    "Deployment",
+    "Actual model call",
+    "Global stock coverage certification",
+    "Paid service or plugin addition"
+  ]
+}

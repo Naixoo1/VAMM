@@ -89,7 +89,7 @@
     {
       "id": "empty-line",
       "number": 15,
-      "state": "idle"
+      "state": "error"
     },
     {
       "id": "mentor-orbit",
@@ -250,7 +250,7 @@
     },
     {
       "route": "/compare",
-      "artworks": 5,
+      "artworks": 4,
       "maximumPrimitives": 20
     },
     {

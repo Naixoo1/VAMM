@@ -6,6 +6,7 @@ import {ChartNoAxesCombined,ChevronRight,GitCompareArrows,House,LockKeyhole,Pane
 import {useEffect,useRef,useState,useSyncExternalStore,type ReactNode} from "react";
 import {MotionBoundary,MotionControls} from "@/components/motion";
 import {styles} from "./workspace";
+import {BrandLogo} from "./branding";
 import shell from "./app-shell.module.css";
 import motionStyles from "./app-shell-motion.module.css";
 
@@ -21,12 +22,12 @@ const links=[
  {href:"/news",name:"News & Sentiment Lab",icon:null,image:"news"},
 ];
 const contexts:Record<string,{kicker:string;description:string;links:{href:string;label:string}[]}>={
- "/dashboard":{kicker:"Start with curiosity",description:"Explore market context, then practice with the separate teaching tools.",links:[{href:"/market",label:"Explore the charts"},{href:"/simulation",label:"Practice from zero"},{href:"/research",label:"Ask a basket question"}]},
- "/market":{kicker:"Observe & understand",description:"Real market charts and the original learning chart each keep their own source labels.",links:[{href:"/market",label:"Charts & learning"},{href:"/compare",label:"Compare instruments"}]},
+ "/dashboard":{kicker:"Start with curiosity",description:"Explore live market context, compare instruments, and practice with the separate educational simulation.",links:[{href:"/market",label:"Explore the charts"},{href:"/simulation",label:"Practice from zero"},{href:"/research",label:"Ask a basket question"}]},
+ "/market":{kicker:"Observe & understand",description:"Explore TradingView’s live chart. Symbols, currency and delivery timing are determined by the provider.",links:[{href:"/market",label:"Real market chart"},{href:"/compare",label:"Compare instruments"}]},
  "/research":{kicker:"Follow your questions",description:"Explore company context. The basket mentor answers separately from frozen teaching evidence.",links:[{href:"/research",label:"Company & basket research"},{href:"/compare",label:"Explore the differences"}]},
- "/compare":{kicker:"A little perspective",description:"Compare compatible company views, or open the synthetic basket comparison for practice.",links:[{href:"/compare",label:"Instrument comparison"},{href:"/research",label:"Ask a basket question"}]},
- "/simulation":{kicker:"Learn through choices",description:"Start at zero. Save, allocate, and address one unexpected cost in each of three years.",links:[{href:"/simulation",label:"Your simulation"},{href:"/compare",label:"Explore the baskets"}]},
- "/news":{kicker:"Read the context",description:"Follow provider headlines, then explore the separate prewritten sentiment exercise.",links:[{href:"/news",label:"Live news & practice"},{href:"/research",label:"Explore a question"}]},
+ "/compare":{kicker:"A little perspective",description:"Compare compatible company views on the provider’s percentage chart. Check its currency, range and availability.",links:[{href:"/compare",label:"Instrument comparison"},{href:"/research",label:"Ask a basket question"}]},
+ "/simulation":{kicker:"Learn through choices",description:"Start at zero. Save, allocate, and address one unexpected cost in each of three years.",links:[{href:"/simulation",label:"Your simulation"},{href:"/compare",label:"Compare company listings"}]},
+ "/news":{kicker:"Read the context",description:"Follow automatically updating provider headlines. Open a story to check its publisher and full context.",links:[{href:"/news",label:"Live market news"},{href:"/research",label:"Explore a question"}]},
 };
 
 export function AppShell({children}:{children:ReactNode}){
@@ -65,7 +66,7 @@ export function AppShell({children}:{children:ReactNode}){
     <span className={shell.railFoot} aria-hidden="true">V</span>
    </div>
    <section id="workspace-context" className={shell.contextPanel} aria-labelledby="workspace-context-title" inert={!panelOpen} aria-hidden={!panelOpen}>
-    <Link href="/dashboard" className={shell.brand} aria-label="VAMM home" onClick={followLink}><Image src="/team-design/brand.svg" width={36} height={36} alt="" unoptimized/><span>VAMM<small>THE MONEY LAB</small></span></Link>
+    <Link href="/dashboard" className={shell.brand} aria-label="VAMM home" onClick={followLink}><BrandLogo decorative/></Link>
     <div className={shell.contextHeading}><div><p>Your space</p><h2 id="workspace-context-title">{active.name}</h2></div><button ref={closer} type="button" className={shell.close} aria-label="Close workspace menu" onClick={()=>setMobileOpen(false)}><X size={19} aria-hidden="true"/></button></div>
     <div className={shell.contextBody}><p className={shell.contextKicker}>{context.kicker}</p><ul className={shell.contextLinks}>{context.links.map(link=><li key={link.href}><Link href={link.href} className={shell.contextLink} aria-current={active.href===link.href?"page":undefined} onClick={followLink}>{link.label}<ChevronRight size={14} aria-hidden="true"/></Link></li>)}</ul><div className={shell.contextNote}><ShieldCheck size={20} strokeWidth={1.6} aria-hidden="true"/><p>{context.description}</p></div></div>
     <div className={shell.panelFoot}><span className={shell.dot} aria-hidden="true"/><div><strong>Student workspace</strong><p>Learn · practice · reflect</p></div></div>
@@ -77,7 +78,7 @@ export function AppShell({children}:{children:ReactNode}){
    <div className={motionStyles.toolbar}><MotionControls/></div>
    <main id="main-content" className={shell.main} tabIndex={-1}>
     <MotionBoundary preset="route-arrival" state="ready" motionKey={pathname}>{children}</MotionBoundary>
-    <footer className={shell.footer}><p><LockKeyhole size={13} aria-hidden="true"/>Stored on this device; anyone using this browser profile can access it.</p><p>{external?"Live market context and synthetic learning tools labeled separately · Educational use":pathname.startsWith("/news")?"Live news and synthetic practice labeled separately · Educational use":"Synthetic data · Educational use only"}</p></footer>
+    <footer className={shell.footer}><p><LockKeyhole size={13} aria-hidden="true"/>Stored on this device; anyone using this browser profile can access it.</p><p>{pathname.startsWith("/research")?"Live company context and separate mentor evidence labeled clearly · Educational use":external?"External market data · Provider timing and availability apply · Educational use":pathname.startsWith("/news")?"External news feed · Provider and publisher timing apply · Educational use":"Synthetic data · Educational use only"}</p></footer>
    </main>
   </div>
  </div>;

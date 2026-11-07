@@ -124,3 +124,16 @@ The preceding audit remains the historical failing baseline. Current resolution 
 | AUDIT-SCOPE-01 | Screenshot/personalized advice/trading/live sentiment/live-grounded AI remain deferred under frozen MVP; incoming prototype logic not imported. | Missing/deferred, unchanged |
 
 Final local checks:201/201 unit/integration,60/60 browser, TypeScript/ESLint/build,27/27 original probes,30 responsive route checks,24 contrast checks with no failures,36 protected hashes unchanged. No plugin, paid service, dependency, real model call or deployment added. ENV-01 native source-folder alignment and DEP-01 historical development-only advisories remain separate limitations.
+
+## Logo/live review — 2026-11-07
+
+| ID | Observation / cause / action | Final evidence |
+|---|---|---|
+| LIVE-SYMBOL-01 | Valid maximum-length stock symbol overflowed narrow display: 579px document width at320px. Text paragraphs lacked wrapping. Added overflow-wrap:anywhere without truncating input or changing the provider symbol. | Same case now320px; all19 responsive checks passed. |
+| QA-LOGO-01 | Initial browser run62/66: global alert selector matched Next route announcer; old News footer copy assertion was stale. Scoped the actual comparison alert and updated current provenance expectation. | Full66/66 passed; guards unchanged. |
+| QA-LOGO-02 | Responsive script's close-button selector matched modal and inert trigger. Scope to Workspace menu dialog. | Complete19-case run passed. |
+| QA-LOGO-03 | Contrast script timed out awaiting Research fallback after repeated suites. Exact response not captured; root cause remains unproven. Isolated fresh-server run passed; no timeout/rate-limit/fallback guard weakened. | All20 contrast combinations passed with zero findings. |
+| ENV-LOGO-01 | Reused workers retained restricted writes and worker Vitest reported EPERM creating temporary config. Stage bounded sources, review/import and run tests as CEO. | CEO237 unit and66 browser cases passed; worker runtime pass not claimed. |
+| PROVIDER-LOGO-01 | One mobile iframe request aborted while replacing a comparison selection. Final comparison lines rendered; external provider timing/coverage remains its responsibility. | Four real chart-pair/viewport renders plus two News ready checks, no app errors/overflow. |
+
+Walkthrough and proof: reviews/LOGO-LIVE-WALKTHROUGH-2026-11-07.md and reviews/evidence/logo-live-2026-11-07/. No remaining confirmed application failure from this change; universal live symbol coverage, model delivery and public deployment are not claimed.

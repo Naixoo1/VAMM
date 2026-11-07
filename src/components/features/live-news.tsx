@@ -136,7 +136,7 @@ export function LiveNewsFeed() {
       <div className={styles.provenance}>
         <p className={[styles.status, failed ? styles.error : ""].join(" ")} role={failed ? "alert" : "status"}>{statusText[state]}</p>
         <p className={styles.note}>News by <a href={LIVE_NEWS_EXTERNAL_URL} target="_blank" rel="noopener noreferrer">TradingView</a>. Delivery timing and availability depend on the provider and publishers.</p>
-        <p className={styles.note}>Live headlines are separate from VAMM’s synthetic practice and simulation. VAMM adds no sentiment scores to this feed.</p>
+        <p className={styles.note}>Live headlines are separate from VAMM’s frozen simulation. VAMM adds no sentiment scores to this feed.</p>
       </div>
       <div className={styles.actions}>
         {(failed || retryRequested) && !hidden && <button type="button" className={styles.button} aria-disabled={state === "loading"} onClick={retry}><RefreshCw size={14} aria-hidden="true" />{state === "loading" ? "Reconnecting live feed…" : !moduleAvailable ? "Reload page" : failed ? "Retry live feed" : "Refresh live feed"}</button>}

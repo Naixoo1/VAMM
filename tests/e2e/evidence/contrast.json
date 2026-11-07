@@ -6,22 +6,12 @@
   },
   {
     "viewport": "1440x900",
-    "route": "dashboard-learning",
-    "failures": []
-  },
-  {
-    "viewport": "1440x900",
     "route": "market",
     "failures": []
   },
   {
     "viewport": "1440x900",
     "route": "compare",
-    "failures": []
-  },
-  {
-    "viewport": "1440x900",
-    "route": "compare-learning",
     "failures": []
   },
   {
@@ -66,22 +56,12 @@
   },
   {
     "viewport": "390x844",
-    "route": "dashboard-learning",
-    "failures": []
-  },
-  {
-    "viewport": "390x844",
     "route": "market",
     "failures": []
   },
   {
     "viewport": "390x844",
     "route": "compare",
-    "failures": []
-  },
-  {
-    "viewport": "390x844",
-    "route": "compare-learning",
     "failures": []
   },
   {

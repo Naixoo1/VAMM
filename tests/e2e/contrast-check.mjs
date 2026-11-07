@@ -41,17 +41,15 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
   for (const route of ["dashboard","market","compare","research","simulation","news"]) {
     await page.goto("http://127.0.0.1:3000/" + route);
     await page.getByRole("heading",{level:1}).waitFor();
-    await page.getByRole("main").getByRole("status").filter({hasText:/Restoring|Loading the educational|Loading instrument|Opening/}).waitFor({state:"hidden"});
+    await page.waitForFunction(() => !Array.from(document.querySelectorAll('main [role="status"]')).some(element => element.getClientRects().length > 0 && /Restoring|Loading instrument choices/.test(element.textContent || "")));
     if(route==="dashboard") await page.locator("[data-live-market-kind=summary][data-live-market-state=ready]").waitFor();
     if(route==="research") await page.getByLabel("Company context",{exact:true}).waitFor();
     if(route==="news") await page.getByRole("heading",{name:"Live market news",exact:true}).waitFor();
     await inspect(route);
-    const learningSummary={dashboard:"Synthetic learning baskets",compare:"Synthetic basket comparison",research:"Synthetic basket mentor"}[route];
+    const learningSummary={research:"Synthetic basket mentor"}[route];
     if(learningSummary){
       await page.locator("summary").filter({hasText:learningSummary}).click();
-      if(route==="dashboard")await page.getByText("Simulated cash",{exact:true}).waitFor();
       if(route==="research")await page.getByRole("checkbox",{name:"Simulated bond basket"}).waitFor();
-      if(route==="compare")await page.getByRole("cell").filter({hasText:/^Unavailable/}).first().waitFor();
       await inspect(route+"-learning");
     }
     if(route==="research") {
@@ -64,7 +62,7 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
       await page.getByRole("button",{name:"Start your simulation"}).click();
       await page.getByRole("button",{name:"Advance one year"}).click();
       await page.getByRole("button",{name:"Confirm funding decision"}).waitFor();
-      await page.getByRole("main").getByRole("status").filter({hasText:/Restoring|Loading the educational|Loading instrument|Opening/}).waitFor({state:"hidden"});
+      await page.waitForFunction(() => !Array.from(document.querySelectorAll('main [role="status"]')).some(element => element.getClientRects().length > 0 && /Restoring|Loading instrument choices/.test(element.textContent || "")));
       await inspect("simulation-pending");
       await page.getByRole("button",{name:"New session",exact:true}).click();
       await inspect("reset-dialog");

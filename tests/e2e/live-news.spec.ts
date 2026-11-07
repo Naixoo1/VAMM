@@ -94,7 +94,7 @@ test("stubbed live feed registers once, has explicit provider configuration, and
   await noOverflow(page);
 });
 
-test("blocked external news shows an honest failure and keeps synthetic practice explicitly separate", async ({ page }) => {
+test("blocked external news shows an honest failure without substituting synthetic practice", async ({ page }) => {
   let practiceRequests = 0;
   page.on("request", request => { if (new URL(request.url()).pathname === "/api/news") practiceRequests += 1; });
   await page.route(LIVE_NEWS_TEST_MODULE_URL, route => route.abort("blockedbyclient"));
@@ -109,9 +109,9 @@ test("blocked external news shows an honest failure and keeps synthetic practice
   await expect(fallback).toHaveAttribute("rel", /noreferrer/);
   await expect(page.getByText("Curated · not live", { exact: true })).toHaveCount(0);
   expect(practiceRequests).toBe(0);
-  await page.locator("summary").filter({ hasText: "Synthetic practice" }).click();
-  await expect(page.getByText("Synthetic scenario: bond basket records a modest gain", { exact: true })).toBeVisible();
-  expect(practiceRequests).toBe(1);
+  await expect(page.locator("summary").filter({ hasText: "Synthetic practice" })).toHaveCount(0);
+  await expect(page.getByText("Synthetic scenario: bond basket records a modest gain", { exact: true })).toHaveCount(0);
+  expect(practiceRequests).toBe(0);
   await expect(feedRegion(page)).toHaveAttribute("data-live-news-state", "error");
   await noOverflow(page);
 });

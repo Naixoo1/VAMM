@@ -1,0 +1,7 @@
+.frame{position:relative;display:block;flex:none;max-width:100%;aspect-ratio:1.28;overflow:hidden;isolation:isolate;border:1px solid #d9cda7;border-radius:13px;background:#fefbec}
+/* Preserve the full central crest/banner; crop only empty cream margins from the 1600px source. */
+.frame .asset{position:absolute;display:block;left:-20.175%;top:-43.8%;width:140.35%;height:auto;max-width:none;pointer-events:none}
+.sidebar{width:180px}
+.hero{width:320px;margin-inline:auto;border-radius:18px;box-shadow:0 12px 30px #2023340a}
+@media(max-width:1180px){.hero{width:220px}}
+@media(max-width:560px){.hero{width:190px;border-radius:14px}}
