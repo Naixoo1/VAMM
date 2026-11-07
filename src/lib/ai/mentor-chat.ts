@@ -74,6 +74,29 @@ async function readInput(request: Request, signal: AbortSignal): Promise<MentorC
   let raw: unknown; try { raw = JSON.parse(text); } catch { invalid(); }
   return validateMentorChatRequest(raw);
 }
+async function upstreamFailure(response: Response, signal: AbortSignal): Promise<MentorChatError> {
+  let insufficientQuota = false;
+  if (response.body) {
+    try {
+      // Provider error text is private. Only this exact whitelisted category is retained.
+      const raw: unknown = JSON.parse(await boundedText(response.body, 8192, signal, false));
+      if (raw && typeof raw === "object" && "error" in raw && raw.error && typeof raw.error === "object") {
+        const error = raw.error as { code?: unknown; type?: unknown };
+        insufficientQuota = error.code === "insufficient_quota" || error.type === "insufficient_quota";
+      }
+    } catch { aborted(signal); /* Malformed/oversized bodies never hide the safe HTTP classification. */ }
+  }
+  switch (response.status) {
+    case 401: return new MentorChatError("MODEL_AUTH_FAILED", 502, "The AI provider rejected this site's credentials. The site owner should check the server-side API key.");
+    case 403: return new MentorChatError("MODEL_ACCESS_DENIED", 502, "The AI provider denied access. The site owner should check the configured model's permissions.");
+    case 404: return new MentorChatError("MODEL_NOT_FOUND", 502, "The configured AI model could not be found. The site owner should check the server-side model setting.");
+    case 429: return insufficientQuota
+      ? new MentorChatError("MODEL_QUOTA_EXCEEDED", 429, "The AI provider has no available quota. The site owner should review provider billing and quota; your saved question remains available.")
+      : new MentorChatError("MODEL_RATE_LIMITED", 429, "The AI provider is temporarily limiting requests. Wait before choosing Retry reply.");
+    case 400: return new MentorChatError("MODEL_REQUEST_REJECTED", 502, "The AI provider rejected this chat or screenshot request. The site owner should check model and request compatibility.");
+    default: return new MentorChatError("MODEL_UNAVAILABLE", 502, "The mentor service is unavailable. Please try again later.");
+  }
+}
 async function modelReply(input: MentorChatRequest, configuration: MentorModelConfig, signal: AbortSignal, fetcher: typeof fetch): Promise<string> {
   const messages = input.messages.map((message, index) => input.image && index === input.messages.length - 1
     ? { role: message.role, content: [{ type: "input_text", text: message.content }, { type: "input_image", image_url: input.image.dataUrl, detail: "auto" }] }
@@ -83,7 +106,8 @@ async function modelReply(input: MentorChatRequest, configuration: MentorModelCo
     headers: { Authorization: `Bearer ${configuration.apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({ model: configuration.model, store: false, instructions: INSTRUCTIONS, input: messages, max_output_tokens: 1000 }),
   });
-  if (!response.ok || !response.body) { void response.body?.cancel().catch(() => undefined); throw new MentorChatError("MODEL_UNAVAILABLE", 502, "The mentor service is unavailable. Please try again later."); }
+  if (!response.ok) throw await upstreamFailure(response, signal);
+  if (!response.body) throw new MentorChatError("MODEL_UNAVAILABLE", 502, "The mentor service is unavailable. Please try again later.");
   const text = await boundedText(response.body, MAX_PROVIDER_BYTES, signal, false);
   let raw: unknown; try { raw = JSON.parse(text); } catch { throw new MentorChatError("MODEL_INVALID_OUTPUT", 502, "The mentor returned an invalid response. Please try again."); }
   const envelope = raw as { status?: unknown; output?: unknown } | null;

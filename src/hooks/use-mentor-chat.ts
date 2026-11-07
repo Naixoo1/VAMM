@@ -31,6 +31,12 @@ function requestFor(session:ChatSession,image:ChatImage|null):MentorChatRequest{
 function latestImage(session:ChatSession):ChatImage|null{return [...session.messages].reverse().find(message=>message.role==="user")?.image??null}
 function serverIssue(code:unknown):string{
  if(code==="NOT_CONFIGURED")return"The Mentor is not configured on this site yet. Your question is saved; you can retry after it becomes available.";
+ if(code==="MODEL_AUTH_FAILED")return"This site’s configured model credentials were rejected. Your question is saved. The site owner must update the model configuration before you retry.";
+ if(code==="MODEL_ACCESS_DENIED")return"The configured model is not accessible to this site. Your question is saved. The site owner must check model access before you retry.";
+ if(code==="MODEL_NOT_FOUND")return"This site’s configured model is unavailable. Your question is saved. The site owner must check the model name before you retry.";
+ if(code==="MODEL_QUOTA_EXCEEDED")return"The model provider’s quota or billing limit has been reached. Your question is saved. Retry after the site owner restores provider capacity.";
+ if(code==="MODEL_RATE_LIMITED")return"The model provider is busy or rate-limiting requests. Your question is saved. Wait a moment, then choose Retry reply.";
+ if(code==="MODEL_REQUEST_REJECTED")return"The model provider rejected this screenshot or model request. Your question is saved. Start a new chat to revise the question or screenshot.";
  if(code==="RATE_LIMITED")return"The Mentor has reached its request limit. Your question is saved. Wait a moment, then choose Retry reply.";
  if(code==="MODEL_TIMEOUT")return"The Mentor took too long to respond. Your question is saved. A manual retry sends another model request.";
  if(code==="MODEL_REFUSAL")return"The Mentor could not answer that request. Your question is saved. You can start a new chat with a different question.";

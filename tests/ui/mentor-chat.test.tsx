@@ -26,6 +26,16 @@ beforeEach(()=>{vi.clearAllMocks();records=new Map();configured=true;fetchMock.m
 afterEach(()=>{cleanup();clients.splice(0).forEach(client=>client.clear());vi.unstubAllGlobals()});
 
 describe("Mentor chat durable request boundaries",()=>{
+ it.each([
+  ["MODEL_AUTH_FAILED","configured model credentials were rejected"],
+  ["MODEL_ACCESS_DENIED","model is not accessible to this site"],
+  ["MODEL_NOT_FOUND","configured model is unavailable"],
+  ["MODEL_QUOTA_EXCEEDED","quota or billing limit has been reached"],
+  ["MODEL_RATE_LIMITED","provider is busy or rate-limiting requests"],
+  ["MODEL_REQUEST_REJECTED","provider rejected this screenshot or model request"],
+ ])("explains %s without exposing provider details or retrying automatically",async(code,explanation)=>{
+  fetchMock.mockImplementation(async(_url,options)=>options?.method==="POST"?json({ok:false,error:{code,message:"private raw provider diagnostic"}},502):json({configured:true}));const{wrapper}=setup();const{result}=renderHook(()=>useMentorChat(),{wrapper});await ready(result);act(()=>result.current.setDraft("Keep this question safe"));act(()=>result.current.send());await waitFor(()=>expect(result.current.issue?.message).toContain(explanation));await waitFor(()=>expect(result.current.busy).toBe(false));expect(result.current.issue?.message).toContain("Your question is saved");expect(result.current.issue?.message).not.toContain("private raw provider diagnostic");expect(result.current.session?.messages.map(message=>message.content)).toEqual(["Keep this question safe"]);await act(async()=>{await result.current.reloadHistory();await result.current.checkAvailability()});expect(posts()).toHaveLength(1);expect(saveSession).toHaveBeenCalledTimes(1);
+ });
  it("reads and reopens stored conversations without making a model request",async()=>{
   const previous=sample();records.set(previous.id,previous);const{wrapper}=setup();const{result}=renderHook(()=>useMentorChat(),{wrapper});await ready(result);await act(async()=>{await result.current.openSession(previous.id)});expect(result.current.session?.messages).toEqual(previous.messages);expect(posts()).toHaveLength(0);act(()=>{result.current.newChat()});expect(records.get(previous.id)).toEqual(previous);expect(posts()).toHaveLength(0);
  });

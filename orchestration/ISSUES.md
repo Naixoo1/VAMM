@@ -7,6 +7,7 @@
 | CHAT-UI-01 | Initial component checkpoint missed a closing JSX brace; initial hook read an intent ref during render, rejected by React lint. Owner repairs syntax and mirrors render state without changing lint rules. | Final types/lint/build and14 UI tests pass |
 | CHAT-RECOVERY-01 | Source review found New/Open chat could discard an unsaved received reply, a local save retry depended on model availability, and removal could hide an image still captured by a failed request. Require informed discard, separate local save retry, and lock image edits for pending intent. |14 UI and2 additional browser recovery cases pass; no repeated model call for local save retry |
 | CHAT-CONFIG-01 | Production initially had no OpenAI variables. User chose to add existing credentials securely in Vercel; key presence is observed without reading its value. Configuration presence is not actual model success. | Production verification pending |
+| CHAT-PROVIDER-01 | Production845da99 passed18 route checks but the first real text request received upstream non-2xx, displayed as generic502. Adding bounded status/category classification and fixed UI messages distinguishes rejected credentials, model access, quota and request errors without exposing provider text. |67server +20UI checks, lint/build pass; redeploying to identify the actual provider category |
 
 CEO-maintained; workers report evidence. Apply during authorized work only. This guide
 does not start implementation, retries, external actions, or continuous monitoring.

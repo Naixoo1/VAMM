@@ -134,7 +134,7 @@ describe("bounded model failures, cancellation and per-instance guards", () => {
       return new Response("x".repeat(65537));
     });
     const response = await createMentorChatHandlers({ configuration, fetcher }).POST(request());
-    await rejected(response, 502, mode === "throw" || mode === "provider-status" ? "MODEL_UNAVAILABLE" : "MODEL_INVALID_OUTPUT"); expect(fetcher).toHaveBeenCalledTimes(1);
+    await rejected(response, 502, mode === "provider-status" ? "MODEL_AUTH_FAILED" : mode === "throw" ? "MODEL_UNAVAILABLE" : "MODEL_INVALID_OUTPUT"); expect(fetcher).toHaveBeenCalledTimes(1);
   });
   it("aborts a stalled provider by18seconds, even if its promise ignores abort", async () => {
     vi.useFakeTimers(); let signal: AbortSignal | null | undefined;
@@ -168,5 +168,46 @@ describe("bounded model failures, cancellation and per-instance guards", () => {
     const slow = vi.fn<typeof fetch>(async () => { await held; return providerResponse(); }); const concurrent = createMentorChatHandlers({ configuration, fetcher: slow });
     const first = concurrent.POST(request()); const second = concurrent.POST(request());
     await rejected(await concurrent.POST(request()), 429, "RATE_LIMITED"); release(); expect((await first).status).toBe(200); expect((await second).status).toBe(200); expect(slow).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe("safe upstream HTTP diagnostics", () => {
+  it.each([
+    [400, "MODEL_REQUEST_REJECTED", 502, { code: "malicious-provider-code" }],
+    [401, "MODEL_AUTH_FAILED", 502, { code: "invalid_api_key" }],
+    [403, "MODEL_ACCESS_DENIED", 502, { type: "permissions_error" }],
+    [404, "MODEL_NOT_FOUND", 502, { code: "model_not_found" }],
+    [429, "MODEL_QUOTA_EXCEEDED", 429, { code: "insufficient_quota" }],
+    [429, "MODEL_QUOTA_EXCEEDED", 429, { type: "insufficient_quota" }],
+    [429, "MODEL_RATE_LIMITED", 429, { code: "rate_limit_exceeded" }],
+    [429, "MODEL_RATE_LIMITED", 429, { code: "insufficient_quota\u0000injected" }],
+    [500, "MODEL_UNAVAILABLE", 502, { code: "private_internal_error" }],
+  ] as const)("classifies upstream%s as%s using safe categories only", async (upstream, code, status, category) => {
+    const privateText = "PRIVATE_PROVIDER_MESSAGE_ORG_AND_REQUEST_DETAILS";
+    const log = vi.spyOn(console, "log"); const warn = vi.spyOn(console, "warn"); const error = vi.spyOn(console, "error");
+    const fetcher = vi.fn<typeof fetch>(async () => Response.json({ error: { ...category, message: privateText, api_key: configuration().apiKey, organization: privateText }, request_id: privateText }, { status: upstream, headers: { "x-private-provider-details": privateText } }));
+    const response = await createMentorChatHandlers({ configuration, fetcher }).POST(request());
+    const body = await rejected(response, status, code); expect(JSON.stringify(body)).not.toContain(privateText);
+    expect(response.headers.get("x-private-provider-details")).toBeNull(); expect(fetcher).toHaveBeenCalledTimes(1);
+    expect(log).not.toHaveBeenCalled(); expect(warn).not.toHaveBeenCalled(); expect(error).not.toHaveBeenCalled();
+  });
+  it.each(["not JSON; PRIVATE_PROVIDER_DETAILS", "x".repeat(8193)])("falls back to status-only classification for invalid/oversized error bodies (%#)", async text => {
+    const fetcher = vi.fn<typeof fetch>(async () => new Response(text, { status: 401 }));
+    const body = await rejected(await createMentorChatHandlers({ configuration, fetcher }).POST(request()), 502, "MODEL_AUTH_FAILED");
+    expect(JSON.stringify(body)).not.toContain("PRIVATE_PROVIDER_DETAILS"); expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+  it("reads at most8KiB of error JSON and does not infer quota from unread or malformed data", async () => {
+    const text = JSON.stringify({ error: { code: "insufficient_quota" } });
+    for (const [size, expected] of [[8192, "MODEL_QUOTA_EXCEEDED"], [8193, "MODEL_RATE_LIMITED"]] as const) {
+      const fetcher = vi.fn<typeof fetch>(async () => new Response(text + " ".repeat(size - text.length), { status: 429 }));
+      await rejected(await createMentorChatHandlers({ configuration, fetcher }).POST(request()), 429, expected); expect(fetcher).toHaveBeenCalledTimes(1);
+    }
+  });
+  it("keeps a stalled provider error stream inside the existing18second deadline", async () => {
+    vi.useFakeTimers(); const cancel = vi.fn();
+    const fetcher = vi.fn<typeof fetch>(async () => new Response(new ReadableStream<Uint8Array>({ cancel }), { status: 429 }));
+    const pending = createMentorChatHandlers({ configuration, fetcher }).POST(request());
+    await vi.advanceTimersByTimeAsync(0); expect(fetcher).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(CHAT_TIMEOUT_MS); await rejected(await pending, 504, "MODEL_TIMEOUT"); expect(cancel).toHaveBeenCalled();
   });
 });
