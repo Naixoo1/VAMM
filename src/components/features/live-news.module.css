@@ -1,0 +1,26 @@
+.card{background:#fff;border:1px solid #e1e7da;border-radius:11px;min-width:0}
+.header{padding:22px 24px 18px;border-bottom:1px solid #e6ebe0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.title{font-size:15px;font-weight:600;color:#263f33;margin:0 0 6px}
+.description{color:#52635b;font-size:12px;line-height:1.8;margin:0;max-width:580px}
+.provider{font-size:11px;color:#46613e;background:#eef3e6;padding:4px 8px;border-radius:5px}
+.frame{position:relative;min-width:0;height:650px;background:#fff}
+.host{width:100%;height:100%;min-width:0;display:block}
+.host>tv-news-feed{display:block;width:100%;height:100%;min-width:0}
+.placeholder{position:absolute;inset:0;background:#f9fbf6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#52635b;padding:28px;gap:12px}
+.placeholder strong{font-size:15px;color:#304c3a}
+.placeholder p{font-size:12px;line-height:1.8;max-width:390px;margin:0}
+.spinner{animation:news-spin 1s linear infinite}
+.footer{padding:18px 24px;border-top:1px solid #e6ebe0;display:flex;gap:18px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+.provenance{flex:1 1 300px;min-width:0}
+.status{font-size:12px;font-weight:600;color:#3d5e43;margin:0 0 7px}
+.error{color:#87543c}
+.note{font-size:11px;line-height:1.8;color:#52635b;margin:5px 0 0}
+.note a,.link{color:#2e6247;text-decoration:underline;text-underline-offset:3px}
+.actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.button{display:inline-flex;gap:7px;align-items:center;justify-content:center;min-height:44px;border:1px solid #cddbc7;background:#f3f7ee;color:#304f3a;border-radius:7px;padding:10px 14px;font:600 12px/1.5 Arial,sans-serif;cursor:pointer}
+.button:hover{background:#e9f1e0}
+.link{display:inline-flex;gap:7px;align-items:center;min-height:44px;font-size:12px;font-weight:600}
+@keyframes news-spin{to{transform:rotate(360deg)}}
+@media(max-width:800px){.frame{height:620px}}
+@media(max-width:480px){.header{padding:20px 18px 16px}.frame{height:600px}.footer{padding:16px 18px;gap:12px}.description{font-size:12px}.actions{width:100%}}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}

@@ -1,3 +1,4 @@
+import { installLiveNewsStub } from "./live-news-stub";
 import { expect, test, type Page } from "@playwright/test";
 
 const MODULE_URL = "https://widgets.tradingview-widget.com/w/en/tv-advanced-chart.js";
@@ -176,47 +177,32 @@ test("verified widget error events are sanitized and manual retry remounts witho
   expect(probe.requests()).toBe(1);
 });
 
-const verifiedSources = [
-  { title: "Apple reports fourth quarter results", publisher: "Apple", date: "2 Nov 2026", url: "https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/" },
-  { title: "Federal Reserve issues FOMC statement", publisher: "Federal Reserve", date: "28 Oct 2026", url: "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm" },
-  { title: "When index funds mix but don’t match", publisher: "Vanguard", date: "4 Jun 2025", url: "https://corporate.vanguard.com/content/corporatesite/us/en/corp/articles/when-index-funds-mix-dont-match.html" },
-] as const;
-
-test("real publisher reading uses verified links and no invented sentiment, with synthetic practice explicitly separate", async ({ page }) => {
+test("live news provenance and separate lazy synthetic practice", async ({ page }) => {
+  await installLiveNewsStub(page);
   let practiceRequests = 0;
   page.on("request", request => { if (new URL(request.url()).pathname === "/api/news") practiceRequests += 1; });
   await page.goto("/news");
-  const reading = page.getByRole("region", { name: "Curated source reading", exact: true });
-  await expect(reading).toBeVisible();
-  await expect(reading.getByRole("article")).toHaveCount(3);
-  for (const source of verifiedSources) {
-    const article = reading.getByRole("article").filter({ has: page.getByRole("heading", { name: source.title, exact: true }) });
-    await expect(article).toBeVisible();
-    const link = article.getByRole("link");
-    await expect(link).toHaveAccessibleName(source.title + " — " + source.publisher + " (opens in a new tab)");
-    await expect(link).toHaveAttribute("href", source.url);
-    await expect(link).toHaveAttribute("target", "_blank");
-    await expect(link).toHaveAttribute("rel", /noopener/);
-    await expect(link).toHaveAttribute("rel", /noreferrer/);
-    await expect(article).toContainText(source.publisher);
-    await expect(article).toContainText(source.date);
-  }
-  for (const sentiment of ["Positive", "Neutral", "Negative", "Mixed"]) {
-    await expect(reading.getByText(sentiment, { exact: true })).toHaveCount(0);
-  }
-  await expect(page.getByText("Curated · not live", { exact: true })).toBeVisible();
-  await expect(page.getByRole("main").locator("footer").last()).toContainText("Publisher reading and synthetic practice labeled separately");
+  const feed = page.getByRole("region", { name: "Live market news", exact: true });
+  await expect(feed).toHaveAttribute("data-live-news-state", "ready");
+  await expect(page.getByText("Auto-updating news", { exact: true })).toBeVisible();
+  await expect(page.getByRole("main").locator("footer").last()).toContainText("Live news and synthetic practice labeled separately");
+  await expect(page.getByText("Curated · not live", { exact: true })).toHaveCount(0);
+  await expect(feed).toContainText("VAMM adds no sentiment scores");
+  const link = feed.getByRole("link", { name: "Open news on TradingView" });
+  await expect(link).toHaveAttribute("href", "https://www.tradingview.com/news/");
+  await expect(link).toHaveAttribute("target", "_blank");
+  await expect(link).toHaveAttribute("rel", "noopener noreferrer");
   expect(practiceRequests).toBe(0);
-  await noHorizontalOverflow(page);
   await page.locator("summary").filter({ hasText: "Synthetic practice" }).click();
   await expect(page.getByText("Synthetic scenario: bond basket records a modest gain", { exact: true })).toBeVisible();
   await expect(page.getByText("Mixed", { exact: true })).toBeVisible();
   expect(practiceRequests).toBe(1);
-  await expect(reading).toBeVisible();
+  await expect(feed).toHaveAttribute("data-live-news-state", "ready");
   await noHorizontalOverflow(page);
 });
 
-test("independent widget and source-news interactions preserve saved simulation state and first-turn math", async ({ page, request }) => {
+test("independent widget and live-news interactions preserve saved simulation state and first-turn math", async ({ page, request }) => {
+  await installLiveNewsStub(page);
   await stubOfficialModule(page);
   const marketBefore = await (await request.get("/api/market")).json();
   const newsBefore = await (await request.get("/api/news")).json();
@@ -233,7 +219,7 @@ test("independent widget and source-news interactions preserve saved simulation 
   });
   await expect(widget(page)).toHaveAttribute("symbol", "NYSE:IBM");
   await navigation(page, "News & Sentiment Lab").click();
-  await expect(page.getByRole("region", { name: "Curated source reading", exact: true })).toBeVisible();
+  await expect(page.getByRole("region", { name: "Live market news", exact: true })).toBeVisible();
   await page.locator("summary").filter({ hasText: "Synthetic practice" }).click();
   await expect(page.getByText("Synthetic scenario: bond basket records a modest gain", { exact: true })).toBeVisible();
   expect(await simulationSnapshot(page)).toEqual(before);

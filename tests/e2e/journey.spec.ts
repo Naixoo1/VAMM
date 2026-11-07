@@ -1,7 +1,8 @@
+import { installLiveNewsStub } from "./live-news-stub";
 import { installTradingViewStub } from "./tradingview-stub";
 import { test, expect, type Page } from "@playwright/test";
 
-test.beforeEach(async ({ page }) => { await installTradingViewStub(page); });
+test.beforeEach(async ({ page }) => { await installTradingViewStub(page); await installLiveNewsStub(page); });
 
 async function savedState(page: Page) {
   return page.evaluate(async () => {

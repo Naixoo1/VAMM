@@ -1,0 +1,44 @@
+[
+  {
+    "name": "desktop",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "state": "ready",
+    "host": {
+      "x": 289,
+      "y": 470.953125,
+      "width": 1106,
+      "height": 650
+    },
+    "documentWidth": 1440,
+    "modules": [
+      200
+    ],
+    "reconnected": true,
+    "pageErrors": [],
+    "failedRequests": []
+  },
+  {
+    "name": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "ready",
+    "host": {
+      "x": 18,
+      "y": 727.390625,
+      "width": 354,
+      "height": 600
+    },
+    "documentWidth": 390,
+    "modules": [
+      200
+    ],
+    "reconnected": true,
+    "pageErrors": [],
+    "failedRequests": []
+  }
+]

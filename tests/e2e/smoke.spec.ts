@@ -1,3 +1,4 @@
+import { installLiveNewsStub } from "./live-news-stub";
 import { installTradingViewStub } from "./tradingview-stub";
 import { test, expect } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
@@ -24,6 +25,7 @@ test("frozen market/news and labeled research fallback", async ({ request }) => 
 
 test("six routes render without page errors or horizontal overflow", async ({ page }, testInfo) => {
   await installTradingViewStub(page);
+  await installLiveNewsStub(page);
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   const evidenceDirectory = resolve("tests/e2e/evidence");
@@ -40,7 +42,7 @@ test("six routes render without page errors or horizontal overflow", async ({ pa
     if (route === "research") await expect(page.getByRole("checkbox", { name: "Simulated bond basket" })).toBeVisible();
     if (route === "compare") await expect(page.getByRole("cell").filter({ hasText: /^Unavailable/ })).toHaveCount(2);
     if (route === "simulation") await expect(page.getByRole("button", { name: "Start your simulation" })).toBeVisible();
-    if (route === "news") await expect(page.getByRole("heading", { name: "Apple reports fourth quarter results", exact: true })).toBeVisible();
+    if (route === "news") await expect(page.getByRole("heading", { name: "Live market news", exact: true })).toBeVisible();
     await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); window.scrollTo(0,0); });
     await page.screenshot({ path: resolve(evidenceDirectory, route + "-" + testInfo.project.name + ".png"), fullPage: true, animations: "disabled" });
   }

@@ -26,7 +26,7 @@ fund shock → review nominal/real outcome → continue or reset.
 | Research / AI Investment Mentor | 1–2 instruments/question; server-selected fixture evidence; limitations/labeled fallback |
 | Compare | Bonds/equity default; cumulative synthetic return and unavailable annual fee; matching periods |
 | Simulation | Engine contribution preview; nominal/real charts; separate gain/contribution/bill; explicit funding, history/reset |
-| News / News & Sentiment Lab | Three synthetic stories; prewritten sentiment/reason, never trading advice |
+| News / News & Sentiment Lab | Live TradingView feed; separately expandable three synthetic stories with prewritten sentiment/reason, never trading advice |
 
 ## Compatible feature meanings — 2026-11-07
 
@@ -39,7 +39,7 @@ Suggested prompts populate the existing question field and reuse ResearchRequest
 - "Explain why these synthetic results are not a forecast."
 Explain concepts only within available evidence; unsupported company/fundamental data
 remains unavailable. Current feedback is prewritten reflection, not model portfolio analysis.
-Academy, Missions/XP, profiles, Rp10M stock trading, live news/model sentiment and chat
+Academy, Missions/XP, profiles, Rp10M stock trading, live model sentiment and chat
 history remain roadmap proposals. If quizzes are later approved, Missions owns all of
 them; Academy/News link there and learning rewards never rank investment returns.
 No backend shape, fixture, storage or ownership changes; contract stays v2.
@@ -62,7 +62,7 @@ the active-session pointer only on success.
 ## Data and service defaults
 
 Only frozen synthetic fixtures/scenarios are required. IDs/values/versions are in
-FIXTURES; no live provider, fabricated provenance, or widget-derived calculations.
+FIXTURES; no fabricated provenance or widget-derived calculations. External chart/live News presentation is independent of financial state and research evidence.
 Simulation/AI owns gateway previews using the same engine helper as ADVANCE; no UI math.
 Feedback uses committed-turn prewritten templates. Research is the sole default model
 feature: 15-second timeout, no automatic retry, validated evidence, labeled fixture fallback.
@@ -93,3 +93,9 @@ labels, and desktop/mobile deployment checks.
 
 Fallback order: omit widget → labeled prewritten research → simplify supporting visuals.
 Preserve local persistence and simulation semantics.
+
+## Authorized presentation extensions
+
+The separate /market route and Dashboard chart use TradingView (NASDAQ:AAPL, symbol changing, 1D). News is automatically updated by TradingView instead of manually maintained links. Provider timestamps/availability apply; VAMM adds no live sentiment score. Synthetic sentiment practice and all v2 endpoints remain unchanged. No backend or financial API is created for the widgets.
+
+Future handmade UI can replace presentation only; retain hooks, gateway, validation, contracts, fixtures and storage semantics. Current animation work is a separate MagicPath prototype/combination study based on the user's video, not a production redesign. Details: orchestration/reviews/LIVE-NEWS-MOTION-2026-11-07.md. Ask before adding plugins or paid data services.

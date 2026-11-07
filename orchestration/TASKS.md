@@ -91,3 +91,19 @@ User authorized /market (dark, NASDAQ:AAPL, symbol changing,1D), TradingView das
 Same three workers resumed using saved-role fallback. Temporary path ownership is in the reconciliation report; workers must not touch frozen sources. CEO recorded19 protected file hashes. Git main now preserves remote16607b0 and local baseline005549f, using connected GitHub identity with a private noreply address scoped to this repository. Nothing pushed yet.
 
 TradingView/News tasks progressed Running → Review (worker handoffs) → Integrated (CEO-reviewed imports) → Verified. Evidence: 96 unit tests, 26 production-browser checks, TypeScript/lint/build; actual TradingView ready/render at desktop/mobile; 19 protected hashes unchanged. Full reconciliation/evidence in reviews/TRADINGVIEW-2026-11-07.md. Source reading is curated/non-live; no plugins, paid services or chart APIs added. Git changes are ready for the requested commit/push; no manual deployment.
+
+## Live News and motion exploration — 2026-11-07
+
+Latest user instruction: live provider-updated News without task-by-task curation; selected existing MagicPath for video-based animation brainstorming. User confirmed future UI replaces presentation while preserving data/logic. Original BOOT/UI/DATA/SIM briefs remain Verified; the new bounded work does not reopen financial implementation. Earlier "not pushed" notes are historical: baseline 98ceffe is on origin/main.
+
+| ID | Owner | Dependencies | Status |
+|---|---|---|---|
+| VAMM-LIVE-NEWS-03 | Data/platform | Official tv-news-feed Web Component | Verified |
+| VAMM-MOTION-01 | Interface + CEO | Locally inspected reference; existing MagicPath | Verified |
+| VAMM-LIVE-MOTION-VERIFY-01 | Simulation/AI + CEO | Provider host and staged concepts | Verified |
+
+Same three generic workers resumed with saved role instructions/document paths explicitly supplied. No native named-role selection or recursive delegation is claimed. Workers draft under the existing visualization writable root; CEO reviews/imports through approved commands in C:/code/VAMM because native cwd still points to nonexistent C:/code/VAAM. No ACL/global-trust workaround.
+
+Data temporarily owns News page/provider component/helper/CSS and matching unit tests. Interface owns separate MagicPath TSX/CSS concepts and combination matrix only. Simulation/AI owns new live-news browser checks. CEO owns shared shell wording, old e2e updates, documentation, integration and Git. Frozen v2/API/fixture/engine/storage/model sources are prohibited. Review: reviews/LIVE-NEWS-MOTION-2026-11-07.md. No plugins/paid data services may be added without asking.
+
+Live-News/motion tasks progressed Running → Review (all three actual handoffs) → Integrated (CEO-reviewed imports / remote builds) → Verified for the local production app and separate motion studies. Evidence: reviews/LIVE-NEWS-MOTION-2026-11-07.md;103 unit tests,38 browser cases across initial run plus corrected failed-case rerun,18 contrast combinations, real Feed load/reconnect at desktop/mobile,4 motion render combinations and19 protected hashes unchanged. Motion remains outside production imports; future handmade UI pending. No plugin/paid data service or deployment was added. Concurrent remote commit1ac7552 is being reviewed for preservation before push.

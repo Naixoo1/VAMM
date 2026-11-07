@@ -64,3 +64,14 @@ Keep actionable summaries here; use `work/` for scratch output only when necessa
 | QA-01 / VERIFY / CEO | Browser test selectors collided with Next route announcer or nested fee text; canceled StrictMode fixture GET was counted as a retry. | Scoped alerts to main, selected actual fee cells, counted completed503 responses. No validation or app guards weakened. | All 14 production-browser checks passed. | Verified resolved |
 
 DEP-01 remains a development-only lint-chain advisory: production-only npm audit returned zero findings. Live model/provider/deployment access was not tested or configured. Native workspace root remains VAAM; explicit approved operations in VAMM are the verified workaround, not a permanent app permission change.
+
+## Live-News / motion checks — 2026-11-07
+
+| ID | Evidence and action | Actual result |
+|---|---|---|
+| QA-02 | New refresh test used clock.fastForward, which invokes repeating timers once; changed only that case to runFor while retaining >=3 refresh assertion. | Both failed desktop/mobile cases passed on rerun. App untouched. |
+| QA-03 | Contrast helper timed out awaiting fallback during concurrent checks; isolated rerun completed. | All18 rendered combinations had zero contrast failures; initial timeout remains recorded. |
+| MEDIA-01 | Installed Playwright ffmpeg supports only WebM/image demuxing; MP4 inspection failed. | Existing browser decoded local24s video;12 frames captured, six reviewed. No installation, original edit or external video upload. |
+| MOTION-01 | Prototype static switch initially omitted forced OS state; two select names included nested option text. | Corrected effective static state/disable and explicit labels. Remote builds completed; four local responsive interaction checks passed. |
+
+No live-provider outage was observed in final smoke checks. Provider refresh timing and full accessibility of its closed internals remain external, not inferred from deterministic stubs.

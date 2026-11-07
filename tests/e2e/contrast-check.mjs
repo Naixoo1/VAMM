@@ -1,3 +1,4 @@
+import { installLiveNewsStub } from "./live-news-stub.ts";
 import { installTradingViewStub } from "./tradingview-stub.ts";
 import { chromium } from "@playwright/test";
 import { writeFile } from "node:fs/promises";
@@ -33,6 +34,7 @@ const reports = [];
 for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,844]]) {
   const page = await browser.newPage({ viewport: { width, height } });
   await installTradingViewStub(page);
+  await installLiveNewsStub(page);
   const inspect = async route => reports.push({viewport,route,failures:await page.evaluate(scanContrast)});
   for (const route of ["dashboard","market","compare","research","simulation","news"]) {
     await page.goto("http://127.0.0.1:3000/" + route);
@@ -40,7 +42,7 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
     await page.getByRole("main").getByRole("status").filter({hasText:/Restoring|Loading the educational|Loading instrument|Opening/}).waitFor({state:"hidden"});
     if(route==="dashboard") await page.getByText("Simulated cash",{exact:true}).waitFor();
     if(route==="research") await page.getByRole("checkbox",{name:"Simulated bond basket"}).waitFor();
-    if(route==="news") await page.getByRole("heading",{name:"Apple reports fourth quarter results",exact:true}).waitFor();
+    if(route==="news") await page.getByRole("heading",{name:"Live market news",exact:true}).waitFor();
     await inspect(route);
     if(route==="research") {
       await page.getByLabel("Your question").fill("Explain why synthetic results are not a forecast.");

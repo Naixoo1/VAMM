@@ -1,0 +1,46 @@
+[
+  {
+    "study": "reference",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "controls": "passed",
+    "runtimeReducedMotion": "passed",
+    "errors": [],
+    "apiRequests": []
+  },
+  {
+    "study": "playground",
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "documentWidth": 1440,
+    "controls": "passed",
+    "runtimeReducedMotion": "passed",
+    "errors": [],
+    "apiRequests": []
+  },
+  {
+    "study": "reference",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "controls": "passed",
+    "runtimeReducedMotion": "passed",
+    "errors": [],
+    "apiRequests": []
+  },
+  {
+    "study": "playground",
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "controls": "passed",
+    "runtimeReducedMotion": "passed",
+    "errors": [],
+    "apiRequests": []
+  }
+]

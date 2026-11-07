@@ -72,5 +72,5 @@ contract v2 and FIXTURES now resolve them without starting application work.
 Read `orchestration/reviews/FEATURES-2026-11-07.md` when reviewing checklist scope.
 User directed MVP preservation: existing views gain equivalent Home/Mentor/News Lab
 labels and suggested prompts through the existing request. Contracts/fixtures/ownership
-stay v2; Academy, stock trading, Missions/XP, profiles and live news remain deferred.
+stay v2; Academy, stock trading, Missions/XP, profiles and live model sentiment remain deferred. A later explicit user request authorizes independent automatically updating TradingView News presentation; frozen synthetic practice remains unchanged.
 The source checklist is reference-only; no new module or agent task is activated.

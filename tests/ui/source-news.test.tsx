@@ -5,6 +5,10 @@ import NewsPage from "@/app/news/page";
 import { useNewsData } from "@/hooks/use-api-data";
 import { getNewsData } from "@/lib/data/fixtures";
 vi.mock("@/hooks/use-api-data", () => ({ useNewsData: vi.fn() }));
+// Provider lifecycle is covered separately; these tests exercise the page/practice boundary.
+vi.mock("@/components/features/live-news", () => ({
+  LiveNewsFeed: () => <section aria-label="Live market news">External provider test boundary</section>,
+}));
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -18,37 +22,18 @@ function openPractice() {
   fireEvent(details, new Event("toggle"));
 }
 
-describe("News publisher reading and separate synthetic practice", () => {
-  it("shows real dated publisher links and honest manually curated labeling", () => {
+describe("live News page and separate synthetic practice", () => {
+  it("makes the automatic provider feed primary instead of manually maintained article cards", () => {
     render(<NewsPage />);
     expect(screen.getByRole("heading", { name: "News & Sentiment Lab", level: 1 })).toBeTruthy();
-    expect(screen.getByText("Curated · not live")).toBeTruthy();
-    const sources = within(screen.getByRole("region", { name: "Curated source reading" }));
-    expect(sources.getAllByRole("article")).toHaveLength(3);
-    expect(sources.getByText("2 Nov 2026")).toBeTruthy();
-    expect(sources.getByText("28 Oct 2026")).toBeTruthy();
-    expect(sources.getByText("4 Jun 2025")).toBeTruthy();
-    expect(sources.getByText("Background reading")).toBeTruthy();
-    expect(sources.getByText("7 Nov 2026")).toBeTruthy();
-    expect(sources.queryByText(/^(positive|negative|neutral|mixed)$/i)).toBeNull();
+    expect(screen.getByText("Auto-updating news")).toBeTruthy();
+    expect(screen.getByRole("region", { name: "Live market news" })).toBeTruthy();
+    expect(screen.queryByText("Curated · not live")).toBeNull();
+    expect(screen.queryByText("Apple reports fourth quarter results")).toBeNull();
     expect(useNewsData).not.toHaveBeenCalled();
   });
 
-  it("opens original pages safely with meaningful link names", () => {
-    render(<NewsPage />);
-    const sources = within(screen.getByRole("region", { name: "Curated source reading" }));
-    const links = sources.getAllByRole("link");
-    expect(links).toHaveLength(3);
-    for (const link of links) {
-      expect(link.getAttribute("href")).toMatch(/^https:\/\//);
-      expect(link.getAttribute("target")).toBe("_blank");
-      expect(link.getAttribute("rel")).toBe("noopener noreferrer");
-      expect(link.getAttribute("aria-label")).toContain("opens in a new tab");
-    }
-    expect(sources.getByRole("link", { name: /Apple reports fourth quarter results/ }).getAttribute("href")).toBe("https://www.apple.com/newsroom/2026/11/apple-reports-fourth-quarter-results/");
-  });
-
-  it("loads the frozen exercise only when expanded and labels its sentiment as prewritten", () => {
+  it("keeps the exercise lazy and clearly labels frozen prewritten sentiment", () => {
     render(<NewsPage />);
     expect(useNewsData).not.toHaveBeenCalled();
     expect(screen.queryByRole("region", { name: "Synthetic practice stories" })).toBeNull();
@@ -60,15 +45,24 @@ describe("News publisher reading and separate synthetic practice", () => {
     expect(practice.getByText("Negative")).toBeTruthy();
     expect(practice.getAllByText(/Prewritten sentiment/)).toHaveLength(3);
     expect(practice.getByText("Synthetic scenario: bond basket records a modest gain")).toBeTruthy();
-    expect(within(screen.getByRole("region", { name: "Curated source reading" })).getAllByRole("link")).toHaveLength(3);
+    expect(screen.getByRole("region", { name: "Live market news" })).toBeTruthy();
   });
 
-  it("keeps source reading available when synthetic practice fails to load", () => {
+  it("keeps live reading separate when the synthetic exercise fails", () => {
     vi.mocked(useNewsData).mockReturnValue({ data: null, error: "Synthetic practice is temporarily unavailable.", loading: false, reload: vi.fn() });
     render(<NewsPage />);
     openPractice();
     expect(screen.getByRole("alert").textContent).toContain("Synthetic practice is temporarily unavailable.");
-    expect(within(screen.getByRole("region", { name: "Curated source reading" })).getAllByRole("link")).toHaveLength(3);
+    expect(screen.getByRole("region", { name: "Live market news" })).toBeTruthy();
     expect(screen.getByRole("button", { name: "Try again" })).toBeTruthy();
+  });
+
+  it("retains the frozen empty-practice state without using it as live-provider fallback", () => {
+    vi.mocked(useNewsData).mockReturnValue({ data: { ...getNewsData(), items: [] }, error: null, loading: false, reload: vi.fn() });
+    render(<NewsPage />);
+    expect(screen.queryByText("No teaching stories are available.")).toBeNull();
+    openPractice();
+    expect(screen.getByText("No teaching stories are available.")).toBeTruthy();
+    expect(screen.getByRole("region", { name: "Live market news" })).toBeTruthy();
   });
 });

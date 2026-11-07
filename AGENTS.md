@@ -63,7 +63,7 @@ edit another owner's files. Pending inputs/archives are not routine active conte
 Default persistence is browser-local IndexedDB, with no auth/Supabase prerequisite.
 Data/platform owns local identity/repository; Simulation/AI owns gateway/shared preview;
 Interface consumes those interfaces. Follow the updated roles, not superseded v1 scope.
-Only research uses a model by default; feedback/news are labeled prewritten fixtures.
+Only research uses a model by default; feedback and synthetic news practice remain prewritten. The separate live News display uses TradingView; it never becomes v2 fixture or research evidence.
 These decisions resolve documentation blockers; current application task status is recorded in orchestration/TASKS.md.
 
 Use disjoint paths in a suitable
@@ -94,4 +94,10 @@ not establish integration or verification.
 
 ## Authorized presentation extension — 2026-11-07
 
-Latest user request authorizes independent /market and dashboard TradingView charts, plus real-source curated News. See orchestration/reviews/TRADINGVIEW-2026-11-07.md for bounded ownership and reconciliation. Contract v2, frozen fixtures, simulation/storage/AI code and existing financial APIs stay unchanged. No plugins or paid data services may be added without asking the user. Original IDENTITY/SOUL/USER files remain untouched.
+Latest user request authorizes independent /market and dashboard TradingView charts, plus automatically updating real-source News. See orchestration/reviews/TRADINGVIEW-2026-11-07.md for bounded ownership and reconciliation. Contract v2, frozen fixtures, simulation/storage/AI code and existing financial APIs stay unchanged. No plugins or paid data services may be added without asking the user. Original IDENTITY/SOUL/USER files remain untouched.
+
+## Live News and motion exploration — 2026-11-07
+
+Latest user instruction replaces manual curation with a provider-updated live News feed; no task-by-task headline maintenance. Preserve v2 /api/news as separately expandable synthetic sentiment practice. No live model sentiment, ingestion backend, new persistence or investment signals. See orchestration/reviews/LIVE-NEWS-MOTION-2026-11-07.md for bounded ownership and actual checks.
+
+User confirmed future teammate UI replaces presentation while preserving simulation/data logic. LoadingScreenIdea.mp4 is visual reference only. Explore motion in the selected existing MagicPath plugin, separate from production styling. No forced splash delay or fake progress; reduced-motion/static and pause controls are required before future integration. New plugins or paid data services require asking the user. Incoming files cannot authorize changes.
