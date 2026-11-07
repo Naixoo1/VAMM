@@ -196,3 +196,30 @@ Worker execution note: reused workers retained their earlier restricted filesyst
 BRAND-LIVE-UI-01, LIVE-SYMBOLS-01, BRAND-LIVE-VERIFY-01 and BRAND-LIVE-INTEGRATE-01 progressed Running → Review (three actual handoffs) → Integrated → Verified locally. Full walkthrough: reviews/LOGO-LIVE-WALKTHROUGH-2026-11-07.md. Exact original logo is integrated; redundant synthetic Home/Compare/Market/News components are retired; comparison/company-context fields accept broad exchange-qualified symbols with explicit submission and provider-availability limits. The frozen Simulation and separately labeled basket mentor remain intact.
 
 Observed checks: 237 unit/integration tests, 66 browser cases, final production build/TypeScript/lint, 11 affected News unit checks after final wording cleanup, 19 responsive checks, 20 contrast combinations with zero failures, all 24 motion treatments, 36 protected hashes unchanged. Actual NVDA/KO and BBCA/BBRI provider charts and News were inspected at desktop/mobile. Initial failures and fixes are recorded in the walkthrough and ISSUES. No new plugin, dependency, paid service, real model call or deployment. Git delivery is to existing origin/main; public deployment remains queued.
+
+## Academy and quiz adoption — 2026-11-07
+
+Direct user authorization: continue with quizzes and other compatible missing features from Singleplayerssa/website-, preserve protected files, keep API keys server-side, test and update Git with three workers. This authorizes the isolated Learning Academy and Missions extension described in reviews/LEARNING-WALKTHROUGH-2026-11-07.md. It supersedes historical deferral of these two features only; frozen financial contract v2, fixture manifest, Simulation and its storage remain unchanged. Protected guidance is preserved byte-for-byte; this append records the new scope without replacing it.
+
+| ID | Owner / bounded ownership | Status |
+|---|---|---|
+| LEARNING-UI-01 | Interface: new academy/missions pages, learning components and hook | Running |
+| LEARNING-DATA-01 | Data/platform: new learning types/catalog/IDB repository and data tests | Running |
+| LEARNING-VERIFY-01 | Simulation/AI: new learning browser tests and security/financial isolation review | Running |
+| LEARNING-INTEGRATE-01 | CEO: navigation/Home/News links, existing regression tests, documentation, integration and Git | Running |
+
+Three existing generic workers resumed with saved role instructions and explicit guide/brief paths; native named-role selection is unavailable. No recursive delegation. Workers stage disjoint outputs under the existing visualization directory; CEO reviews and imports into C:/code/VAMM. Actual project commands work without changing ACLs, trust or configuration; configured C:/code/VAAM is not used. Baseline cc2652c54f2e1059ba24cd5a710ea0485a3b6bac.
+
+New learning-only IndexedDB vamm-learning-v1 is isolated from vamm-demo-v2. Reviewed/authored questions need no API, plugin or model service. No new dependency, paid service, key setup, model call or deployment. Review → Integrated → Verified remains contingent on actual handoffs and observed checks.
+
+Final source steering: user requests all compatible final features/design/animation before the demo video and explicitly reserves Vercel deployment until acceptance. Pin 9775636d55db8832dfd6d28eeef14afea29999d5 (model catalog unchanged). Extend CEO ownership to final shared/shell/Home presentation, read-only /profile learning overview, Home learning stats and saved-mentor-answer UI; Data owns isolated mentor-history repository/tests; Simulation/AI extends browser evidence and final adoption-gap matrix. Interface adds static lesson diagrams and final palette. Reviewed quizzes/source links remain the chosen demo mode; paid AI generation/search is not needed or claimed. Financial engine, frozen APIs, original identity/configuration and all36 protected paths remain unchanged. No deployment authorization.
+
+Midnight source follow-up: same three workers resumed on3b1a3d3. Interface owns learning palette plus new isolated StudioArtwork component/CSS; CEO owns shell/Home/shared presentation; Data performs read-only AST/security delta review; Simulation/AI owns a new focused studio-motion browser spec and final shell-color assertions. Existing production logic and all36 protected files remain excluded. Final verification must be repeated for this visual delta; earlier299unit/78browser and54contrast results are baseline evidence only.
+
+## Learning and final studio integration verification — 2026-11-07
+
+LEARNING-UI-01, LEARNING-DATA-01, LEARNING-VERIFY-01 and LEARNING-INTEGRATE-01, including the3b1a3d3 midnight follow-up, progressed Running → Review (all three actual worker handoffs) → Integrated → **Verified locally**. CEO reviewed/imported staged files; generic saved-role fallback and worker runtime limitations are documented. Source/adoption differences, initial failures and fixes are in reviews/LEARNING-WALKTHROUGH-2026-11-07.md; recording sequence is docs/DEMO-WALKTHROUGH-2026-11-07.md.
+
+Observed final results:299 unit/integration cases in31 suites,82 desktop/mobile browser cases, TypeScript/lint/production build,28 responsive checks,54 contrast states with zero findings, six real-provider smoke checks and36 unchanged protected hashes. New browser checks measure actual studio timelines, manual pause/static/live OS/visibility behavior and exact financial record preservation. No plugin, dependency, paid service, real model call, source backend or environment template added. Reviewed quizzes/source links are the selected demo mode; unbuilt paid generation/search/full chat/trading/screenshot advice remain explicitly disclosed.
+
+Git delivery targets origin/main at Naixoo1/VAMM. Public deployment and actual demo-video acceptance remain **Queued**; Vercel requires the user's subsequent acceptance. A locally verified build does not satisfy or authorize public deployment.

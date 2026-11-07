@@ -1,0 +1,39 @@
+{
+  "commit": "3b1a3d348185aa8bbc50da97583a71092ccd3906",
+  "tree": "4969f66ededa75d3792e20af0819155bbd2303e8",
+  "parent": "9775636d55db8832dfd6d28eeef14afea29999d5",
+  "sources": [
+    {
+      "path": "vamm-website/app.js",
+      "sha": "e4df0f91bbc9ed06b090d12966876368f1a7e667",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/style.css",
+      "sha": "00f06af94971b66febedb4a4be0a3507f430924f",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/index.html",
+      "sha": "c3ec7284bae6efa8354a159226eb4c6faccf1d1b",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/motion.js",
+      "sha": "0553079fc94b27b6b6807adec448814642ce404a",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/README.md",
+      "sha": "0d235004561f772d53d73ad86113ccd77c372b7f",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/server.mjs",
+      "sha": "a014cb0d3b3b4bb7fe23d46a7c4c8e75e138307a",
+      "credentialRedactionNeeded": false
+    }
+  ],
+  "modelBlobUnchanged": "5907c122eba1f881f33d3e3b7762ee15bb54a1ce",
+  "note": "Inert references only; no source scripts or env file executed/imported."
+}

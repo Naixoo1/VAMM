@@ -24,7 +24,7 @@ test("frozen market/news and labeled research fallback", async ({ request }) => 
   expect(invalid.status()).toBe(400);
 });
 
-test("six routes render without page errors or horizontal overflow", async ({ page }, testInfo) => {
+test("nine routes render without page errors or horizontal overflow", async ({ page }, testInfo) => {
   await installLiveFeatureWidgetStubs(page);
   await installTradingViewStub(page);
   await installLiveNewsStub(page);
@@ -34,7 +34,7 @@ test("six routes render without page errors or horizontal overflow", async ({ pa
   await mkdir(evidenceDirectory, { recursive: true });
   await page.goto("/");
   await expect(page).toHaveURL(/\/dashboard$/);
-  for (const route of ["dashboard", "market", "research", "compare", "simulation", "news"]) {
+  for (const route of ["dashboard", "market", "research", "compare", "simulation", "news", "academy", "missions", "profile"]) {
     const response = await page.goto("/" + route);
     expect(response?.ok()).toBe(true);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();

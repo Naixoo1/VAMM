@@ -1,0 +1,91 @@
+[
+  {
+    "width": 1440,
+    "pair": [
+      "NASDAQ:NVDA",
+      "NYSE:KO"
+    ],
+    "state": "panel",
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "documentWidth": 1440,
+    "note": "Panel opening is not proof of symbol data or freshness; screenshot reviewed separately."
+  },
+  {
+    "width": 1440,
+    "pair": [
+      "IDX:BBCA",
+      "IDX:BBRI"
+    ],
+    "state": "panel",
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "documentWidth": 1440,
+    "note": "Panel opening is not proof of symbol data or freshness; screenshot reviewed separately."
+  },
+  {
+    "route": "news",
+    "width": 1440,
+    "state": "ready",
+    "documentWidth": 1440
+  },
+  {
+    "width": 390,
+    "pair": [
+      "NASDAQ:NVDA",
+      "NYSE:KO"
+    ],
+    "state": "panel",
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://www.tradingview-widget.com/embed-widget/symbol-overview/",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "documentWidth": 390,
+    "note": "Panel opening is not proof of symbol data or freshness; screenshot reviewed separately."
+  },
+  {
+    "width": 390,
+    "pair": [
+      "IDX:BBCA",
+      "IDX:BBRI"
+    ],
+    "state": "panel",
+    "scripts": [
+      {
+        "url": "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js",
+        "status": 200
+      }
+    ],
+    "pageErrors": [],
+    "failedRequests": [],
+    "documentWidth": 390,
+    "note": "Panel opening is not proof of symbol data or freshness; screenshot reviewed separately."
+  },
+  {
+    "route": "news",
+    "width": 390,
+    "state": "ready",
+    "documentWidth": 390
+  }
+]

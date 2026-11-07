@@ -16,7 +16,7 @@ try {
       await installLiveFeatureWidgetStubs(page);
       await installTradingViewStub(page);
       await installLiveNewsStub(page);
-      for (const route of ["dashboard", "market", "compare", "research", "simulation", "news"]) {
+      for (const route of ["dashboard", "market", "compare", "research", "simulation", "news", "academy", "missions", "profile"]) {
         const pageErrors = [];
         const onError = error => pageErrors.push(error.message);
         page.on("pageerror", onError);

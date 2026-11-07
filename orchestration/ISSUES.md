@@ -137,3 +137,33 @@ Final local checks:201/201 unit/integration,60/60 browser, TypeScript/ESLint/bui
 | PROVIDER-LOGO-01 | One mobile iframe request aborted while replacing a comparison selection. Final comparison lines rendered; external provider timing/coverage remains its responsibility. | Four real chart-pair/viewport renders plus two News ready checks, no app errors/overflow. |
 
 Walkthrough and proof: reviews/LOGO-LIVE-WALKTHROUGH-2026-11-07.md and reviews/evidence/logo-live-2026-11-07/. No remaining confirmed application failure from this change; universal live symbol coverage, model delivery and public deployment are not claimed.
+
+## Learning feature review — 2026-11-07
+
+| ID | Observation / cause / resolution | Status |
+|---|---|---|
+| LEARNING-SEC-01 | Upstream public .env.example contains an apparent API-key value. Do not copy, use or validate it; notify the owner to revoke/rotate. Local quiz uses reviewed questions without a model call. | External owner action required; no credential imported |
+| LEARNING-SCOPE-01 | Prototype 10/15-question counts depend on generated questions, while each reviewed pack contains five. Offer the five actual questions with accurate provenance; do not repeat questions or fabricate AI generation. | Implemented: three reviewed five-question packs; no generated-count claims |
+| LEARNING-ENV-01 | Reused workers retain restricted writes; CEO project writes work. Stage worker files in visualization root, review/import and execute canonical checks as CEO. | Working fallback; CEO integrated/runtime checks executed; worker static/runtime attribution kept separate |
+
+### Learning integration findings and fixes
+
+| ID | Cause / implemented approach | Observed evidence |
+|---|---|---|
+| LEARNING-TYPE-01 | TypeScript inferred a literal replayed:true branch in generic transaction calls. Supply explicit LearningMutationResult / QuizSubmissionResult type arguments instead of widening/casting away validation. | TypeScript and production build pass. |
+| LEARNING-UI-01 | The activated Reload control could unmount after recovery, losing keyboard focus. Retain the used control and guard pending reads; show refreshing rather than premature up-to-date status. | Focused UI test passes across pending, success and later user focus. |
+| LEARNING-UI-02 | A second tab can submit the same active attempt ID. Checking only the active ID left the first tab editable after reload. Check saved status as well, preserve local choices read-only and link to the current saved result. | Focused UI test confirms radio and mutation controls are blocked without overwriting choices; repository rejects late writes. |
+| LEARNING-QA-01 | Existing unit assertion matched both network and unavailable-storage alerts; two new desktop browser assertions matched sidebar h2 and page h1. Scope assertions to the actual error and level1 page headings. | 299 unit tests pass; corrected level1 heading cases passed in the78-case baseline. Final midnight full-suite result is recorded in the walkthrough. |
+| LEARNING-QA-02 | Running browser and contrast suites concurrently exhausted the existing Research request window. The failed mobile API smoke trace confirms HTTP429. Run suites separately with a fresh QA server; do not change rate limits or add automatic research retries. | Initial78-case run75passed/3failed includes this429 and the2selector failures; sequential78-case rerun passed. Request safeguards unchanged. |
+| LEARNING-CONTRAST-01 | Final teammate muted color #657184 on #edf5ff falls just below4.5 contrast (display rounded to4.5). Darken the Home crest caption and eight diagram captions to stronger muted colors. | Initial base scan found2caption findings; expanded54states found16diagram findings. Caption corrections passed all54 states; later midnight canvas findings are tracked separately below. |
+| LEARNING-WRAP-01 | New search echo can contain an unbroken user string. Bound wrapping in the learning-page CSS while preserving the full input and content. | Focused search/empty recovery tests pass; route width checks remain part of final verification. |
+
+| ID | Final-source finding / bounded correction | Evidence |
+|---|---|---|
+| LEARNING-UI-03 | Native exit-dialog recovery button disappeared after success; retain the activated control. Runner Back link bypassed save/discard confirmation; route it through the same exit dialog. | Ten focused UI/hook cases pass within299 total tests; financial navigation/controller unchanged. |
+| LEARNING-QA-03 | New artwork consumes useMotionPreferences; an older unit test completely mocked the motion module without that export. Use importOriginal for real preference behavior while retaining existing decorative test doubles. | Initial298/299, corrected299/299. No application fallback changed. |
+| LEARNING-STYLE-01 | Two CSS-module shell classes declared different --team-* tokens on the same element. Shared page styles loaded later and restored interim colors. Align shared tokens with the accepted midnight palette. | Initial midnight browser80/82; both failures showed the old computed tokens. All4 focused shell cases passed after correction; final full result in walkthrough. |
+| LEARNING-CONTRAST-02 | Correct midnight canvas #edf2f7 exposed legacy #657184 shared text at4.39 contrast, producing52 findings across54 states. Use final-source muted #5d6c7f consistently in shared primitives. | Final expanded54-state scan: zero findings, including toolbar/animation controls and all10 lesson readers. |
+| LEARNING-PROVIDER-01 | One initial mobile iframe request aborted during symbol replacement; the replacement chart rendered. | Final six real-provider checks had no page errors, failed requests or overflow; actual US/IDX chart lines and News headlines reviewed. Provider availability/quote timing remain external. |
+
+All new learning/design application findings above are resolved locally. External credential revocation (LEARNING-SEC-01), historical workspace-root alignment/development advisories and explicitly unbuilt paid-generation/search/trading features remain disclosed limitations. No deployment was performed.

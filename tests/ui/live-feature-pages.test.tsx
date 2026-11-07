@@ -16,7 +16,8 @@ vi.mock("@/components/features/live-market-widget", () => ({
   LiveMarketWidget: ({ kind, symbol, comparison }: { kind: string; symbol?: string; comparison?: string }) =>
     <section aria-label={"provider " + kind} data-symbol={symbol} data-comparison={comparison}>Provider test boundary</section>,
 }));
-vi.mock("@/components/motion", () => ({
+vi.mock("@/components/motion", async importOriginal => ({
+  ...await importOriginal<typeof import("@/components/motion")>(),
   MotionMark: ({ preset }: { preset: string }) => <span data-motion-preset={preset} />,
   MotionBoundary: ({ children, preset }: { children: ReactNode; preset: string }) => <div data-motion-preset={preset}>{children}</div>,
 }));

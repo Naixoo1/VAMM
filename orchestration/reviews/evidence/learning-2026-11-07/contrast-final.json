@@ -1,0 +1,272 @@
+[
+  {
+    "viewport": "1440x900",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "market",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "compare",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-learning",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-answer",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation-pending",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "news",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-stocks",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-prices",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-returns",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-risk",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-diversification",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-fundamentals",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-technical",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-compounding",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-inflation",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-costs",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-setup",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-question",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-exit",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-result",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "profile",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "market",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "compare",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-learning",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-answer",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation-pending",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "news",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-stocks",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-prices",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-returns",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-risk",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-diversification",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-fundamentals",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-technical",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-compounding",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-inflation",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-costs",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-setup",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-question",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-exit",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-result",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "profile",
+    "failures": []
+  }
+]

@@ -9,7 +9,7 @@ function scanContrast() {
   const luminance = color => color.map(v => {v/=255;return v<=0.04045?v/12.92:((v+0.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[0.2126,0.7152,0.0722][i],0);
   const result = [];
   const dialog = document.querySelector("dialog[open]");
-  const elements = dialog ? dialog.querySelectorAll("*") : document.querySelectorAll("main *,aside *,footer *");
+  const elements = dialog ? dialog.querySelectorAll("*") : document.querySelectorAll('main *,aside *,header *,footer *,[aria-label="Animation preferences"] *');
   for (const element of elements) {
     if (!element.getClientRects().length || element.closest("[aria-hidden=true],:disabled")) continue;
     const style = getComputedStyle(element);
@@ -38,7 +38,7 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
   await installTradingViewStub(page);
   await installLiveNewsStub(page);
   const inspect = async route => reports.push({viewport,route,failures:await page.evaluate(scanContrast)});
-  for (const route of ["dashboard","market","compare","research","simulation","news"]) {
+  for (const route of ["dashboard","market","compare","research","simulation","news","academy","missions","profile"]) {
     await page.goto("http://127.0.0.1:3000/" + route);
     await page.getByRole("heading",{level:1}).waitFor();
     await page.waitForFunction(() => !Array.from(document.querySelectorAll('main [role="status"]')).some(element => element.getClientRects().length > 0 && /Restoring|Loading instrument choices/.test(element.textContent || "")));
@@ -46,6 +46,35 @@ for (const [viewport, width, height] of [["1440x900",1440,900],["390x844",390,84
     if(route==="research") await page.getByLabel("Company context",{exact:true}).waitFor();
     if(route==="news") await page.getByRole("heading",{name:"Live market news",exact:true}).waitFor();
     await inspect(route);
+    if(route==="academy") {
+      for(const lesson of ["stocks","prices","returns","risk","diversification","fundamentals","technical","compounding","inflation","costs"]) {
+        await page.goto("http://127.0.0.1:3000/academy?lesson="+lesson);
+        await page.locator('[data-learning-diagram="'+lesson+'"]').waitFor();
+        await page.getByText("Reveal a way to reason",{exact:true}).click();
+        await inspect("academy-"+lesson);
+        await page.getByRole("button",{name:"Mark lesson complete",exact:true}).click();
+        await page.getByRole("button",{name:"Lesson complete",exact:true}).waitFor();
+      }
+    }
+    if(route==="missions") {
+      await page.goto("http://127.0.0.1:3000/missions?quiz=stocks-101");
+      await page.getByRole("button",{name:"Start quiz",exact:true}).waitFor();
+      await inspect("missions-setup");
+      await page.getByRole("button",{name:"Start quiz",exact:true}).click();
+      await page.getByRole("radio").first().check();
+      await inspect("missions-question");
+      await page.getByRole("button",{name:"Exit quiz",exact:true}).click();
+      await page.getByRole("dialog",{name:"Exit quiz?",exact:true}).waitFor();
+      await inspect("missions-exit");
+      await page.getByRole("button",{name:"Stay in quiz",exact:true}).click();
+      for(let i=0;i<5;i++) {
+        await page.getByRole("radio").first().check();
+        await page.getByRole("button",{name:i===4?"Submit answers":"Next question",exact:true}).click();
+        if(i<4)await page.getByText("Question "+(i+2)+" of 5",{exact:true}).waitFor();
+      }
+      await page.getByTestId("quiz-score").waitFor();
+      await inspect("missions-result");
+    }
     const learningSummary={research:"Synthetic basket mentor"}[route];
     if(learningSummary){
       await page.locator("summary").filter({hasText:learningSummary}).click();

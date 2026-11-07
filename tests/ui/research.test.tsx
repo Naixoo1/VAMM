@@ -33,6 +33,6 @@ describe("Mentor request boundaries",()=>{
  it("shows a network error and never retries research automatically",async()=>{
   vi.mocked(fetch).mockRejectedValue(new Error("Research connection failed"));
   renderMentor();fireEvent.change(screen.getByLabelText("Your question"),{target:{value:"Explain the teaching assumptions"}});fireEvent.click(screen.getByRole("button",{name:"Ask your mentor"}));
-  expect(await screen.findByRole("alert")).toBeTruthy();expect(screen.getByText("Research connection failed")).toBeTruthy();expect(fetch).toHaveBeenCalledTimes(1);
+  expect((await screen.findByText("Research connection failed")).closest('[role="alert"]')).toBeTruthy();expect(fetch).toHaveBeenCalledTimes(1);
  });
 });

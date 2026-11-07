@@ -1,0 +1,20 @@
+.artwork{position:relative;display:block;width:100%;max-width:560px;min-width:0;aspect-ratio:520/420;pointer-events:none;isolation:isolate}
+.artwork>svg{display:block;width:100%;height:auto;overflow:visible}
+.ring{transform-box:view-box;transform-origin:260px 210px}
+.token,.core,.signal,.specks{transform-box:view-box;transform-origin:center}
+.artwork[data-studio-static=false] .ring{animation:studio-orbit 64s linear infinite;animation-play-state:paused}
+.artwork[data-studio-static=false] .outerRing{animation-direction:reverse;animation-duration:86s}
+.artwork[data-studio-static=false] .token{animation:studio-float 14s ease-in-out infinite;animation-play-state:paused}
+.artwork[data-studio-static=false] .practice{animation-delay:-4s;animation-duration:17s}
+.artwork[data-studio-static=false] .reflect{animation-delay:-7s;animation-duration:19s}
+.artwork[data-studio-static=false] .core{animation:studio-core 22s ease-in-out infinite;animation-play-state:paused}
+.artwork[data-studio-static=false] .signal{animation:studio-signal 8s ease-in-out infinite;animation-play-state:paused}
+.artwork[data-studio-static=false] .specks{animation:studio-specks 12s ease-in-out infinite;animation-play-state:paused}
+.artwork[data-studio-running=true] :is(.ring,.token,.core,.signal,.specks){animation-play-state:running}
+.artwork[data-studio-static=true] [data-studio-part]{animation:none!important;transform:none}
+@keyframes studio-orbit{to{transform:rotate(360deg)}}
+@keyframes studio-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes studio-core{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@keyframes studio-signal{0%,100%{opacity:1}50%{opacity:.7}}
+@keyframes studio-specks{0%,100%{transform:translateY(0);opacity:.65}50%{transform:translateY(-3px);opacity:1}}
+@media(prefers-reduced-motion:reduce){.artwork [data-studio-part]{animation:none!important;transform:none!important}}

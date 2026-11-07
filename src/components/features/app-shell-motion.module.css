@@ -1,8 +1,8 @@
-.toolbar{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;padding:9px 32px;border-bottom:1px solid #e0e2e8;background:#fafaf7;color:#626779;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif}
-.toolbar :global(button){border-color:#d7dae3;border-radius:10px;background:#fff;color:#3c4c82;font-family:inherit;font-size:12px}
-.toolbar :global(button:hover){border-color:#b6c2ee;background:#f0f2fb}
-.toolbar :global(button[aria-pressed=true]),.toolbar :global(button[aria-checked=true]){border-color:#9eafea;background:#edf0ff;color:#2c48b3}
-.toolbar :global(button:focus-visible){outline:3px solid #3458e8;outline-offset:3px}
+.toolbar{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;padding:9px 32px;border-bottom:1px solid #2a3b50;background:#101d2d;color:#aabbcf;font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+.toolbar :global(button){border-color:#34475e;border-radius:10px;background:#1b2d41;color:#d0deef;font-family:inherit;font-size:12px}
+.toolbar :global(button:hover){border-color:#55718d;background:#294159;color:#fff}
+.toolbar :global(button[aria-pressed=true]),.toolbar :global(button[aria-checked=true]){border-color:#345951;background:#183a38;color:#8df0d2}
+.toolbar :global(button:focus-visible){outline:3px solid #8df0d2;outline-offset:3px}
 @media(max-width:1180px){.toolbar{padding-inline:24px}}
 @media(max-width:760px){.toolbar{justify-content:flex-start;padding:9px 18px}.toolbar :global(button){font-size:11px}}
 @media(max-width:360px){.toolbar{padding-inline:12px}}

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {ChartNoAxesCombined,ChevronRight,GitCompareArrows,House,LockKeyhole,PanelLeftClose,PanelLeftOpen,ShieldCheck,X} from "lucide-react";
+import {ChartNoAxesCombined,ChevronRight,GitCompareArrows,House,LockKeyhole,PanelLeftClose,PanelLeftOpen,ShieldCheck,UserRound,X} from "lucide-react";
 import {useEffect,useRef,useState,useSyncExternalStore,type ReactNode} from "react";
 import {MotionBoundary,MotionControls} from "@/components/motion";
 import {styles} from "./workspace";
@@ -20,14 +20,20 @@ const links=[
  {href:"/compare",name:"Compare",icon:GitCompareArrows,image:null},
  {href:"/simulation",name:"Simulation",icon:ChartNoAxesCombined,image:null},
  {href:"/news",name:"News & Sentiment Lab",icon:null,image:"news"},
+ {href:"/academy",name:"Learning Academy",icon:null,image:"academy"},
+ {href:"/missions",name:"Missions & Challenges",icon:null,image:"missions"},
+ {href:"/profile",name:"Learning Profile",icon:UserRound,image:null},
 ];
 const contexts:Record<string,{kicker:string;description:string;links:{href:string;label:string}[]}>={
+ "/profile":{kicker:"Your learning record",description:"Review lessons, quiz results and milestone badges saved in this browser. No account or financial ranking.",links:[{href:"/profile",label:"Learning activity"},{href:"/academy",label:"Continue learning"},{href:"/missions",label:"Quiz challenges"}]},
  "/dashboard":{kicker:"Start with curiosity",description:"Explore live market context, compare instruments, and practice with the separate educational simulation.",links:[{href:"/market",label:"Explore the charts"},{href:"/simulation",label:"Practice from zero"},{href:"/research",label:"Ask a basket question"}]},
  "/market":{kicker:"Observe & understand",description:"Explore TradingView’s live chart. Symbols, currency and delivery timing are determined by the provider.",links:[{href:"/market",label:"Real market chart"},{href:"/compare",label:"Compare instruments"}]},
  "/research":{kicker:"Follow your questions",description:"Explore company context. The basket mentor answers separately from frozen teaching evidence.",links:[{href:"/research",label:"Company & basket research"},{href:"/compare",label:"Explore the differences"}]},
  "/compare":{kicker:"A little perspective",description:"Compare compatible company views on the provider’s percentage chart. Check its currency, range and availability.",links:[{href:"/compare",label:"Instrument comparison"},{href:"/research",label:"Ask a basket question"}]},
  "/simulation":{kicker:"Learn through choices",description:"Start at zero. Save, allocate, and address one unexpected cost in each of three years.",links:[{href:"/simulation",label:"Your simulation"},{href:"/compare",label:"Compare company listings"}]},
  "/news":{kicker:"Read the context",description:"Follow automatically updating provider headlines. Open a story to check its publisher and full context.",links:[{href:"/news",label:"Live market news"},{href:"/research",label:"Explore a question"}]},
+ "/academy":{kicker:"Build your foundation",description:"Read short lessons, check primary sources, and track your learning on this device. Learning rewards never change your simulation.",links:[{href:"/academy",label:"Lessons & glossary"},{href:"/missions",label:"Practice with quizzes"}]},
+ "/missions":{kicker:"Put ideas into practice",description:"Try reviewed questions, learn from each explanation, and earn learning XP once per passed quiz. No stock orders or financial rewards.",links:[{href:"/missions",label:"Quiz challenges"},{href:"/academy",label:"Review the lessons"},{href:"/news",label:"Read market headlines"}]},
 };
 
 export function AppShell({children}:{children:ReactNode}){
@@ -62,7 +68,7 @@ export function AppShell({children}:{children:ReactNode}){
   <a href="#main-content" className={shell.skip}>Skip to main content</a>
   <aside ref={aside} className={shell.sidebar} role={modalOpen?"dialog":undefined} aria-label={modalOpen?"Workspace menu":undefined} aria-modal={modalOpen?true:undefined}>
    <div className={shell.rail}>
-    <MotionBoundary preset="focus-ring" state="idle"><nav className={shell.nav} aria-label="Main navigation">{links.map(link=><Link key={link.href} href={link.href} aria-label={link.name} title={link.name} aria-current={active.href===link.href?"page":undefined} className={[shell.railLink,link.href==="/dashboard"?shell.homeLink:""].join(" ")} onClick={followLink}>{link.image?<Image src={"/team-design/"+link.image+".svg"} width={34} height={34} alt="" unoptimized/>:link.icon?<link.icon size={24} strokeWidth={1.7} aria-hidden="true"/>:null}</Link>)}</nav></MotionBoundary>
+    <MotionBoundary preset="focus-ring" state="idle"><nav className={shell.nav} aria-label="Main navigation">{links.map(link=><Link key={link.href} href={link.href} aria-label={link.name} title={link.name} aria-current={active.href===link.href?"page":undefined} className={[shell.railLink,link.href==="/dashboard"?shell.homeLink:""].join(" ")} onClick={followLink}>{link.image?<Image src={"/team-design/"+link.image+".svg"} width={34} height={34} alt="" unoptimized/>:link.icon?<link.icon size={24} strokeWidth={1.7} aria-hidden="true"/>:null}<span className={shell.railLabel} aria-hidden="true">{({"/dashboard":"Home","/market":"Market","/research":"Mentor","/compare":"Compare","/simulation":"Practice","/news":"News","/academy":"Learn","/missions":"Quizzes","/profile":"Profile"} as Record<string,string>)[link.href]}</span></Link>)}</nav></MotionBoundary>
     <span className={shell.railFoot} aria-hidden="true">V</span>
    </div>
    <section id="workspace-context" className={shell.contextPanel} aria-labelledby="workspace-context-title" inert={!panelOpen} aria-hidden={!panelOpen}>
@@ -78,7 +84,7 @@ export function AppShell({children}:{children:ReactNode}){
    <div className={motionStyles.toolbar}><MotionControls/></div>
    <main id="main-content" className={shell.main} tabIndex={-1}>
     <MotionBoundary preset="route-arrival" state="ready" motionKey={pathname}>{children}</MotionBoundary>
-    <footer className={shell.footer}><p><LockKeyhole size={13} aria-hidden="true"/>Stored on this device; anyone using this browser profile can access it.</p><p>{pathname.startsWith("/research")?"Live company context and separate mentor evidence labeled clearly · Educational use":external?"External market data · Provider timing and availability apply · Educational use":pathname.startsWith("/news")?"External news feed · Provider and publisher timing apply · Educational use":"Synthetic data · Educational use only"}</p></footer>
+    <footer className={shell.footer}><p><LockKeyhole size={13} aria-hidden="true"/>Stored on this device; anyone using this browser profile can access it.</p><p>{pathname.startsWith("/research")?"Live company context and separate mentor evidence labeled clearly · Educational use":external?"External market data · Provider timing and availability apply · Educational use":pathname.startsWith("/news")?"External news feed · Provider and publisher timing apply · Educational use":pathname.startsWith("/academy")||pathname.startsWith("/missions")||pathname.startsWith("/profile")?"Reviewed learning material · Progress on this device · Educational use":"Synthetic data · Educational use only"}</p></footer>
    </main>
   </div>
  </div>;

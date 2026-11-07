@@ -1,0 +1,43 @@
+{
+  "initialUnit": {
+    "failed": 1,
+    "passed": 270,
+    "total": 271,
+    "cause": "Research test used global alert selector; new storage-unavailable alert also rendered in jsdom"
+  },
+  "initialBrowser": {
+    "failed": 3,
+    "passed": 75,
+    "total": 78,
+    "causes": [
+      "Two desktop learning test selectors matched sidebar h2 and page h1",
+      "Concurrent contrast and browser suites reached Research HTTP 429; trace confirms status"
+    ]
+  },
+  "initialExpandedContrast": {
+    "findings": 16,
+    "cause": "Eight lesson diagram captions on each viewport used #657184 against #edf5ff; unrounded contrast below 4.5",
+    "states": 54
+  },
+  "initialTypecheck": {
+    "cause": "Generic inference fixed literal replayed true rather than boolean; explicit result generic resolved it",
+    "errors": 4
+  },
+  "midnightUnit": {
+    "total": 299,
+    "passed": 298,
+    "cause": "Older full motion mock omitted newly consumed preference hook; partial importOriginal fixed test boundary",
+    "failed": 1
+  },
+  "midnightBrowser": {
+    "total": 82,
+    "passed": 80,
+    "cause": "Shared and shell CSS modules declared conflicting theme variables; actual computed old tokens observed; aligned both declarations",
+    "failed": 2
+  },
+  "midnightCanvasContrast": {
+    "states": 54,
+    "findings": 52,
+    "cause": "Legacy shared muted text #657184 against correct #edf2f7 canvas, ratio4.39; updated to #5d6c7f"
+  }
+}

@@ -8,6 +8,9 @@ const routes = [
   { path: "/compare", name: "Compare" },
   { path: "/simulation", name: "Simulation" },
   { path: "/news", name: "News & Sentiment Lab" },
+  { path: "/academy", name: "Learning Academy" },
+  { path: "/missions", name: "Missions & Challenges" },
+  { path: "/profile", name: "Learning Profile" },
 ];
 const shell = (page: Page) => page.locator("[data-site-motion]");
 const mobile = (page: Page) => page.viewportSize()!.width <= 760;
@@ -18,7 +21,7 @@ async function openNavigation(page: Page) {
   }
   const navigation = page.getByRole("navigation", { name: "Main navigation", exact: true });
   await expect(navigation).toHaveCount(1);
-  await expect(navigation.getByRole("link")).toHaveCount(6);
+  await expect(navigation.getByRole("link")).toHaveCount(routes.length);
   return navigation;
 }
 async function navigate(page: Page, destination: (typeof routes)[number]) {
@@ -65,7 +68,7 @@ async function exerciseShellControl(page: Page) {
     await expect(dialog).toHaveAttribute("aria-modal", "true");
     await expect.poll(() => page.evaluate(() => getComputedStyle(document.body).overflow)).toBe("hidden");
     await expect(shell(page)).toHaveAttribute("data-mobile-menu-open", "true");
-    await expect(dialog.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link")).toHaveCount(6);
+    await expect(dialog.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link")).toHaveCount(routes.length);
     expect(await dialog.evaluate(element => element.contains(document.activeElement))).toBe(true);
     const focusable = dialog.locator('a[href],button:not([disabled]),[tabindex="0"]').filter({ visible: true });
     await focusable.first().focus();
@@ -92,7 +95,7 @@ async function exerciseShellControl(page: Page) {
     await expect(reopen).toHaveAttribute("aria-expanded", "false");
     await expect(reopen).toBeFocused();
     await expect(page.locator("#workspace-context")).not.toBeVisible();
-    await expect(page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link")).toHaveCount(6);
+    await expect(page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link")).toHaveCount(routes.length);
     await reopen.press("Enter");
     await expect(shell(page)).toHaveAttribute("data-context-collapsed", "false");
     await expect(page.locator("#workspace-context")).toBeVisible();
@@ -102,7 +105,7 @@ async function exerciseShellControl(page: Page) {
 
 test.beforeEach(async ({ page }) => { await installLiveFeatureWidgetStubs(page); });
 
-test("teammate visual shell preserves six routes and accessible responsive navigation", async ({ page }, testInfo) => {
+test("teammate visual shell preserves nine routes and accessible responsive navigation", async ({ page }, testInfo) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/dashboard");
@@ -111,10 +114,10 @@ test("teammate visual shell preserves six routes and accessible responsive navig
     const style = getComputedStyle(element);
     return Object.fromEntries(["--team-canvas", "--team-ink", "--team-cobalt", "--team-lime"].map(name => [name, style.getPropertyValue(name).trim().toLowerCase()]));
   });
-  expect(tokens).toEqual({ "--team-canvas": "#f4f4ef", "--team-ink": "#202334", "--team-cobalt": "#3458e8", "--team-lime": "#d6ef87" });
-  expect(await shell(page).evaluate(element => getComputedStyle(element).backgroundColor)).toBe("rgb(244, 244, 239)");
+  expect(tokens).toEqual({ "--team-canvas": "#edf2f7", "--team-ink": "#14263c", "--team-cobalt": "#225bd5", "--team-lime": "#8df0d2" });
+  expect(await shell(page).evaluate(element => getComputedStyle(element).backgroundColor)).toBe("rgb(237, 242, 247)");
   const currentLink = page.locator('nav[aria-label="Main navigation"] a[aria-current="page"]');
-  expect(await currentLink.evaluate(element => getComputedStyle(element).backgroundColor)).toBe("rgb(52, 88, 232)");
+  expect(await currentLink.evaluate(element => getComputedStyle(element).backgroundColor)).toBe("rgb(141, 240, 210)");
   await exerciseShellControl(page);
   for (const destination of routes) {
     await navigate(page, destination);

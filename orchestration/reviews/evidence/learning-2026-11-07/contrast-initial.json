@@ -1,0 +1,416 @@
+[
+  {
+    "viewport": "1440x900",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "market",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "compare",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-learning",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-answer",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation-pending",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "news",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-stocks",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-prices",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-returns",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-risk",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-diversification",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-fundamentals",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-technical",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-compounding",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-inflation",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-costs",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-setup",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-question",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-exit",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-result",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "profile",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "market",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "compare",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-learning",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-answer",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation-pending",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "news",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-stocks",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-prices",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-returns",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-risk",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-diversification",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-fundamentals",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-technical",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-compounding",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-inflation",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-costs",
+    "failures": [
+      {
+        "text": "Illustrative concept · no live financial values",
+        "ratio": 4.5,
+        "color": "rgb(24, 39, 58)",
+        "fill": "rgb(101, 113, 132)",
+        "font": "12px",
+        "className": null
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-setup",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-question",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-exit",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-result",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "profile",
+    "failures": []
+  }
+]

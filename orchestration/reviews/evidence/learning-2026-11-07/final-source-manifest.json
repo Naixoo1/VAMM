@@ -1,0 +1,69 @@
+{
+  "commit": "9775636d55db8832dfd6d28eeef14afea29999d5",
+  "tree": "dd2f0efd5091c02d8a25710143edf32c965dfd4c",
+  "sources": [
+    {
+      "path": "vamm-website/app.js",
+      "sha": "67651c7804df7b06386946054cd8202b6e2f74ff",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/style.css",
+      "sha": "295680e7f7ba97728857cf25d0c749f3f4dedeb3",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/index.html",
+      "sha": "095a1277de06ae42d643dce7b2286f9e7693fd96",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/README.md",
+      "sha": "3d95074a6d33a8e01ea2691f019e181dfa437b62",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/ai-service.mjs",
+      "sha": "2608f721f145ed3ba5228f2299b57b7ce6bbce16",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/server.mjs",
+      "sha": "ca7e45d1c7e46544ad8e5d1c342d2fb7fc6075a5",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/news-feed.js",
+      "sha": "20b677dcf4ae397e4e0bbf199d90a9994f4e327e",
+      "credentialRedactionNeeded": false
+    },
+    {
+      "path": "vamm-website/web-research.js",
+      "sha": "9ece22429e213b99ca184ec733cf74fb5d282649",
+      "credentialRedactionNeeded": false
+    }
+  ],
+  "assets": [
+    {
+      "path": "vamm-website/images/market.svg",
+      "sha": "1accd2595e2a865c1fc84e7f802d1adf67379f94"
+    },
+    {
+      "path": "vamm-website/images/mentor.svg",
+      "sha": "e19d1622ff3dec2d3cf6e1e29d671769107e5c90"
+    },
+    {
+      "path": "vamm-website/images/news.svg",
+      "sha": "d62d9c50289d837cb3ed13f51eb230db8d4ac5ca"
+    },
+    {
+      "path": "vamm-website/images/academy.svg",
+      "sha": "ee418ed0524888edaf3619130d73dd405cbe7a93"
+    },
+    {
+      "path": "vamm-website/images/missions.svg",
+      "sha": "eac0e2189e71c48653f5d65a8c396d6892a1c653"
+    }
+  ],
+  "note": "Source references are inert text outside the repository. No env file, source backend or credential imported."
+}

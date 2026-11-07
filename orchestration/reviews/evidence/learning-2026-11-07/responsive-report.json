@@ -1,0 +1,398 @@
+[
+  {
+    "route": "dashboard",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 222,
+        "height": 222,
+        "alt": "VAMM AI Teknologi logo",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "market",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "compare",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "compare-long-symbol",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": []
+  },
+  {
+    "route": "research",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "simulation",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "news",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "academy",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "missions",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "profile",
+    "width": 320,
+    "documentWidth": 320,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 250,
+        "height": 250,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "dashboard",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      },
+      {
+        "width": 222,
+        "height": 222,
+        "alt": "VAMM AI Teknologi logo",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "market",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "compare",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "research",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "simulation",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "news",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "academy",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "missions",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "profile",
+    "width": 768,
+    "documentWidth": 768,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 195,
+        "height": 195,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "dashboard",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      },
+      {
+        "width": 222,
+        "height": 222,
+        "alt": "VAMM AI Teknologi logo",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "market",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "compare",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "research",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "simulation",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "news",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "academy",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "missions",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  },
+  {
+    "route": "profile",
+    "width": 1440,
+    "documentWidth": 1440,
+    "pageErrors": [],
+    "logoSizes": [
+      {
+        "width": 215,
+        "height": 215,
+        "alt": "",
+        "loaded": true
+      }
+    ]
+  }
+]

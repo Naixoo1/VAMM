@@ -1,0 +1,734 @@
+[
+  {
+    "viewport": "1440x900",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "market",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "compare",
+    "failures": [
+      {
+        "text": "Explore stock combinations across exchanges on the same provider chart and period. Search for a list",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research",
+    "failures": [
+      {
+        "text": "Explore provider company context, then ask the separate basket mentor about its synthetic teaching e",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-learning",
+    "failures": [
+      {
+        "text": "Explore provider company context, then ask the separate basket mentor about its synthetic teaching e",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "research-answer",
+    "failures": [
+      {
+        "text": "Explore provider company context, then ask the separate basket mentor about its synthetic teaching e",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation",
+    "failures": [
+      {
+        "text": "Three annual turns. Start from zero, save with purpose, and make room for the unexpected.",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "simulation-pending",
+    "failures": [
+      {
+        "text": "Three annual turns. Start from zero, save with purpose, and make room for the unexpected.",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      },
+      {
+        "text": "Year 2",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "12px",
+        "className": "sOt50a_step "
+      },
+      {
+        "text": "Year 3",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "12px",
+        "className": "sOt50a_step "
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "news",
+    "failures": [
+      {
+        "text": "Follow automatically updated market headlines, check publishers and story times, and practice thinki",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-stocks",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-prices",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-returns",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-risk",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-diversification",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-fundamentals",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-technical",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-compounding",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-inflation",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "academy-costs",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      },
+      {
+        "text": "Each reviewed pack has five questions. Reach 80% to earn its 100 XP reward once.",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "12px",
+        "className": "sOt50a_fieldHelp"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-setup",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-question",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-exit",
+    "failures": []
+  },
+  {
+    "viewport": "1440x900",
+    "route": "missions-result",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "route": "profile",
+    "failures": [
+      {
+        "text": "Review your lessons, quiz results, and learning milestones on this device. This local overview does ",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "14px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "dashboard",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "market",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "compare",
+    "failures": [
+      {
+        "text": "Explore stock combinations across exchanges on the same provider chart and period. Search for a list",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "research",
+    "failures": [
+      {
+        "text": "Explore provider company context, then ask the separate basket mentor about its synthetic teaching e",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-learning",
+    "failures": [
+      {
+        "text": "Explore provider company context, then ask the separate basket mentor about its synthetic teaching e",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "research-answer",
+    "failures": [
+      {
+        "text": "Explore provider company context, then ask the separate basket mentor about its synthetic teaching e",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation",
+    "failures": [
+      {
+        "text": "Three annual turns. Start from zero, save with purpose, and make room for the unexpected.",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "simulation-pending",
+    "failures": [
+      {
+        "text": "Three annual turns. Start from zero, save with purpose, and make room for the unexpected.",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      },
+      {
+        "text": "Year 2",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "11px",
+        "className": "sOt50a_step "
+      },
+      {
+        "text": "Year 3",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "11px",
+        "className": "sOt50a_step "
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "reset-dialog",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "news",
+    "failures": [
+      {
+        "text": "Follow automatically updated market headlines, check publishers and story times, and practice thinki",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-stocks",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-prices",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-returns",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-risk",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-diversification",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-fundamentals",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-technical",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-compounding",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-inflation",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "academy-costs",
+    "failures": [
+      {
+        "text": "Build understanding one lesson at a time. Reviewed lessons, thoughtful reflection, and progress that",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      },
+      {
+        "text": "Each reviewed pack has five questions. Reach 80% to earn its 100 XP reward once.",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "12px",
+        "className": "sOt50a_fieldHelp"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-setup",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-question",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-exit",
+    "failures": []
+  },
+  {
+    "viewport": "390x844",
+    "route": "missions-result",
+    "failures": [
+      {
+        "text": "Check what you understand, read the explanations, and practice again. No time limit, no financial-pe",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  },
+  {
+    "viewport": "390x844",
+    "route": "profile",
+    "failures": [
+      {
+        "text": "Review your lessons, quiz results, and learning milestones on this device. This local overview does ",
+        "ratio": 4.39,
+        "color": "rgb(101, 113, 132)",
+        "fill": "rgb(0, 0, 0)",
+        "font": "13px",
+        "className": "sOt50a_subtitle"
+      }
+    ]
+  }
+]

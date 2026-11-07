@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-07",
+  "project": "C:/code/VAMM",
+  "baseline": "cc2652c54f2e1059ba24cd5a710ea0485a3b6bac",
+  "teammateSource": "3b1a3d348185aa8bbc50da97583a71092ccd3906",
+  "executor": "CEO after review/import of three generic saved-role worker handoffs",
+  "unit": {
+    "passed": 299,
+    "total": 299,
+    "suites": 31
+  },
+  "browser": {
+    "passed": 82,
+    "total": 82,
+    "seconds": 58.6,
+    "projects": [
+      "desktop",
+      "mobile"
+    ],
+    "fullRun": true
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "productionBuild": "passed after final shared-palette/text-contrast corrections",
+  "responsive": {
+    "checks": 28,
+    "overflow": 0,
+    "pageErrors": 0
+  },
+  "contrast": {
+    "states": 54,
+    "findings": 0
+  },
+  "liveProvider": {
+    "checks": 6,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "overflow": 0,
+    "scope": "US/IDX pair charts and News rendered at two widths; provider code unchanged through final shared-palette correction; universal availability not claimed"
+  },
+  "protection": {
+    "checked": 36,
+    "changed": 0
+  },
+  "boundaries": {
+    "realModelCalls": 0,
+    "newPlugins": 0,
+    "newPaidServices": 0,
+    "newDependencies": 0,
+    "deployment": "not performed; awaiting user acceptance"
+  },
+  "notes": [
+    "Browser tests use deterministic provider boundaries; real-provider checks are separate.",
+    "Studio visibility-event test uses an explicitly labeled document.hidden fixture; actual CSS timelines and real scroll intersection are measured.",
+    "Existing API credentials/provider code remain server-side and unchanged.",
+    "Reviewed quizzes and source links are implemented; generated quizzes, paid search, full chat, screenshot advice and stock orders are not claimed."
+  ]
+}
