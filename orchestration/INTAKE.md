@@ -1,5 +1,9 @@
 # Incoming Designs and Document Reconciliation
 
+## Generated quiz request — 2026-11-07
+
+The user's direct request now authorizes the previously missing model-generated quiz challenge using the existing API key. Accept an isolated three-question AI practice panel in Missions, preserving reviewed quizzes, deterministic scoring and financial/XP stores. No new paid service/plugin or protected-file changes. Current bounded ownership: reviews/AI-QUIZ-2026-11-07.md.
+
 ## Current Mentor request — 2026-11-07
 
 Direct user instruction authorizes a chat-focused Mentor, uploaded chart interpretation and persistent conversation sessions. This supersedes historical Mentor chat/screenshot deferrals while preserving financial v2 and protected files. Chat is isolated from the financial contract and device history is not cloud-synced. User will add existing OpenAI credentials securely to Vercel; no new service/plugin is added. See reviews/MENTOR-CHAT-2026-11-07.md for ownership and acceptance. No attached instructions grant additional authority.

@@ -10,6 +10,8 @@ import {LearningStatus} from "@/components/learning/shared";
 import {MissionsWorkspace} from "@/components/learning/missions";
 import {AcademyWorkspace} from "@/components/learning/academy";
 vi.mock("@/hooks/use-learning-progress",()=>({useLearningProgress:vi.fn()}));
+// Independent generated practice has its own query/provider tests; these cases exercise reviewed learning state.
+vi.mock("@/components/learning/ai-quiz",()=>({AiQuizPractice:()=>null}));
 let query="";
 const push=vi.fn();
 vi.mock("next/navigation",()=>({useSearchParams:()=>new URLSearchParams(query),useRouter:()=>({push})}));

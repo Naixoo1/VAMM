@@ -74,7 +74,7 @@ async function readInput(request: Request, signal: AbortSignal): Promise<MentorC
   let raw: unknown; try { raw = JSON.parse(text); } catch { invalid(); }
   return validateMentorChatRequest(raw);
 }
-async function upstreamFailure(response: Response, signal: AbortSignal): Promise<MentorChatError> {
+export async function classifyProviderFailure(response: Response, signal: AbortSignal): Promise<MentorChatError> {
   let insufficientQuota = false;
   if (response.body) {
     try {
@@ -106,7 +106,7 @@ async function modelReply(input: MentorChatRequest, configuration: MentorModelCo
     headers: { Authorization: `Bearer ${configuration.apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({ model: configuration.model, store: false, instructions: INSTRUCTIONS, input: messages, max_output_tokens: 1000 }),
   });
-  if (!response.ok) throw await upstreamFailure(response, signal);
+  if (!response.ok) throw await classifyProviderFailure(response, signal);
   if (!response.body) throw new MentorChatError("MODEL_UNAVAILABLE", 502, "The mentor service is unavailable. Please try again later.");
   const text = await boundedText(response.body, MAX_PROVIDER_BYTES, signal, false);
   let raw: unknown; try { raw = JSON.parse(text); } catch { throw new MentorChatError("MODEL_INVALID_OUTPUT", 502, "The mentor returned an invalid response. Please try again."); }

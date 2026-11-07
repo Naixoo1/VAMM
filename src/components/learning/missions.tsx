@@ -3,6 +3,7 @@ import Link from "next/link";
 import {useRouter,useSearchParams} from "next/navigation";
 import {useEffect,useRef,useState} from "react";
 import {ArrowLeft,ArrowRight,Check,ClipboardCheck} from "lucide-react";
+import {AiQuizPractice} from "./ai-quiz";
 import {Badge,PageHeading,styles as workspace} from "@/components/features/workspace";
 import {useLearningProgress} from "@/hooks/use-learning-progress";
 import {getLearningSummary} from "@/lib/learning/progress";
@@ -50,6 +51,7 @@ function MissionsSession(){
  const question=pack&&working?pack.questions[working.index]:undefined;
  return <div className={styles.page} data-learning-page="missions">
   <PageHeading eyebrow="Practice and progress" title="Missions & Challenges" description="Check what you understand, read the explanations, and practice again. No time limit, no financial-performance rewards."/>
+  {!pack&&<AiQuizPractice/>}
   <LearningStatus learning={learning} onRetry={()=>{void retry()}} onReload={reload}/>
   <p className={styles.count} role="status">{announcement}</p>
   {!requested?<>

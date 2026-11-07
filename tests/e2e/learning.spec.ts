@@ -93,6 +93,10 @@ test.beforeEach(async ({ page }) => {
     if (new URL(route.request().url()).pathname === "/api/account" && route.request().method() === "GET") {
       await route.fulfill({ json: { configured: false, user: null } }); return;
     }
+    // The optional AI panel checks configuration only; generation POSTs remain forbidden in reviewed-quiz journeys.
+    if (new URL(route.request().url()).pathname === "/api/quiz-generation" && route.request().method() === "GET") {
+      await route.fulfill({ json: { configured: false } }); return;
+    }
     calls.push(new URL(route.request().url()).pathname); await route.abort("blockedbyclient");
   });
   await page.route(/^https:\/\/(?:api\.openai\.com|generativelanguage\.googleapis\.com)\//, async route => {

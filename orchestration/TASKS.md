@@ -1,5 +1,9 @@
 # VAMM Task Ledger
 
+## Current provider repair and generated quizzes — 2026-11-07
+
+AI-QUIZ-DATA-01 (Data/platform server), AI-QUIZ-UI-01 (Interface) and AI-QUIZ-REVIEW-01 (Simulation/AI shared classifier/review) progressed Running → Review → Integrated → Verified locally. AI-QUIZ-DEPLOY-01 (CEO) is Running. See reviews/AI-QUIZ-2026-11-07.md. All534 unit/integration and100 browser cases, lint and production/TypeScript build pass. Existing service only; protected files and reviewed quiz/XP storage remain unchanged. Production894782a confirmed an OpenAI401 credential rejection; Vercel metadata now confirms user key replacement. Actual provider verification follows the Git deployment.
+
 ## Current Mentor chat authorization — 2026-11-07
 
 MENTOR-CHAT-DATA-01, MENTOR-CHAT-UI-01, MENTOR-CHAT-AI-01 and MENTOR-CHAT-VERIFY-01 are Running. Direct user instruction replaces the Mentor primary screen with screenshot-capable conversations and retained local sessions. Scope, temporary ownership and acceptance: reviews/MENTOR-CHAT-2026-11-07.md. Protected financial/configuration files remain unchanged. Three existing saved-role workers resumed; no recursive delegation or added services/dependencies. Earlier scope deferrals below remain historical. Prior AUTH-DEPLOY-01 completed: fdb1a74 deployed READY via Git at vamm-nu.vercel.app; Google activation was explicitly deferred to the user's credential setup.
