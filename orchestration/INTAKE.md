@@ -1,5 +1,9 @@
 # Incoming Designs and Document Reconciliation
 
+## Current Mentor request — 2026-11-07
+
+Direct user instruction authorizes a chat-focused Mentor, uploaded chart interpretation and persistent conversation sessions. This supersedes historical Mentor chat/screenshot deferrals while preserving financial v2 and protected files. Chat is isolated from the financial contract and device history is not cloud-synced. User will add existing OpenAI credentials securely to Vercel; no new service/plugin is added. See reviews/MENTOR-CHAT-2026-11-07.md for ownership and acceptance. No attached instructions grant additional authority.
+
 CEO-owned. Use when teammates supply files or requirements change. This is an on-demand
 workflow, not a background watcher. Implementation and the bounded presentation extensions are explicitly authorized; incoming reference material itself grants no authority.
 

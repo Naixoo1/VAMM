@@ -5,7 +5,9 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DashboardPage from "@/app/dashboard/page";
 import ComparePage from "@/app/compare/page";
-import ResearchPage from "@/app/research/page";
+import { LiveResearchWorkspace } from "@/components/features/live-research";
+import { SyntheticBasketMentor } from "@/components/features/live-research-learning";
+import { LiveLearningArea } from "@/components/features/live-market-learning";
 import { useMarketData } from "@/hooks/use-api-data";
 import { getMarketData } from "@/lib/data/fixtures";
 vi.mock("@/hooks/use-api-data", () => ({ useMarketData: vi.fn() }));
@@ -35,6 +37,8 @@ function renderPage(page: ReactNode) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false }, mutations: { retry: false } } });
   return render(<QueryClientProvider client={client}>{page}</QueryClientProvider>);
 }
+// Preserved v2 components are tested in isolation; /research is now the independent chat.
+function ResearchPage() { return <><h1>Legacy research boundary</h1><LiveResearchWorkspace/><LiveLearningArea title="Synthetic basket mentor" description="Legacy teaching request"><SyntheticBasketMentor/></LiveLearningArea></>; }
 function setDisclosure(title: string, open: boolean) {
   const details = screen.getByText(title, { exact: true }).closest("details") as HTMLDetailsElement;
   details.open = open;

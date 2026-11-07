@@ -1,13 +1,10 @@
+import { CHAT_REPLY } from "./mentor-chat-fixture";
 import {writeFile} from "node:fs/promises";
 import { expect, test, type Page } from "@playwright/test";
 import { captureProductionMotion, installLiveFeatureWidgetStubs, readLiveFeatureProbe, readProductionMotion } from "./live-features-widget-stub";
 
 function nav(page: Page, name: string) { return page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name, exact: true }); }
 function live(page: Page, kind: string) { return page.locator(`section[data-live-market-kind="${kind}"]`); }
-async function openLearning(page: Page, title: string) {
-  const summary = page.locator("summary").filter({ hasText: title });
-  if (!(await summary.evaluate(element => (element.parentElement as HTMLDetailsElement).open))) await summary.click();
-}
 async function snapshot(page: Page) {
   return page.evaluate(async () => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
@@ -44,16 +41,6 @@ async function artworkBudget(page: Page) {
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
   return { route: new URL(page.url()).pathname, artworks: primitives.length, maximumPrimitives: Math.max(...primitives) };
 }
-const fixtureResponse = {
-  ok: true, data: {
-    summary: "Explicit browser fixture: these synthetic baskets illustrate modeled changes, not forecasts.",
-    facts: [{ text: "Annual fees are not modeled for the educational baskets.", evidenceIds: ["ev-demo-method"] }],
-    limitations: ["Deterministic browser fixture. No model call or live company evidence was used."],
-    evidence: [{ id: "ev-demo-method", title: "VAMM synthetic teaching methodology", sourceUrl: null,
-      observedAt: "2026-11-06T00:00:00Z", dataMode: "synthetic", datasetVersion: "vamm-demo-2026-11-06.v1" }],
-    origin: "prewritten",
-  },
-};
 
 test("all24 production treatments are reached through real states while live displays preserve the frozen three-turn journey", async ({ page, context, request }, testInfo) => {
   test.setTimeout(90000);
@@ -68,9 +55,6 @@ test("all24 production treatments are reached through real states while live dis
   const before = await snapshot(page);
   await expect(page.locator('[data-motion-preset="preview-signal"]')).toHaveAttribute("data-motion-state", "ready");
 
-  let releaseMarket!: () => void;
-  const marketGate = new Promise<void>(resolve => { releaseMarket = resolve; });
-  await page.route("**/api/market", async route => { await marketGate; await route.continue(); });
   await nav(page, "Home").click();
   await expect(live(page, "summary")).toHaveAttribute("data-live-market-state", "ready");
   const summary = page.getByTestId("live-summary-host").locator("tv-market-summary");
@@ -99,40 +83,28 @@ test("all24 production treatments are reached through real states while live dis
   await expect(page.locator('[data-motion-preset="empty-line"]')).toBeVisible();
   budgets.push(await artworkBudget(page));
 
-  await nav(page, "AI Investment Mentor").click();
-  await expect(live(page, "profile")).toHaveAttribute("data-live-market-state", "ready");
-  await expect(live(page, "technical")).toHaveAttribute("data-live-market-state", "ready");
-  await expect(live(page, "fundamentals")).toHaveAttribute("data-live-market-state", "panel");
-  await expect(page.getByText(/do not provide facts to the AI form/)).toBeVisible();
-  await page.getByLabel("Company context", { exact: true }).fill("NASDAQ:MSFT");
-  await page.getByRole("button", { name: "Load company", exact: true }).click();
-  await expect(page.getByTestId("live-profile-host").locator("tv-company-profile")).toHaveAttribute("symbol", "NASDAQ:MSFT");
-  await expect(live(page, "profile")).toHaveAttribute("data-live-market-state", "ready");
-  await expect(live(page, "fundamentals")).toHaveAttribute("data-live-market-state", "panel");
-  await openLearning(page, "Synthetic basket mentor");
-  await expect(page.locator('[data-motion-preset="query-inline"]').first()).toBeVisible();
-  releaseMarket();
-  await expect(page.getByRole("checkbox", { name: "Simulated bond basket", exact: true })).toBeVisible();
-  let releaseResearch!: () => void;
-  const researchGate = new Promise<void>(resolve => { releaseResearch = resolve; });
-  const researchRequests: { instrumentIds: string[]; question: string }[] = [];
-  await page.route("**/api/research", async route => {
-    researchRequests.push(route.request().postDataJSON());
-    await researchGate; await route.fulfill({ json: fixtureResponse });
+  let releaseStatus!: () => void;
+  const statusGate = new Promise<void>(resolve => { releaseStatus = resolve; });
+  let releaseReply!: () => void;
+  const replyGate = new Promise<void>(resolve => { releaseReply = resolve; });
+  let mentorPosts = 0;
+  await page.route("**/api/mentor-chat", async route => {
+    if (route.request().method() === "GET") { await statusGate; return route.fulfill({ json: { configured: true } }); }
+    mentorPosts++; await replyGate;
+    return route.fulfill(mentorPosts === 1 ? { status: 503, json: { ok: false, error: { code: "MODEL_UNAVAILABLE", message: "Explicit unavailable fixture." } } } : { json: { ok: true, data: { content: CHAT_REPLY, origin: "model" } } });
   });
-  const question = "Explain why these synthetic results are not a forecast.";
-  await page.getByLabel("Your question", { exact: true }).fill(question);
-  await page.getByRole("button", { name: "Ask your mentor", exact: true }).click();
+  await nav(page, "AI Investment Mentor").click();
+  await expect(page.locator('[data-motion-preset="query-inline"]').first()).toBeVisible();
+  releaseStatus();
+  await page.getByLabel("Message your mentor", { exact: true }).fill("Explain uncertainty.");
+  await page.getByRole("button", { name: "Send message", exact: true }).click();
   await expect(page.locator('[data-motion-preset="mentor-orbit"]')).toBeVisible();
-  releaseResearch();
-  await expect(page.getByText("Prewritten fallback", { exact: true })).toBeVisible();
-  await expect(page.locator('[data-motion-preset="evidence-arrival"]')).toBeVisible();
+  releaseReply();
   await expect(page.locator('[data-motion-preset="research-fallback"]')).toBeVisible();
-  expect(researchRequests).toEqual([{ instrumentIds: ["edu-bonds", "edu-equity"], question }]);
-  await openLearning(page, "Synthetic basket mentor");
-  await page.locator("summary").filter({ hasText: "Synthetic basket mentor" }).click();
-  await page.locator("summary").filter({ hasText: "Synthetic basket mentor" }).click();
-  await expect(page.getByLabel("Your question", { exact: true })).toHaveValue(question);
+  await page.getByRole("button", { name: "Retry reply", exact: true }).click();
+  await expect(page.getByText(CHAT_REPLY, { exact: true })).toBeVisible();
+  await expect(page.locator('[data-motion-preset="evidence-arrival"]')).toBeVisible();
+  expect(mentorPosts).toBe(2);
   budgets.push(await artworkBudget(page));
 
   await nav(page, "News & Sentiment Lab").click();
@@ -256,10 +228,9 @@ test("blocked live panels remain visible failures and never replace or mutate th
   await nav(page, "Compare").click();
   await expect(live(page, "comparison")).toHaveAttribute("data-live-market-state", "error");
   await nav(page, "AI Investment Mentor").click();
-  for (const kind of ["profile", "fundamentals", "technical"]) await expect(live(page, kind)).toHaveAttribute("data-live-market-state", "error");
-  await openLearning(page, "Synthetic basket mentor");
-  await page.getByLabel("Your question", { exact: true }).fill("Explain synthetic baskets.");
-  await expect(page.getByRole("button", { name: "Ask your mentor", exact: true })).toBeEnabled();
+  await expect(page.locator("[data-live-market-kind]")).toHaveCount(0);
+  await expect(page.getByLabel("Message your mentor", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Send message", exact: true })).toBeDisabled();
   expect(await snapshot(page)).toEqual(before);
   expect(await (await request.get("/api/market")).json()).toEqual(marketBefore);
   await nav(page, "Simulation").click();

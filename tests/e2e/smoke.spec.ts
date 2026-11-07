@@ -41,7 +41,7 @@ test("nine routes render without page errors or horizontal overflow", async ({ p
     await expect(page.getByRole("main")).toBeVisible();
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(page.viewportSize()!.width);
     if (route === "dashboard") await expect(page.getByRole("region", { name: "Live market summary", exact: true })).toHaveAttribute("data-live-market-state", "ready");
-    if (route === "research") await expect(page.getByLabel("Company context", { exact: true })).toBeVisible();
+    if (route === "research") await expect(page.getByLabel("Message your mentor", { exact: true })).toBeVisible();
     if (route === "compare") await expect(page.getByLabel("First company", { exact: true })).toBeVisible();
     if (route === "simulation") await expect(page.getByRole("button", { name: "Start your simulation" })).toBeVisible();
     if (route === "news") await expect(page.getByRole("heading", { name: "Live market news", exact: true })).toBeVisible();

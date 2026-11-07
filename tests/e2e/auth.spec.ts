@@ -1,3 +1,4 @@
+import { CHAT_REPLY, installMentorFixture, seedLegacyAnswer, sendMentorMessage } from "./mentor-chat-fixture";
 import { expect, test, type Page } from "@playwright/test";
 import { getMarketData } from "../../src/lib/data/fixtures";
 import { TRACKS } from "../../src/lib/learning/catalog";
@@ -15,7 +16,7 @@ async function noOverflow(page: Page) {
 }
 async function deviceRecords(page: Page) {
   return page.evaluate(async () => {
-    const catalog = { "vamm-demo-v2": ["metadata", "sessions", "turns", "requestOutcomes"], "vamm-learning-v1": ["progress"], "vamm-mentor-history-v1": ["answers"] };
+    const catalog = { "vamm-demo-v2": ["metadata", "sessions", "turns", "requestOutcomes"], "vamm-learning-v1": ["progress"], "vamm-mentor-history-v1": ["answers"], "vamm-mentor-chat-v1": ["sessions"] };
     const all: Record<string, Record<string, { keys: IDBValidKey[]; values: unknown[] }>> = {};
     for (const [name, stores] of Object.entries(catalog)) {
       const db = await new Promise<IDBDatabase>((resolve, reject) => {
@@ -51,27 +52,17 @@ async function seedDeviceRecordsThroughUI(page: Page) {
   await expect(page.getByTestId("learning-academy-points")).toHaveText("10");
 
   const market = getMarketData();
-  const research = { summary: "Explicit auth-isolation browser fixture: these synthetic baskets are not forecasts.",
-    facts: [{ text: "Educational basket annual fees are not modeled.", evidenceIds: ["ev-demo-method"] }],
-    limitations: ["Deterministic browser fixture; no model request or Google exchange occurred."],
-    evidence: market.evidence.filter(item => item.id === "ev-demo-method"), origin: "prewritten" };
-  await page.route("**/api/market", route => route.fulfill({ json: { ok: true, data: market } }));
-  const researchRequests: unknown[] = [];
-  await page.route("**/api/research", route => {
-    researchRequests.push(route.request().postDataJSON()); return route.fulfill({ json: { ok: true, data: research } });
-  });
+  const researchRequests = await installMentorFixture(page);
   await page.goto("/research");
-  await page.locator("summary").filter({ hasText: "Synthetic basket mentor" }).click();
-  await page.getByLabel("Your question", { exact: true }).fill("Explain synthetic basket fees for this auth-isolation fixture.");
-  await page.getByRole("button", { name: "Ask your mentor", exact: true }).click();
-  await expect(page.getByText(research.summary, { exact: true })).toBeVisible();
-  await page.getByRole("region", { name: "Saved basket research", exact: true }).getByRole("button", { name: "Save this answer", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Answer saved", exact: true })).toBeVisible();
+  await sendMentorMessage(page, "Explain uncertainty for this auth-isolation fixture.");
+  await expect(page.getByText(CHAT_REPLY, { exact: true })).toBeVisible();
+  await seedLegacyAnswer(page, { id: "10000000-0000-4000-8000-000000000001", question: "Prior saved answer", instrumentIds: ["edu-bonds"], createdAt: "2026-11-07T00:00:00Z", response: { summary: "Explicit legacy browser fixture", facts: [], limitations: ["No model call"], evidence: market.evidence.filter(item => item.id === "ev-demo-method"), origin: "prewritten" } });
   const records = await deviceRecords(page);
   expect(records["vamm-demo-v2"].sessions.values[0]).toMatchObject({ session: { version: 2, balances: { cash: 630000, bonds: 811200, equity: 1123200 } } });
   expect(records["vamm-demo-v2"].requestOutcomes.values).toHaveLength(3);
   expect(records["vamm-learning-v1"].progress.values[0]).toMatchObject({ completedLessonIds: ["stocks"] });
   expect(records["vamm-mentor-history-v1"].answers.values).toHaveLength(1);
+  expect(records["vamm-mentor-chat-v1"].sessions.values).toHaveLength(1);
   return { records, researchRequests };
 }
 

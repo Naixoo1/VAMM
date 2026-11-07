@@ -42,6 +42,6 @@ export function AccountPanel(){
    {account.busy&&<p className={styles.copy} role="status">{account.action==="sign-in"?"Opening Google’s secure sign-in page…":"Signing out of your Google account session…"}</p>}
   </>}
   <AccountActions account={account}/>
-  <div className={styles.disclosure}><ShieldCheck size={18} aria-hidden="true"/><p>Simulation history, lessons, quiz progress, and saved mentor answers stay in this browser. Signing in or out does not sync, transfer, erase, or make those device records private to your account. Anyone using this browser profile can access them.</p></div>
+  <div className={styles.disclosure}><ShieldCheck size={18} aria-hidden="true"/><p>Simulation history, lessons, quiz progress, saved mentor answers, and chat history stay in this browser. Signing in or out does not sync, transfer, erase, or make those device records private to your account. Anyone using this browser profile can access them.</p></div>
  </section>;
 }

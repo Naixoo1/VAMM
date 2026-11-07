@@ -8,7 +8,7 @@ import theme from "./team-design.module.css";
 const features=[
  {href:"/market",title:"Market & charts",kind:"Market context",description:"Explore TradingView’s live market chart. Change symbols and check the provider’s timing and availability.",image:"market",icon:null},
  {href:"/compare",title:"Compare instruments",kind:"Perspective",description:"Compare company price movements on the provider’s percentage chart, with range and availability shown in the panel.",image:null,icon:GitCompareArrows},
- {href:"/research",title:"AI Investment Mentor",kind:"Curiosity",description:"Explore company context and ask a separate question grounded in frozen teaching evidence.",image:"mentor",icon:null},
+ {href:"/research",title:"AI Investment Mentor",kind:"Curiosity",description:"Ask questions, explore a chart screenshot, and return to conversations saved on this device.",image:"mentor",icon:null},
  {href:"/simulation",title:"Simulation",kind:"Practice",description:"Save, allocate, and fund the unexpected across three synthetic years. Start from zero.",image:null,icon:ChartNoAxesCombined},
  {href:"/news",title:"News & Sentiment Lab",kind:"Context",description:"Follow automatically updating headlines and open a story to check its publisher and full context.",image:"news",icon:null},
  {href:"/academy",title:"Learning Academy",kind:"Foundations",description:"Build understanding through ten short lessons, source links, and a glossary. Your progress stays on this device.",image:"academy",icon:null},

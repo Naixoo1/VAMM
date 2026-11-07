@@ -84,11 +84,11 @@ test("original supplied logo decodes at both placements and primary live routes 
   }
   expect(fixtureRequests).toEqual([]);
   await navigation(page, "AI Investment Mentor").click();
-  await expect(page.locator("summary").filter({ hasText: "Synthetic basket mentor" })).toBeVisible();
-  await expect(page.locator('input[type="file"]')).toHaveCount(0);
+  await expect(page.getByLabel("Message your mentor", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Upload screenshot", { exact: true })).toHaveCount(1);
 });
 
-test("exchange-qualified comparison and company contexts accept broad listings without changing committed simulation records", async ({ page }) => {
+test("exchange-qualified comparison accepts broad listings and Mentor stays isolated without changing committed simulation records", async ({ page }) => {
   test.setTimeout(60000);
   await start(page);
   await page.getByRole("button", { name: "Advance one year", exact: true }).click();
@@ -127,13 +127,8 @@ test("exchange-qualified comparison and company contexts accept broad listings w
   expect(await comparisonCount(page)).toBe(validCount);
   await expect(panel(page, "comparison")).toHaveAttribute("data-live-market-state", "panel");
   await navigation(page, "AI Investment Mentor").click();
-  const company = page.getByLabel("Company context", { exact: true });
-  await company.fill("LSE:VOD");
-  await page.getByRole("button", { name: "Load company", exact: true }).click();
-  for (const [kind, element] of [["profile", "tv-company-profile"], ["technical", "tv-technical-analysis"]]) {
-    await expect(page.getByTestId("live-" + kind + "-host").locator(element)).toHaveAttribute("symbol", "LSE:VOD");
-  }
-  await expect.poll(async () => (await readLiveFeatureProbe(page))?.configurations.filter(item => item.kind === "fundamentals").at(-1)?.configuration.symbol).toBe("LSE:VOD");
+  await expect(page.getByLabel("Message your mentor", { exact: true })).toBeVisible();
+  await expect(page.locator("[data-live-market-kind]")).toHaveCount(0);
   await noRetiredPanels(page);
   expect(await records(page)).toEqual(committed);
 });

@@ -3,10 +3,10 @@ import {afterEach,beforeEach,describe,expect,it,vi} from "vitest";
 import {cleanup,fireEvent,render,screen,waitFor} from "@testing-library/react";
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
 
-import ResearchPage from "@/app/research/page";
+import { SyntheticBasketMentor as ResearchPage } from "@/components/features/live-research-learning";
 vi.mock("@/hooks/use-api-data",async()=>{const {getMarketData}=await import("@/lib/data/fixtures");return{useMarketData:()=>({data:getMarketData(),error:null,loading:false,reload:vi.fn()})}});
 vi.mock("@/components/features/live-market-widget",()=>({LiveMarketWidget:()=>null}));
-function renderMentor(){const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});const mounted=render(<QueryClientProvider client={client}><ResearchPage/></QueryClientProvider>); const disclosure=screen.getByText("Synthetic basket mentor").closest("details") as HTMLDetailsElement; disclosure.open=true; fireEvent(disclosure,new Event("toggle")); return mounted}
+function renderMentor(){const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});return render(<QueryClientProvider client={client}><ResearchPage/></QueryClientProvider>)}
 afterEach(()=>{cleanup();vi.unstubAllGlobals()});
 beforeEach(()=>{vi.stubGlobal("fetch",vi.fn().mockResolvedValue({json:async()=>({ok:true,data:{summary:"Synthetic teaching explanation.",facts:[],limitations:["Teaching assumptions, not forecasts."],evidence:[],origin:"prewritten"}})}))});
 describe("Mentor request boundaries",()=>{

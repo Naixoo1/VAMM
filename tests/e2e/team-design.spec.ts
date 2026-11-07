@@ -122,9 +122,9 @@ test("teammate visual shell preserves nine routes and accessible responsive navi
   for (const destination of routes) {
     await navigate(page, destination);
     if (destination.path === "/research") {
-      // A QA screenshot is not an application image-upload/analysis feature.
-      await expect(page.locator('input[type="file"]')).toHaveCount(0);
-      await expect(page.getByRole("button", { name: /upload (?:a )?(?:chart|screenshot)|analy[sz]e (?:a )?(?:chart image|screenshot)|buy virtually|sell virtually/i })).toHaveCount(0);
+      // Upload is now an authorized independent Mentor feature; financial trading stays absent.
+      await expect(page.getByLabel("Upload screenshot", { exact: true })).toHaveCount(1);
+      await expect(page.getByRole("button", { name: /buy virtually|sell virtually/i })).toHaveCount(0);
     }
   }
   expect(errors).toEqual([]);

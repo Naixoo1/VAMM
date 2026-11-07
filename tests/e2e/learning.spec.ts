@@ -1,3 +1,4 @@
+import { seedLegacyAnswer } from "./mentor-chat-fixture";
 import { expect, test, type Page } from "@playwright/test";
 import { ACADEMY_MILESTONES, GLOSSARY, QUIZ_PACKS, TRACKS, getLesson } from "../../src/lib/learning/catalog";
 import { installLiveFeatureWidgetStubs } from "./live-features-widget-stub";
@@ -323,62 +324,30 @@ test("a failed learning write preserves choices and financial records, then expl
   expect(await financialRecords(page)).toEqual(financial);
 });
 
-test("saved basket research retains the submitted snapshot and reopens/deletes without model context or financial changes", async ({ page }) => {
+test("earlier basket answers remain readable after reload without model calls or financial changes", async ({ page }) => {
   const financial = await seedFinancialHistory(page);
   const question = "Explain synthetic basket fees.";
-  const requests: unknown[] = [];
+  let posts = 0;
+  await page.route("**/api/mentor-chat", route => { if (route.request().method() === "POST") posts++; return route.fulfill({ json: { configured: false } }); });
+  await page.route("**/api/research", route => { posts++; return route.abort(); });
   const market = getMarketData();
-  const response = {
-    summary: "Explicit history browser fixture: synthetic baskets are teaching examples, not forecasts.",
-    facts: [{ text: "Annual fees are not modeled for these educational baskets.", evidenceIds: ["ev-demo-method"] }],
-    limitations: ["Deterministic browser fixture. No model request or live company evidence was used."],
-    evidence: market.evidence.filter(item => item.id === "ev-demo-method"), origin: "prewritten",
-  };
-  await page.route("**/api/market", route => route.fulfill({ json: { ok: true, data: market } }));
-  await page.route("**/api/research", route => {
-    requests.push(route.request().postDataJSON());
-    return route.fulfill({ json: { ok: true, data: response } });
-  });
+  const entry: SavedMentorAnswer = { id: "10000000-0000-4000-8000-000000000002", question, instrumentIds: ["edu-bonds", "edu-equity"], createdAt: "2026-11-07T00:00:00Z", response: {
+    summary: "Explicit preserved-history browser fixture; no model call.", facts: [{ text: "Annual fees are not modeled.", evidenceIds: ["ev-demo-method"] }],
+    limitations: ["Synthetic snapshot, not a live forecast."], evidence: market.evidence.filter(item => item.id === "ev-demo-method"), origin: "prewritten"
+  } };
+  await seedLegacyAnswer(page, entry);
   await page.goto("/research");
-  await page.locator("summary").filter({ hasText: "Synthetic basket mentor" }).click();
-  await expect(page.getByRole("checkbox", { name: "Simulated bond basket", exact: true })).toBeVisible();
-  await page.getByLabel("Your question", { exact: true }).fill("  " + question + "  ");
-  await page.getByRole("button", { name: "Ask your mentor", exact: true }).click();
-  await expect(page.getByText(response.summary, { exact: true })).toBeVisible();
-  await page.getByLabel("Your question", { exact: true }).fill("This later edit must not alter the saved original request.");
-  const history = page.getByRole("region", { name: "Saved basket research", exact: true });
-  const save = history.getByRole("button", { name: "Save this answer", exact: true });
-  await expect(save).toHaveAttribute("aria-disabled", "false");
-  await save.dblclick();
-  await expect(history.getByRole("button", { name: "Answer saved", exact: true })).toHaveAttribute("aria-disabled", "true");
-  const entries = await savedMentorRecords(page);
-  expect(entries).toHaveLength(1);
-  expect(entries[0]).toMatchObject({ question, instrumentIds: ["edu-bonds", "edu-equity"], response });
-  expect(requests).toEqual([{ instrumentIds: ["edu-bonds", "edu-equity"], question }]);
-  await history.getByRole("button", { name: "Open saved answer", exact: true }).click();
-  const saved = history.locator("section").filter({ has: page.getByRole("heading", { name: "Saved answer", exact: true }) });
-  await expect(saved).toContainText(response.limitations[0]);
-  await expect(saved).toContainText("VAMM synthetic teaching methodology");
-  await expect(saved).toContainText("No new model request");
+  await page.getByRole("button", { name: "Earlier basket answers", exact: true }).click();
+  await page.getByRole("button", { name: "Open earlier answer: " + question, exact: true }).click();
+  await expect(page.getByText(entry.response.summary, { exact: true })).toBeVisible();
+  await expect(page.getByText(entry.response.limitations[0], { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Delete saved answer", exact: true })).toHaveCount(0);
+  expect(await savedMentorRecords(page)).toEqual([entry]);
   await page.reload();
-  await page.locator("summary").filter({ hasText: "Synthetic basket mentor" }).click();
-  await expect(history.getByRole("heading", { name: question, exact: true })).toBeVisible();
-  await history.getByRole("button", { name: "Open saved answer", exact: true }).click();
-  await expect(saved.getByRole("heading", { name: question, exact: true })).toBeVisible();
-  expect(await savedMentorRecords(page)).toEqual(entries);
-  expect(requests).toHaveLength(1);
-  const remove = history.getByRole("button", { name: "Delete saved answer", exact: true });
-  await remove.focus(); await remove.press("Enter");
-  const dialog = page.getByRole("dialog", { name: "Delete saved answer?", exact: true });
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: "Keep saved answer", exact: true }).click();
-  await expect(remove).toBeFocused();
-  await remove.press("Enter");
-  await dialog.getByRole("button", { name: "Confirm delete answer", exact: true }).click();
-  await expect(dialog).not.toBeVisible();
-  await expect(history.getByRole("button", { name: "Refresh saved research", exact: true })).toBeFocused();
-  expect(await savedMentorRecords(page)).toEqual([]);
-  expect(requests).toHaveLength(1);
+  await page.getByRole("button", { name: "Earlier basket answers", exact: true }).click();
+  await page.getByRole("button", { name: "Open earlier answer: " + question, exact: true }).click();
+  await expect(page.getByText(entry.response.summary, { exact: true })).toBeVisible();
+  expect(await savedMentorRecords(page)).toEqual([entry]);
   expect(await financialRecords(page)).toEqual(financial);
-  await noOverflow(page);
+  expect(posts).toBe(0); await noOverflow(page);
 });

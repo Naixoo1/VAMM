@@ -80,54 +80,29 @@ test("three annual turns, explicit funding, reset and retained browser history",
   expect(pageErrors).toEqual([]);
 });
 
-test("keyboard focus, live comparison and preserved research prompt/fallback", async ({ page }) => {
+test("keyboard focus, live comparison and honest unavailable Mentor", async ({ page }) => {
   await page.goto("/compare");
   const skip = page.getByRole("link", { name: "Skip to main content" });
-  await page.keyboard.press("Tab");
-  await expect(skip).toBeFocused();
+  await page.keyboard.press("Tab"); await expect(skip).toBeFocused();
   expect(await skip.evaluate(element => getComputedStyle(element).outlineStyle)).not.toBe("none");
-  await page.keyboard.press("Enter");
-  await expect(page.getByRole("main")).toBeFocused();
+  await page.keyboard.press("Enter"); await expect(page.getByRole("main")).toBeFocused();
   await expect(page.getByLabel("First company", { exact: true })).toBeVisible();
-  await expect(page.locator("summary").filter({hasText:"Synthetic basket comparison"})).toHaveCount(0);
   await page.goto("/research");
-  await page.locator("summary").filter({hasText:"Synthetic basket mentor"}).click();
-  const prompt = "Explain why these synthetic results are not a forecast.";
-  await page.getByRole("button", { name: prompt }).click();
-  await expect(page.getByLabel("Your question")).toHaveValue(prompt);
-  await page.getByRole("button", { name: "Ask your mentor" }).click();
-  await expect(page.getByText("Prewritten fallback", { exact: true })).toBeVisible();
-  await expect(page.getByText("The research model is not configured; no model request was made.", { exact: true })).toBeVisible();
-  await expect(page.getByRole("listitem").filter({ hasText: /annual fee is unavailable/ })).toHaveCount(2);
+  await expect(page.getByLabel("Message your mentor", { exact: true })).toBeVisible();
+  await expect(page.getByText(/not configured/i).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Send message", exact: true })).toBeDisabled();
+  await expect(page.getByText("Prewritten fallback", { exact: true })).toHaveCount(0);
 });
 
-test("retained basket research exposes loading, visible network failure and explicit retry", async ({ page }) => {
-  let release!: () => void;
-  let failedResponses = 0;
-  let newsRequests = 0;
-  page.on("response", response => { if (response.url().endsWith("/api/market") && response.status() === 503) failedResponses += 1; });
-  page.on("request", request => { if (new URL(request.url()).pathname === "/api/news") newsRequests += 1; });
-  const pause = new Promise<void>(resolve => { release = resolve; });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.route("**/api/market", async route => {
-    await pause;
-    await route.fulfill({ status: 503, json: { ok: false, error: { code: "DATA_UNAVAILABLE", message: "Test data is temporarily unavailable.", retryable: true, requestId: null } } });
-  });
+test("Mentor history failures remain visible without fixture requests or synthetic news", async ({ page }) => {
+  let fixtureRequests = 0;
+  page.on("request", request => { if (["/api/market", "/api/news", "/api/research"].includes(new URL(request.url()).pathname)) fixtureRequests++; });
+  await page.addInitScript(() => Object.defineProperty(window, "indexedDB", { value: undefined }));
   await page.goto("/research");
-  await page.locator("summary").filter({hasText:"Synthetic basket mentor"}).click();
-  const choices = page.locator("fieldset").filter({ hasText: "Your instruments" });
-  await expect(choices.getByRole("status")).toContainText("Loading instrument choices");
-  expect(await choices.getByRole("status").locator("svg").evaluate(element => getComputedStyle(element).animationName)).toBe("none");
-  release();
-  await expect(choices.getByRole("alert")).toContainText("Test data is temporarily unavailable.");
-  expect(failedResponses).toBe(1);
-  await page.unroute("**/api/market");
-  await choices.getByRole("button", { name: "Try again" }).click();
-  await expect(page.getByRole("checkbox", { name: "Simulated cash", exact: true })).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: /storage|history/i }).first()).toBeVisible();
   await page.goto("/news");
   await expect(page.getByRole("region", { name: "Live market news", exact: true })).toHaveAttribute("data-live-news-state", "ready");
-  await expect(page.locator("summary").filter({ hasText: "Synthetic practice" })).toHaveCount(0);
-  expect(newsRequests).toBe(0);
+  expect(fixtureRequests).toBe(0);
 });
 
 test("unavailable browser storage never silently creates a session", async ({ page }) => {

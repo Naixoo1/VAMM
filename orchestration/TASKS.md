@@ -1,5 +1,11 @@
 # VAMM Task Ledger
 
+## Current Mentor chat authorization — 2026-11-07
+
+MENTOR-CHAT-DATA-01, MENTOR-CHAT-UI-01, MENTOR-CHAT-AI-01 and MENTOR-CHAT-VERIFY-01 are Running. Direct user instruction replaces the Mentor primary screen with screenshot-capable conversations and retained local sessions. Scope, temporary ownership and acceptance: reviews/MENTOR-CHAT-2026-11-07.md. Protected financial/configuration files remain unchanged. Three existing saved-role workers resumed; no recursive delegation or added services/dependencies. Earlier scope deferrals below remain historical. Prior AUTH-DEPLOY-01 completed: fdb1a74 deployed READY via Git at vamm-nu.vercel.app; Google activation was explicitly deferred to the user's credential setup.
+
+Final local state: the three Mentor implementation tasks progressed Running → Review → Integrated → Verified after actual handoffs. CEO verified478unit/integration,94browser plus2additional recovery cases,6responsive/contrast states, types/lint/build and36unchanged protected hashes. Deployment verification is in progress after Git delivery; see MENTOR-CHAT review and external delivery report. Existing OpenAI key was added by the user; Mentor selects gpt-5.4-mini server-side. No model execution is claimed by the local mocked checks.
+
 CEO-maintained. User explicitly authorized implementation on 2026-11-07. Contract v2 and the fixture manifest remain frozen.
 BOOT-01, the three worker briefs and integrated local review are Verified in C:/code/VAMM. Public deployment remains Queued.
 Status/handoff: `AGENTS.md`. Contract: `src/contracts/README.md`; data: `docs/FIXTURES.md`.
