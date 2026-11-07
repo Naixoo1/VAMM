@@ -11,7 +11,7 @@ permissions:
 jobs:
   review:
     if: github.event.deleted != true
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     outputs:
       report: ${{ steps.codex.outputs.final-message }}
@@ -87,7 +87,7 @@ jobs:
   publish-report:
     needs: review
     if: always() && needs.review.result != 'skipped'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 3
     permissions: {}
     steps:
